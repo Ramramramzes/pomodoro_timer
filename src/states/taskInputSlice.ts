@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface ITaskInputState{
   value: string;
+  forChange: string;
 }
 
 const initialState: ITaskInputState ={
-  value: ""
+  value: "",
+  forChange: ""
 }
 
 export const taskInputSlice = createSlice({
@@ -14,9 +16,14 @@ export const taskInputSlice = createSlice({
   reducers:{
     change: (state,action) => {
       state.value = action.payload
+    },
+    forchange: (state,action) => {
+      state.forChange = action.payload;
     }
+
+
   }
 })
 
-export const { change } = taskInputSlice.actions
+export const { change, forchange } = taskInputSlice.actions
 export default taskInputSlice.reducer

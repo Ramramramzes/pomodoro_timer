@@ -1,21 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../states/store";
-import { delTask } from "../../states/taskSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../states/store";
+import { MenuBtn } from "./MenuBtn";
 
 export function TaskListItem() {
   const taskList = useSelector((state:RootState) => state.taskList.value)
-  const dispatch = useDispatch<AppDispatch>()
+  // const taskInput = useSelector((state:RootState) => state.inputChange.value)
 
-  const delHandler = (el:string) => {
-    dispatch(delTask(el))
-  }
+  
   return (
     <ul>
       {taskList && taskList.map((el,index) => {
-        return <li key={index}>
-          {el}
-          <button onClick={() => delHandler(el)}>del</button>
-          </li>
+        return  <li key={index}>
+                  {el}
+                  <button>...</button>
+                  <MenuBtn el={el} />
+                </li>
       })}
     </ul>
   );

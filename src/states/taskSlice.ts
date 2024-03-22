@@ -4,6 +4,13 @@ interface ITaskState{
   value: string[]
 }
 
+interface IRedAction{
+  payload: {
+    prev: string;
+    new: string;
+  }
+}
+
 const initialState:ITaskState = {
   value: []
 }
@@ -28,9 +35,20 @@ const taskSlice = createSlice({
         }
       });
       state.value = filtered;
-    }
+    },
+    redTask: (state,action:IRedAction) => {
+      let replaced = false;
+      const filtered = state.value.map((el) => {
+        if(el === action.payload.prev && replaced === false){
+          replaced = true;
+          return action.payload.new
+        }
+        return el;
+      })
+      state.value = filtered;
+    },
   }
 })
 
-export const { addTask, delTask } = taskSlice.actions
+export const { addTask, delTask, redTask } = taskSlice.actions
 export default taskSlice.reducer
