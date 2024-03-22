@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import taskListReducer from "./taskSlice"
 import inputChangeReducer from "./taskInputSlice"
+import activChangeReducer from "./activchange";
 
 export const store = configureStore({
   reducer:{
     taskList:taskListReducer,
     inputChange: inputChangeReducer,
+    activeChange: activChangeReducer,
   },
 });
 

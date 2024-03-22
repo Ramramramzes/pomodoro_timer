@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit"
 interface ITaskState{
   value: {
     content: string,
-    menuState: false
+    menuState: boolean,
+
   }[]
 }
 
@@ -46,9 +47,18 @@ const taskSlice = createSlice({
         }
         return el;
       });
-    },    
+    },
+    showMenu: (state,action) => {
+      for (let i = 0; i < state.value.length; i++) {
+        if(i == action.payload ){
+          continue
+        }
+        state.value[i].menuState = false
+      }
+      state.value[action.payload].menuState = !state.value[action.payload].menuState;
+    }
   }
 })
 
-export const { addTask, delTask, redTask } = taskSlice.actions
+export const { addTask, delTask, redTask,showMenu } = taskSlice.actions
 export default taskSlice.reducer
