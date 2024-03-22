@@ -5,7 +5,7 @@ interface ITaskInputState{
 }
 
 const initialState: ITaskInputState ={
-  value: " "
+  value: ""
 }
 
 export const taskInputSlice = createSlice({
