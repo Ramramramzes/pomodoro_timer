@@ -4,7 +4,6 @@ interface ITaskState{
   value: {
     content: string,
     menuState: boolean,
-
   }[]
 }
 

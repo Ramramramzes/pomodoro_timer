@@ -24,7 +24,7 @@ export function TaskListItem() {
         return  <li key={index}>
                   {el.content}
                   <button onClick={() => settingsItemHandler(index)}>...</button>
-                  {el.menuState && <MenuBtn el={el.content} />}
+                  {el.menuState && <MenuBtn el={el.content} index={index}/>}
                 </li>
       })}
     </ul>
