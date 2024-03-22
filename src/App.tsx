@@ -1,10 +1,12 @@
 // import styles from './App.module.css'
 
+import { TaskInput } from "./TaskInput"
+
 function App() {
 
   return (
     <>
-      Hi
+      <TaskInput />
     </>
   )
 }
