@@ -1,12 +1,11 @@
 // import styles from './App.module.css'
-
-import { TaskInput } from "./TaskInput"
+import { General } from "./Main/General"
 
 function App() {
 
   return (
     <>
-      <TaskInput />
+      <General />
     </>
   )
 }

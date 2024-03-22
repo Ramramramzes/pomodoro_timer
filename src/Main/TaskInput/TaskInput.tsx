@@ -1,10 +1,10 @@
 // import styles from './taskinput.module.css';
 
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../states/store";
-import { change } from "../states/taskInputSlice";
+import { AppDispatch, RootState } from "../../states/store";
+import { change } from "../../states/taskInputSlice";
 import { useEffect } from "react";
-import { addTask } from "../states/taskSlice";
+import { addTask } from "../../states/taskSlice";
 
 
 
@@ -19,6 +19,7 @@ export function TaskInput() {
 
   const addTaskHandler = () => {
     dispatch(addTask(taskInput))
+    dispatch(change(''))
   }
 
   //! временный эффект 
