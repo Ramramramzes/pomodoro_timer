@@ -4,16 +4,16 @@ import { MenuBtn } from "./MenuBtn";
 
 export function TaskListItem() {
   const taskList = useSelector((state:RootState) => state.taskList.value)
-  // const taskInput = useSelector((state:RootState) => state.inputChange.value)
+  // const dispatch = useDispatch<AppDispatch>();
 
   
   return (
     <ul>
       {taskList && taskList.map((el,index) => {
         return  <li key={index}>
-                  {el}
+                  {el.content}
                   <button>...</button>
-                  <MenuBtn el={el} />
+                  <MenuBtn el={el.content} />
                 </li>
       })}
     </ul>

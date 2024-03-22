@@ -3,15 +3,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../states/store";
 import { change } from "../../states/taskInputSlice";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { addTask, redTask } from "../../states/taskSlice";
-import { red_btn } from "../../states/boolSlice";
+// import { TaskListItem } from "../TaskListItem";
+
 
 
 export function TaskInput() {
   const taskInput = useSelector((state:RootState) => state.inputChange.value)
-  // const taskList = useSelector((state:RootState) => state.taskList.value)
-  const reductBtn = useSelector((state: RootState) => state.booleanStates.reduct)
+  const taskList = useSelector((state:RootState) => state.taskList.value)
   const prev = useSelector((state: RootState) => state.inputChange.forChange)
 
   const dispatch = useDispatch<AppDispatch>()
@@ -27,13 +27,13 @@ export function TaskInput() {
   const redTaskHandler = () => {
     dispatch(redTask({prev: prev, new: taskInput}))
     dispatch(change(''))
-    dispatch(red_btn())
   }
 
   //! временный эффект 
-  // useEffect(() => {
-
-  // },[taskInput])
+  useEffect(() => {
+    console.log(taskList);
+    
+  },[taskList])
 
   return (
     <>
@@ -41,7 +41,8 @@ export function TaskInput() {
               value={taskInput} 
               placeholder={taskInput ? '' : 'Название задачи'}
               type="text" />
-      {reductBtn ? <button onClick={redTaskHandler}>Редактировать</button> : <button onClick={addTaskHandler}>Добавить</button>}
+      <button onClick={addTaskHandler}>Добавить</button>
+      <button onClick={redTaskHandler}>Редактировать</button>
       
     </>
   );

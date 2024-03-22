@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface ITaskState{
-  value: string[]
+  value: {
+    content: string,
+    menuState: false
+  }[]
 }
 
 interface IRedAction{
@@ -20,14 +23,14 @@ const taskSlice = createSlice({
   initialState,
   reducers:{
     addTask: (state,action) => {
-      state.value.push(action.payload)
+      state.value.push({content: action.payload, menuState:false})
     },
     delTask: (state,action) => {
       let temp = 0;
       const filtered = state.value.filter((el) => {
-        if (el !== action.payload) {
+        if (el.content !== action.payload) {
           return true;
-        } else if (el === action.payload && temp === 0) {
+        } else if (el.content === action.payload && temp === 0) {
           temp += 1;
           return false;
         } else {
@@ -36,17 +39,14 @@ const taskSlice = createSlice({
       });
       state.value = filtered;
     },
-    redTask: (state,action:IRedAction) => {
-      let replaced = false;
-      const filtered = state.value.map((el) => {
-        if(el === action.payload.prev && replaced === false){
-          replaced = true;
-          return action.payload.new
+    redTask: (state, action: IRedAction) => {
+      state.value = state.value.map((el) => {
+        if (el.content === action.payload.prev) {
+          return { ...el, content: action.payload.new };
         }
         return el;
-      })
-      state.value = filtered;
-    },
+      });
+    },    
   }
 })
 
