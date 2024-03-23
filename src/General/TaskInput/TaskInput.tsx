@@ -22,7 +22,6 @@ export function TaskInput() {
   const addTaskHandler = () => {
     dispatch(addTask({content: taskInput, tastIndex: taskList.value.length + 1}))
     dispatch(change(''))
-    console.log(taskList);
   }
 
   const redTaskHandler = () => {

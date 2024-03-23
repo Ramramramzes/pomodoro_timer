@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { AppDispatch, RootState } from '../../states/store';
-import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, startTomato,  } from '../../states/timer';
+import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, setPauseEnd, setPauseStart, setPausesResult, startTomato,  } from '../../states/timer';
 import { removeFirst } from '../../states/taskSlice';
 
 function Timer() {
@@ -58,7 +58,7 @@ function Timer() {
       onExpire: () => console.warn('onExpire called'),
       autoStart: false
                 });
-
+// !---- Переключение таймеров
     useEffect(() => {
       if(timer.tomatoCount == 0){
         dispatch(changeWork(true))
@@ -68,10 +68,8 @@ function Timer() {
       }
     },[timer.tomatoCount])
     useEffect(() => {
-      
       skipFn(minutes,seconds)
     },[minutes, seconds,])
-
     useEffect(() => {
       if(timer.workActive){
         restart(createNewTime(timer.userTime));
@@ -84,6 +82,15 @@ function Timer() {
       }
       pause();
     }, [pause, restart, timer.workActive, timer.breakActive, timer.bigBreakActive, timer.userTime, timer.breakTime, timer.bigBrakeTime]);
+// !---- Расчет времени пауз в секундак
+    useEffect(() => {
+      dispatch(setPausesResult(Math.round((timer.forStatistic.pauseEnd - timer.forStatistic.pauseStart)/1000)))
+    },[timer.forStatistic.pauseEnd])
+
+    useEffect(() => {
+      console.log(timer.forStatistic.pauseResult);
+    },[timer.forStatistic.pauseResult])
+
 
   return (
     <div style={{textAlign: 'center'}}>
@@ -93,10 +100,14 @@ function Timer() {
       </div>
       <p>{isRunning ? 'Running' : 'Not running'}</p>
       {isRunning ? <button onClick={() => {
-        pause()
         dispatch(pauseState(true))
+        dispatch(setPauseStart(new Date().getTime()))
+        pause()
         }}>Пауза</button>:''}
-      {!isRunning ? <button onClick={resume}>{!timer.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
+      {!isRunning ? <button id='start_btn' onClick={() => {
+        resume()
+        document.getElementById('start_btn')?.textContent === 'Продолжить' ? dispatch(setPauseEnd(new Date().getTime())) : false
+      }}>{!timer.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
 
       {timer.workActive && !timer.pauseState ? <button onClick={() => {
         if(timer.workActive){
