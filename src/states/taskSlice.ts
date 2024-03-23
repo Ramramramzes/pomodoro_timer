@@ -4,6 +4,7 @@ interface ITaskState{
   value: {
     content: string,
     menuState: boolean,
+    taskIndex:number,
   }[]
 }
 
@@ -23,7 +24,7 @@ const taskSlice = createSlice({
   initialState,
   reducers:{
     addTask: (state,action) => {
-      state.value.push({content: action.payload, menuState:false})
+      state.value.push({content: action.payload.content, menuState:false, taskIndex: action.payload.tastIndex})
     },
     removeFirst: (state) => {
       if(state.value.length != 0){

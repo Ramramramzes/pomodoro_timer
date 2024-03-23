@@ -87,7 +87,7 @@ function Timer() {
 
   return (
     <div style={{textAlign: 'center'}}>
-      <p>{taskList.value.length != 0 ? taskList.value[0].content: ''}</p>
+      {taskList.value.length != 0 ? <p>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} - {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p>Задач нет</p>}
       <div style={{fontSize: '100px'}}>
         <span>{minutes < 10 ? '0': ''}{minutes}</span>:<span>{seconds < 10 ? '0': ''}{seconds}</span>
       </div>
@@ -108,6 +108,7 @@ function Timer() {
         if(timer.workActive){
           restart(createNewTime(timer.userTime));
           dispatch(removeFirst())
+          dispatch(pauseState(false))
         }
         pause()
       }}>Сделано</button>: ''}

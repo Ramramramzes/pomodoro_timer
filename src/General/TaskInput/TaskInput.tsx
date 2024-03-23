@@ -9,6 +9,7 @@ import { change_active } from "../../states/activchange";
 
 
 export function TaskInput() {
+  const taskList = useSelector((state:RootState) => state.taskList)
   const taskInput = useSelector((state:RootState) => state.inputChange.value)
   const prev = useSelector((state: RootState) => state.inputChange.forChange)
   const activeChange = useSelector((state: RootState) => state.activeChange)
@@ -19,8 +20,9 @@ export function TaskInput() {
   }
 
   const addTaskHandler = () => {
-    dispatch(addTask(taskInput))
+    dispatch(addTask({content: taskInput, tastIndex: taskList.value.length + 1}))
     dispatch(change(''))
+    console.log(taskList);
   }
 
   const redTaskHandler = () => {
