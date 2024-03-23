@@ -25,6 +25,12 @@ const taskSlice = createSlice({
     addTask: (state,action) => {
       state.value.push({content: action.payload, menuState:false})
     },
+    removeFirst: (state) => {
+      if(state.value.length != 0){
+        const newValue = [...state.value.slice(1)];
+        return { ...state, value: newValue }
+      }
+    },
     delTask: (state,action) => {
       let temp = 0;
       const filtered = state.value.filter((el) => {
@@ -59,5 +65,5 @@ const taskSlice = createSlice({
   }
 })
 
-export const { addTask, delTask, redTask,showMenu } = taskSlice.actions
+export const { addTask, delTask, redTask, showMenu, removeFirst } = taskSlice.actions
 export default taskSlice.reducer

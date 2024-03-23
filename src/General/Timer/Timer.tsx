@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { AppDispatch, RootState } from '../../states/store';
 import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, startTomato,  } from '../../states/timer';
+import { removeFirst } from '../../states/taskSlice';
 
 function Timer() {
   const timer = useSelector((state: RootState) => state.timer)
+  const taskList = useSelector((state: RootState) => state.taskList)
   const dispatch = useDispatch<AppDispatch>();
 
   //! Функция создания времени по данным пользователя
@@ -85,7 +87,7 @@ function Timer() {
 
   return (
     <div style={{textAlign: 'center'}}>
-      <p>Timer Demo</p>
+      <p>{taskList.value.length != 0 ? taskList.value[0].content: ''}</p>
       <div style={{fontSize: '100px'}}>
         <span>{minutes < 10 ? '0': ''}{minutes}</span>:<span>{seconds < 10 ? '0': ''}{seconds}</span>
       </div>
@@ -95,12 +97,20 @@ function Timer() {
         dispatch(pauseState(true))
         }}>Пауза</button>:''}
       {!isRunning ? <button onClick={resume}>{!timer.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
-      {timer.workActive ? <button onClick={() => {
+
+      {timer.workActive && !timer.pauseState ? <button onClick={() => {
         if(timer.workActive){
           restart(createNewTime(timer.userTime));
         }
         pause()
       }}>СТОП</button>: ''}
+      {timer.workActive && timer.pauseState ? <button onClick={() => {
+        if(timer.workActive){
+          restart(createNewTime(timer.userTime));
+          dispatch(removeFirst())
+        }
+        pause()
+      }}>Сделано</button>: ''}
       {timer.breakActive || timer.bigBreakActive ? <button onClick={()=> skipFn(0,0)}>Пропустить</button> : ''}
 
       {timer.workActive && !isRunning && <button onClick={()=>{
