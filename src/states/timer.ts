@@ -9,17 +9,19 @@ interface ITimerState{
   bigBrakeTime: number,
   tomatoCount: number,
   rounds: number,
+  pauseState: boolean,
 }
 
 const initialState:ITimerState = {
   userTime: 0.01,
   breakTime: 0.01,
-  bigBrakeTime: 0.1,
+  bigBrakeTime: 0.01,
   workActive: true,
   bigBreakActive: false,
   breakActive: false,
   tomatoCount: 0,
   rounds:0,
+  pauseState: false,
 }
 
 const timerSlice = createSlice({
@@ -52,9 +54,12 @@ const timerSlice = createSlice({
     },
     addRound: (state) => {
       state.rounds += 1
-    }
+    },
+    pauseState: (state,action) => {
+      state.pauseState = action.payload
+    },
   }
 })
 
-export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound} = timerSlice.actions
+export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound, pauseState} = timerSlice.actions
 export default timerSlice.reducer

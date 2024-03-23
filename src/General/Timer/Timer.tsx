@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { AppDispatch, RootState } from '../../states/store';
-import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, startTomato,  } from '../../states/timer';
+import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, startTomato,  } from '../../states/timer';
 
 function Timer() {
   const timer = useSelector((state: RootState) => state.timer)
@@ -12,8 +12,6 @@ function Timer() {
   const createNewTime = (userTime: number) => {
     return new Date(new Date().getTime() + userTime * 60000);
   };
-
-
 
   const {
     seconds,
@@ -32,8 +30,8 @@ function Timer() {
         dispatch(changeWork(true))
         dispatch(changeBreak(false))
         dispatch(changeBigBreak(false))
+        dispatch(pauseState(false))
       }
-      console.log(timer.tomatoCount);
     },[timer.tomatoCount])
     useEffect(() => {
       if(minutes == 0 && seconds == 0 && timer.tomatoCount != 4){
@@ -55,6 +53,7 @@ function Timer() {
           dispatch(changeBreak(false))
           dispatch(changeBigBreak(false))
         }
+        dispatch(pauseState(false))
       }
       if(minutes == 0 && seconds == 0 && timer.tomatoCount === 4){
         dispatch(changeBigBreak(true))
@@ -63,6 +62,7 @@ function Timer() {
         dispatch(addRound())
         dispatch(startTomato())
       }
+      dispatch(pauseState(false))
     },[minutes, seconds,])
 
     useEffect(() => {
@@ -85,28 +85,25 @@ function Timer() {
         <span>{minutes < 10 ? '0': ''}{minutes}</span>:<span>{seconds < 10 ? '0': ''}{seconds}</span>
       </div>
       <p>{isRunning ? 'Running' : 'Not running'}</p>
-      <button onClick={pause}>Пауза</button>
-      <button onClick={resume}>Продолжить</button>
-      <button onClick={() => {
+      {isRunning ? <button onClick={() => {
+        pause()
+        dispatch(pauseState(true))
+        }}>Пауза</button>:''}
+      {!isRunning ? <button onClick={resume}>{!timer.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
+      {timer.workActive ? <button onClick={() => {
         if(timer.workActive){
           restart(createNewTime(timer.userTime));
         }
-        if(timer.breakActive){
-          restart(createNewTime(timer.breakTime));
-        }
-        if(timer.bigBreakActive){
-          restart(createNewTime(timer.bigBrakeTime));
-        }
         pause()
-      }}>Заново</button>
+      }}>СТОП</button>: ''}
 
-      {timer.workActive &&  <button onClick={()=>{
+      {timer.workActive && !isRunning && <button onClick={()=>{
                                     dispatch(addWorkMinute())
                                     pause()}}>+ рабочее время </button>}
-      {timer.breakActive && <button onClick={()=>{
+      {timer.breakActive && !isRunning && <button onClick={()=>{
                                     dispatch(addBreakeMinute())
                                     pause()}}>+ перерыв</button>}
-      {timer.bigBreakActive && <button  onClick={()=>{
+      {timer.bigBreakActive && !isRunning && <button  onClick={()=>{
                                         dispatch(addBigBreakeMinute())
                                         pause()}}>+ большой перерыв</button>}
     </div>
