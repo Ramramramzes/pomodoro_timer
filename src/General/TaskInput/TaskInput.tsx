@@ -3,16 +3,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../states/store";
 import { change } from "../../states/taskInputSlice";
-import { useEffect } from "react";
 import { addTask, redTask } from "../../states/taskSlice";
 import { change_active } from "../../states/activchange";
-// import { TaskListItem } from "../TaskListItem";
 
 
 
 export function TaskInput() {
   const taskInput = useSelector((state:RootState) => state.inputChange.value)
-  // const taskList = useSelector((state:RootState) => state.taskList.value)
   const prev = useSelector((state: RootState) => state.inputChange.forChange)
   const activeChange = useSelector((state: RootState) => state.activeChange)
 
@@ -31,12 +28,6 @@ export function TaskInput() {
     dispatch(change(''))
     dispatch(change_active())
   }
-
-  //!временный эффект 
-  useEffect(() => {
-    console.log(activeChange);
-    
-  },[activeChange])
 
   return (
     <>
