@@ -1,5 +1,5 @@
 // import styles from './App.module.css'
-import { General } from "./Main/General"
+import { General } from "./General/General"
 
 function App() {
 
