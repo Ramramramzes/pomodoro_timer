@@ -1,5 +1,6 @@
 import { TaskInput } from './TaskInput';
 import { TaskListItem } from './TaskListItem';
+import Timer from './Timer/Timer';
 
 export function General() {
 
@@ -7,6 +8,7 @@ export function General() {
     <>
       <TaskInput />
       <TaskListItem />
+      <Timer />
     </>
   );
 }
