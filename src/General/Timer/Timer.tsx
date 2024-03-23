@@ -13,6 +13,38 @@ function Timer() {
     return new Date(new Date().getTime() + userTime * 60000);
   };
 
+  const skipFn = (minutes: number, seconds: number) => {
+    if(minutes == 0 && seconds == 0 && timer.tomatoCount != 4){
+      if(timer.workActive){
+        if(timer.tomatoCount != 3){
+          dispatch(changeBreak(true))
+          dispatch(changeWork(false))
+          dispatch(changeBigBreak(false))
+        }
+        if(timer.tomatoCount === 3){
+          dispatch(changeBigBreak(true))
+          dispatch(changeBreak(false))
+          dispatch(changeWork(false))
+        }
+        dispatch(addTomato())
+      }
+      if(timer.breakActive){
+        dispatch(changeWork(true))
+        dispatch(changeBreak(false))
+        dispatch(changeBigBreak(false))
+      }
+      dispatch(pauseState(false))
+    }
+    if(minutes == 0 && seconds == 0 && timer.tomatoCount === 4){
+      dispatch(changeBigBreak(true))
+      dispatch(changeWork(false))
+      dispatch(changeBreak(false))
+      dispatch(addRound())
+      dispatch(startTomato())
+    }
+    dispatch(pauseState(false))
+  }
+
   const {
     seconds,
     minutes,
@@ -34,35 +66,8 @@ function Timer() {
       }
     },[timer.tomatoCount])
     useEffect(() => {
-      if(minutes == 0 && seconds == 0 && timer.tomatoCount != 4){
-        if(timer.workActive){
-          if(timer.tomatoCount != 3){
-            dispatch(changeBreak(true))
-            dispatch(changeWork(false))
-            dispatch(changeBigBreak(false))
-          }
-          if(timer.tomatoCount === 3){
-            dispatch(changeBigBreak(true))
-            dispatch(changeBreak(false))
-            dispatch(changeWork(false))
-          }
-          dispatch(addTomato())
-        }
-        if(timer.breakActive){
-          dispatch(changeWork(true))
-          dispatch(changeBreak(false))
-          dispatch(changeBigBreak(false))
-        }
-        dispatch(pauseState(false))
-      }
-      if(minutes == 0 && seconds == 0 && timer.tomatoCount === 4){
-        dispatch(changeBigBreak(true))
-        dispatch(changeWork(false))
-        dispatch(changeBreak(false))
-        dispatch(addRound())
-        dispatch(startTomato())
-      }
-      dispatch(pauseState(false))
+      
+      skipFn(minutes,seconds)
     },[minutes, seconds,])
 
     useEffect(() => {
@@ -96,6 +101,7 @@ function Timer() {
         }
         pause()
       }}>СТОП</button>: ''}
+      {timer.breakActive || timer.bigBreakActive ? <button onClick={()=> skipFn(0,0)}>Пропустить</button> : ''}
 
       {timer.workActive && !isRunning && <button onClick={()=>{
                                     dispatch(addWorkMinute())
