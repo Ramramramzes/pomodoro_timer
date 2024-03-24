@@ -4,6 +4,7 @@ import { AppDispatch } from "../../../../states/store";
 import { openPopup } from "../../../../states/taskInputSlice";
 import { delTask, showMenu } from "../../../../states/taskSlice";
 import { useEffect } from "react";
+import { Close } from "../../../../img/images";
 
 export function  Popup({el,index}:{el: string,index: number}) {
   const dispatch = useDispatch<AppDispatch>()
@@ -32,19 +33,23 @@ export function  Popup({el,index}:{el: string,index: number}) {
   return (
     <div id="close_id" className={styles.popup}>
       <div className={styles.popup_panel_content}>
-        <p>Удалить задачу?</p>
-        <button onClick={() => {
+        <p className={styles.title}>Удалить задачу?</p>
+        <button 
+          className={styles.del_btn}
+          onClick={() => {
           delHandler(el)
           dispatch(openPopup())
         }}>Удалить</button>
-        <button onClick={() => {
+        <button 
+          className={styles.back_btn}
+          onClick={() => {
           dispatch(openPopup())
           dispatch(showMenu(index))
           }}>Отмена</button>
         <span onClick={() => {
           dispatch(openPopup())
           dispatch(showMenu(index))
-          }} className={styles.popup_close}>x</span>
+          }} className={styles.popup_close}><Close /></span>
       </div>
     </div>
   );

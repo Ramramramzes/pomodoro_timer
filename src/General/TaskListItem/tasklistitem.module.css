@@ -7,7 +7,7 @@
   position: relative;
 }
 
-.item:last-child{
+.item:first-child{
   border-bottom: 1px solid #e4e4e4;
 }
 
@@ -41,4 +41,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.list{
+  display: flex;
+  flex-direction: column-reverse;
 }

@@ -13,11 +13,15 @@
   src: url(./fonts/SFUIDisplay-Regular.ttf);
 }
 
+@font-face {
+  font-family: 'SFUI_semi';
+  src: url(./fonts/SFUIText-Semibold.ttf);
+}
+
 body{
   font-family: 'SFUI_light';
   color: #333;
   font-size: 16px;
-  font-weight: 100;
 }
 
 ul{
@@ -33,7 +37,7 @@ button{
 }
 
 
-h1,h2,h3{
+h1,h2,h3,p{
   margin: 0px;
 }
 

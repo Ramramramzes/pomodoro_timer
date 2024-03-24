@@ -9,12 +9,12 @@
   margin: 25px 0px;
   background-color: #F4F4F4;
   border: none;
+  font-family: 'SFUI_reg';
 }
 
 .input::placeholder{
   color: #999;
-  font-size: 16px;
-  font-weight: lighter;
+  font-family: 'SFUI_light';
 }
 
 .input:focus{

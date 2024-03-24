@@ -21,7 +21,7 @@ export function TaskListItem() {
   }
   
   return (
-    <ul>
+    <ul className={styles.list}>
       {taskList && taskList.map((el,index) => {
         return  <li className={styles.item}
                     key={index}>
