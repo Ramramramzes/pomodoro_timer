@@ -1,7 +1,7 @@
 import styles from './menubtn.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState} from "../../../states/store";
-import { showMenu } from "../../../states/taskSlice";
+import { fontBigger, fontLower, showMenu } from "../../../states/taskSlice";
 import { change, forchange, openPopup } from "../../../states/taskInputSlice";
 import { change_active } from "../../../states/activchange";
 import { Popup } from "./Popup";
@@ -21,8 +21,8 @@ export function MenuBtn({el,index} : {el:string,index:number}) {
   return (
     <div className={styles.menu}>
       <div className={styles.btn_block}>
-        <button className={styles.btn}><LupaP/><span className={styles.btn_text}>Увеличить</span></button>
-        <button className={styles.btn}><LupaM/><span className={styles.btn_text}>Уменьшить</span></button>
+        <button className={styles.btn} onClick={() => {dispatch(fontBigger(index))}}><LupaP/><span className={styles.btn_text}>Увеличить</span></button>
+        <button className={styles.btn} onClick={() => {dispatch(fontLower(index))}}><LupaM/><span className={styles.btn_text}>Уменьшить</span></button>
         <button className={styles.btn} onClick={() => redHandler(el,index)}><Pen/><span className={styles.btn_text}>Редактировать</span></button>
         <button className={styles.btn} onClick={() => {
           dispatch(openPopup())

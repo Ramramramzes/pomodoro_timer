@@ -5,6 +5,7 @@ interface ITaskState{
     content: string,
     menuState: boolean,
     taskIndex:number,
+    listFontSize: number,
   }[]
 }
 
@@ -24,7 +25,7 @@ const taskSlice = createSlice({
   initialState,
   reducers:{
     addTask: (state,action) => {
-      state.value.push({content: action.payload.content, menuState:false, taskIndex: action.payload.tastIndex})
+      state.value.push({content: action.payload.content, menuState:false, taskIndex: action.payload.tastIndex, listFontSize: 16})
     },
     removeFirst: (state) => {
       if(state.value.length != 0){
@@ -62,9 +63,34 @@ const taskSlice = createSlice({
         state.value[i].menuState = false
       }
       state.value[action.payload].menuState = !state.value[action.payload].menuState;
-    }
+    },
+    fontBigger: (state, action) => {
+      state.value = state.value.map((task, index) => {
+        if (index === action.payload) {
+          if(task.listFontSize === 22){
+            return { ...task, listFontSize: task.listFontSize};
+          }else{
+            return { ...task, listFontSize: task.listFontSize + 2 };
+          }
+        }
+        return task;
+      });
+    },
+    fontLower: (state, action) => {
+      state.value = state.value.map((task, index) => {
+        if (index === action.payload) {
+          if(task.listFontSize === 16){
+            return { ...task, listFontSize: task.listFontSize};
+          }else{
+            return { ...task, listFontSize: task.listFontSize - 2 };
+          }
+        }
+        return task;
+      });
+    },
+    
   }
 })
 
-export const { addTask, delTask, redTask, showMenu, removeFirst } = taskSlice.actions
+export const { addTask, delTask, redTask, showMenu, removeFirst, fontBigger, fontLower } = taskSlice.actions
 export default taskSlice.reducer

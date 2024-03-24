@@ -29,7 +29,7 @@ export function TaskListItem() {
                       <div className={styles.circle_container}>
                         <span className={styles.number}>{index + 1}</span>
                       </div>
-                      {el.content}
+                      <span style={{fontSize:`${el.listFontSize}`+'px'}}>{el.content}</span>
                     </div>
                     <button onClick={() => settingsItemHandler(index)}>{<Dots />}</button>
                     {el.menuState && <MenuBtn el={el.content} index={index}/>}
