@@ -91,7 +91,7 @@ function Timer() {
   return (
     <div style={{textAlign: 'center'}}>
       {taskList.value.length != 0 ? <p>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} - {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p>Задач нет</p>}
-      <div style={{fontSize: '100px'}}>
+      <div style={{fontSize: '150px'}}>
         <span>{minutes < 10 ? '0': ''}{minutes}</span>:<span>{seconds < 10 ? '0': ''}{seconds}</span>
       </div>
       <p>{isRunning ? 'Running' : 'Not running'}</p>
