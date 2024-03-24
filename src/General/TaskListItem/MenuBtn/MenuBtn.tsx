@@ -21,12 +21,12 @@ export function MenuBtn({el,index} : {el:string,index:number}) {
   return (
     <div className={styles.menu}>
       <div className={styles.btn_block}>
-        <button className={styles.btn}><LupaP/>Увеличить</button>
-        <button className={styles.btn}><LupaM/>Уменьшить</button>
-        <button className={styles.btn} onClick={() => redHandler(el,index)}><Pen/>Редактировать</button>
+        <button className={styles.btn}><LupaP/><span className={styles.btn_text}>Увеличить</span></button>
+        <button className={styles.btn}><LupaM/><span className={styles.btn_text}>Уменьшить</span></button>
+        <button className={styles.btn} onClick={() => redHandler(el,index)}><Pen/><span className={styles.btn_text}>Редактировать</span></button>
         <button className={styles.btn} onClick={() => {
           dispatch(openPopup())
-        }}><Trash/>Удалить</button>
+        }}><Trash/><span className={styles.btn_text}>Удалить</span></button>
         {popup ? <Popup el={el} index={index}/> : ''}
       </div>
       <div className={styles.kontur}><Kontur /></div>
