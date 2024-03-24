@@ -110,7 +110,7 @@ function Timer() {
           restart(createNewTime(timer.userTime));
         }
         pause()
-      }}>СТОП</button>: ''}
+      }}>СТОП</button> : ''}
       {timer.workActive && timer.pauseState ? <button onClick={() => {
         if(timer.workActive){
           restart(createNewTime(timer.userTime));
