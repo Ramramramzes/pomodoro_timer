@@ -87,10 +87,6 @@ function Timer() {
       dispatch(setPausesResult(Math.round((timer.forStatistic.pauseEnd - timer.forStatistic.pauseStart)/1000)))
     },[timer.forStatistic.pauseEnd])
 
-    useEffect(() => {
-      console.log(timer.forStatistic.pauseResult);
-    },[timer.forStatistic.pauseResult])
-
 
   return (
     <div style={{textAlign: 'center'}}>
