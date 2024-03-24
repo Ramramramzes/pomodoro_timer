@@ -1,0 +1,16 @@
+.plus_btn{
+  position: absolute;
+  top: 40%;
+  right: -25%;
+  background-color: #f4f4f4;
+}
+
+.main_timer{
+  position: relative;
+  font-size: 150px;
+  display: flex;
+}
+
+.list_status{
+  margin-bottom: 30px;
+}
