@@ -1,0 +1,27 @@
+.input_block{
+  display: flex;
+  flex-direction: column;
+}
+
+.input{
+  padding: 20px 0px 20px 15px;
+  width: 80%;
+  margin: 25px 0px;
+  background-color: #F4F4F4;
+  border: none;
+}
+
+.input::placeholder{
+  color: #999;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.input:focus{
+  outline: none;
+}
+
+.btn{
+  width: 40%;
+  margin-bottom: 25px;
+}

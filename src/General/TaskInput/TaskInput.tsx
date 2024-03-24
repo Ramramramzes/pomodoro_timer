@@ -1,4 +1,4 @@
-// import styles from './taskinput.module.css';
+import styles from './taskinput.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../states/store";
 import { change } from "../../states/taskInputSlice";
@@ -28,15 +28,15 @@ export function TaskInput() {
     dispatch(change(''))
     dispatch(change_active())
   }
-
+//! ПРОДОЛЖИТЬ ТУТ
   return (
-    <>
-      <input  className=''
+    <div className={styles.input_block}>
+      <input  className={styles.input}
               onChange={changeHandler}
               value={taskInput} 
               placeholder={taskInput ? '' : 'Название задачи'}
               type="text" />
-      {activeChange.value ? <button onClick={redTaskHandler}>Редактировать</button> : <button className='green_btn' disabled={taskInput ? false : true} onClick={addTaskHandler}>Добавить</button>}
-    </>
+      {activeChange.value ? <button className={styles.btn + ' green_btn'} onClick={redTaskHandler}>Редактировать</button> : <button className={styles.btn + ' green_btn'} disabled={taskInput ? false : true} onClick={addTaskHandler}>Добавить</button>}
+    </div>
   );
 }
