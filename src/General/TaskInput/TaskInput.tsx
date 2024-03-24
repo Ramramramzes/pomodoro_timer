@@ -31,7 +31,8 @@ export function TaskInput() {
 
   return (
     <>
-      <input  onChange={changeHandler}
+      <input  className=''
+              onChange={changeHandler}
               value={taskInput} 
               placeholder={taskInput ? '' : 'Название задачи'}
               type="text" />

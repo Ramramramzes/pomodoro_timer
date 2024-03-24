@@ -1,20 +1,33 @@
+:root {
+  --app-red: #B7280F;
+  --app-green: #A8B64F;
+
+}
+
 body{
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 ul{
   list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+h1,h2,h3{
+  margin: 0px;
 }
 
 .green_btn{
   color: #fff;
-  background-color: #A8B64F;
-  border: 2px solid #A8B64F;
+  background-color: var(--app-green);
+  border: 2px solid var(--app-green);
   padding: 20px 50px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
 }
+
 
 
 /* :root {

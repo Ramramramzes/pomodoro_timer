@@ -1,0 +1,21 @@
+.guide_block{
+  width: 40%;
+}
+.title{
+  font-size: 24px;
+}
+
+.marker{
+  color: var(--app-red);
+  font-size: 16px;
+  padding-right: 15px;
+}
+
+.list_item{
+  color: #333333;
+  line-height: 2;
+  display: flex;
+}
+.list_item:last-child{
+  margin-bottom: 0px;
+}
