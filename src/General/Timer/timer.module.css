@@ -26,7 +26,7 @@
 
 .stop_btn{
   padding: 20px 50px;
-  font-size: 18px;
+  font-size: 16px;
   background-color: transparent;
   color: var(--back-red);
   border: 2px solid var(--back-red);
@@ -40,6 +40,7 @@
 
 .stop_btn_dis{
   padding: 20px 50px;
+  font-size: 16px;
   color: var(--grayc4);
   border: 2px solid var(--grayc4);
 }
