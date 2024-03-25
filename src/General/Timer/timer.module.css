@@ -26,6 +26,7 @@
 
 .stop_btn{
   padding: 20px 50px;
+  background-color: transparent;
   color: var(--back-red);
   border: 2px solid var(--back-red);
 }
@@ -43,6 +44,7 @@
 }
 
 .skip_btn{
+  background-color: transparent;
   padding: 20px 50px;
   color: var(--back-red);
   border: 2px solid var(--back-red);
