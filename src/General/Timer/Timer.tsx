@@ -95,7 +95,7 @@ function Timer() {
     },[dispatch, isRunning])
 
   return (
-    <div style={{textAlign: 'center'}}>
+    <div className={styles.main}>
       <div className={styles.main_timer}>
         <span className={
                           isRunning && timer.workActive ? styles.num_red :
@@ -120,7 +120,6 @@ function Timer() {
                                                         pause()}}><Plus /></button>}
                                                     {/* большой перерыв */}
       </div>
-      {/* <p>{isRunning ? 'Running' : 'Not running'}</p> */}
       {taskList.value.length != 0 ? <p className={styles.list_status}>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} - {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p className={styles.list_status}>Задач нет</p>}
       <div className={styles.btn_block}>
       {isRunning ? <button  className='green_btn'
@@ -145,7 +144,8 @@ function Timer() {
       {timer.workActive && timer.pauseState ? <button className={styles.skip_btn}
                                                       onClick={() => {
                                                       if(timer.workActive){
-                                                        restart(createNewTime(timer.userTime));
+                                                        //? непонятно сбрасывать таймер или нет
+                                                        // restart(createNewTime(timer.userTime));
                                                         dispatch(removeFirst())
                                                         dispatch(pauseState(false))
                                                       }
