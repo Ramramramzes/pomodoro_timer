@@ -113,6 +113,7 @@ function Timer() {
       </div>
       {/* <p>{isRunning ? 'Running' : 'Not running'}</p> */}
       {taskList.value.length != 0 ? <p className={styles.list_status}>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} - {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p className={styles.list_status}>Задач нет</p>}
+      <div className={styles.btn_block}>
       {isRunning ? <button  className='green_btn'
                             onClick={() => {
                             dispatch(pauseState(true))
@@ -121,24 +122,28 @@ function Timer() {
                             }}>Пауза</button>:''}
       {!isRunning ? <button className='green_btn' id='start_btn'  onClick={() => {
                                             resume()
+                                            dispatch(pauseState(false))
                                             document.getElementById('start_btn')?.textContent === 'Продолжить' ? dispatch(setPauseEnd(new Date().getTime())) : false
                                             }}>{!timer.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
 
-      {timer.workActive && !timer.pauseState ? <button onClick={() => {
-        if(timer.workActive){
-          restart(createNewTime(timer.userTime));
-        }
-        pause()
-      }}>СТОП</button> : ''}
-      {timer.workActive && timer.pauseState ? <button onClick={() => {
-        if(timer.workActive){
-          restart(createNewTime(timer.userTime));
-          dispatch(removeFirst())
-          dispatch(pauseState(false))
-        }
-        pause()
-      }}>Сделано</button>: ''}
-      {timer.breakActive || timer.bigBreakActive ? <button onClick={()=> skipFn(0,0)}>Пропустить</button> : ''}
+      {timer.workActive && !timer.pauseState ? <button  className={!isRunning ? styles.stop_btn_dis : styles.stop_btn}
+                                                        onClick={() => {
+                                                        if(timer.workActive){
+                                                          restart(createNewTime(timer.userTime));
+                                                        }
+                                                        pause()
+                                                      }}>Стоп</button> : ''}
+      {timer.workActive && timer.pauseState ? <button className={styles.skip_btn}
+                                                      onClick={() => {
+                                                      if(timer.workActive){
+                                                        restart(createNewTime(timer.userTime));
+                                                        dispatch(removeFirst())
+                                                        dispatch(pauseState(false))
+                                                      }
+                                                      pause()
+                                                    }}>Сделано</button>: ''}
+      {timer.breakActive || timer.bigBreakActive ? <button className={styles.skip_btn} onClick={()=> skipFn(0,0)}>Пропустить</button> : ''}
+      </div>
     </div>
   );
 }

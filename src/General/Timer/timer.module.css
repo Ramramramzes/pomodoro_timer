@@ -14,3 +14,27 @@
 .list_status{
   margin-bottom: 30px;
 }
+
+.stop_btn{
+  padding: 20px 50px;
+  color: var(--back-red);
+  border: 2px solid var(--back-red);
+}
+
+.stop_btn_dis{
+  padding: 20px 50px;
+  color: var(--grayc4);
+  border: 2px solid var(--grayc4);
+}
+
+.skip_btn{
+  padding: 20px 50px;
+  color: #fff;
+  background-color: var(--back-red);
+}
+
+.btn_block{
+  display: flex;
+  justify-content: space-around;
+}
+

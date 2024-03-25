@@ -19,7 +19,7 @@ export function General() {
       </div>
       <div className={styles.rightside}>
         <div className={styles.title_block}>
-          <span className={styles.title}>{list.value.length != 0 ? list.value[0].content : ''}</span>
+          <span className={styles.title}>{list.value.length != 0 ? list.value[0].content : 'Задач нет'}</span>
           <span className={styles.count}>Помидор {tomatoCount != 4 ? tomatoCount + 1 : '4'}</span>
         </div>
         <Timer />

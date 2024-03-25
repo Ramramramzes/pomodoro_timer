@@ -46,9 +46,20 @@ h1,h2,h3,p{
 .green_btn{
   color: #fff;
   background-color: var(--app-green);
-  border: 2px solid var(--app-green);
   padding: 20px 50px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
+}
+
+.tymer_num_green{
+  color: var(--app-green);
+}
+
+.tymer_num_red{
+  color: var(--back-red);
+}
+
+.tymer_num_def{
+  color: #333;
 }
