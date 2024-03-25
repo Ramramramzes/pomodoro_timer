@@ -51,6 +51,10 @@ h1,h2,h3,p{
   font-size: 16px;
   font-weight: 500;
 }
+.green_btn:active{
+  background-color: #899441;
+  border-color: #899441;
+}
 
 .tymer_num_green{
   color: var(--app-green);
@@ -62,4 +66,8 @@ h1,h2,h3,p{
 
 .tymer_num_def{
   color: #333;
+}
+
+.red_color{
+  color: #B7280F;
 }

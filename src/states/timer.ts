@@ -10,6 +10,7 @@ interface ITimerState{
   tomatoCount: number,
   rounds: number,
   pauseState: boolean,
+  isRuning: boolean,
   forStatistic: {
     pauseStart: number,
     pauseEnd: number,
@@ -27,6 +28,7 @@ const initialState:ITimerState = {
   tomatoCount: 0,
   rounds:0,
   pauseState: false,
+  isRuning: false,
   forStatistic: {
     pauseStart: 0,
     pauseEnd: 0,
@@ -77,9 +79,12 @@ const timerSlice = createSlice({
     setPausesResult: (state,action) => {
       state.forStatistic.pauseResult = state.forStatistic.pauseResult + action.payload
     },
+    setIsRuning: (state,action) => {
+      state.isRuning = action.payload
+    },
     
   }
 })
 
-export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound, pauseState, setPauseStart, setPauseEnd, setPausesResult} = timerSlice.actions
+export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound, pauseState, setPauseStart, setPauseEnd, setPausesResult, setIsRuning} = timerSlice.actions
 export default timerSlice.reducer

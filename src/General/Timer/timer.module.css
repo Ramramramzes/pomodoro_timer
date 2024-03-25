@@ -21,6 +21,12 @@
   border: 2px solid var(--back-red);
 }
 
+.stop_btn:hover{
+  color: #fff;
+  background-color: var(--back-red);
+  border: 2px solid var(--back-red);
+}
+
 .stop_btn_dis{
   padding: 20px 50px;
   color: var(--grayc4);
@@ -29,8 +35,14 @@
 
 .skip_btn{
   padding: 20px 50px;
+  color: var(--back-red);
+  border: 2px solid var(--back-red);
+}
+
+.skip_btn:hover{
   color: #fff;
   background-color: var(--back-red);
+  border: 2px solid var(--back-red);
 }
 
 .btn_block{
@@ -38,3 +50,19 @@
   justify-content: space-around;
 }
 
+.stop_btn:active,
+.skip_btn:active{
+  background-color: #B7280F;
+  border-color: #B7280F;
+}
+
+
+.num_green{
+  color: var(--app-green);
+}
+.num_red{
+  color: var(--back-red);
+}
+.num_def{
+  color: #333;
+}

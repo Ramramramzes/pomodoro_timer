@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { AppDispatch, RootState } from '../../states/store';
-import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, setPauseEnd, setPauseStart, setPausesResult, startTomato,  } from '../../states/timer';
+import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, setIsRuning, setPauseEnd, setPauseStart, setPausesResult, startTomato,  } from '../../states/timer';
 import { removeFirst } from '../../states/taskSlice';
 import { Plus } from '../../img/images';
 
@@ -89,11 +89,20 @@ function Timer() {
       dispatch(setPausesResult(Math.round((timer.forStatistic.pauseEnd - timer.forStatistic.pauseStart)/1000)))
     },[timer.forStatistic.pauseEnd])
 
+// !---- isRuning в общий стор
+    useEffect(() => {
+      dispatch(setIsRuning(isRunning))
+    },[dispatch, isRunning])
 
   return (
     <div style={{textAlign: 'center'}}>
       <div className={styles.main_timer}>
-        <span>{minutes < 10 ? '0': ''}{minutes}</span>:<span>{seconds < 10 ? '0': ''}{seconds}</span>
+        <span className={
+                          isRunning && timer.workActive ? styles.num_red :
+                          (isRunning && (timer.breakActive || timer.bigBreakActive)) ? styles.num_green :
+                          styles.num_def
+                        }
+>{minutes < 10 ? '0': ''}{minutes}:{seconds < 10 ? '0': ''}{seconds}</span>
         {timer.workActive && !isRunning && <button  className={styles.plus_btn}
                                                     onClick={()=>{
                                                     dispatch(addWorkMinute())
