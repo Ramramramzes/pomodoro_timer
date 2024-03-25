@@ -74,10 +74,17 @@
 
 .num_green{
   color: var(--app-green);
+  display: flex;
 }
 .num_red{
   color: var(--back-red);
+  display: flex;
 }
 .num_def{
   color: #333;
+  display: flex;
+}
+
+.one_num_block{
+  width: 100px;
 }

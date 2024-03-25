@@ -97,12 +97,12 @@ function Timer() {
   return (
     <div className={styles.main}>
       <div className={styles.main_timer}>
-        <span className={
+        <div className={
                           isRunning && timer.workActive ? styles.num_red :
                           (isRunning && (timer.breakActive || timer.bigBreakActive)) ? styles.num_green :
                           styles.num_def
                         }
->{minutes < 10 ? '0': ''}{minutes}:{seconds < 10 ? '0': ''}{seconds}</span>
+            ><div className={styles.one_num_block}>{minutes < 10 ? '0': ''}</div><div className={styles.one_num_block}>{minutes}</div>:<div className={styles.one_num_block}>{seconds < 10 ? '0': ''}</div><div className={styles.one_num_block}>{seconds}</div></div>
         {timer.workActive && !isRunning && <button  className={styles.plus_btn}
                                                     onClick={()=>{
                                                     dispatch(addWorkMinute())
