@@ -19,7 +19,7 @@ export function General() {
         <TaskListItem />
       </div>
       <div className={styles.rightside_main}>
-        <div className={timer.isRuning && timer.workActive ? styles.rightside_red :
+        <div style={{backgroundColor: 'gainsboro'}} className={timer.isRuning && timer.workActive ? styles.rightside_red :
                             (timer.isRuning && (timer.breakActive || timer.bigBreakActive)) ? styles.rightside_green :
                             styles.rightside_def}>
           <div className={timer.isRuning && timer.workActive ? styles.title_red :
