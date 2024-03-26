@@ -72,7 +72,9 @@ function Timer() {
     useEffect(() => {
       skipFn(minutes,seconds)
       seconds > 9 ? document.getElementById('forHidden')?.classList.add('dn') : document.getElementById('forHidden')?.classList.remove('dn')
+      minutes > 9 ? document.getElementById('forHidden_m')?.classList.add('dn') : document.getElementById('forHidden_m')?.classList.remove('dn')
       seconds > 9 ? document.getElementById('seconds')?.classList.add('one_num_block_seconds_two') : document.getElementById('seconds')?.classList.remove('one_num_block_seconds_two')
+      minutes > 9 ? document.getElementById('minutes')?.classList.add('one_num_block_minutes_two') : document.getElementById('minutes')?.classList.remove('one_num_block_minutes_two')
       
     },[minutes, seconds,])
     useEffect(() => {
@@ -105,7 +107,7 @@ function Timer() {
                           (isRunning && (timer.breakActive || timer.bigBreakActive)) ? styles.num_green :
                           styles.num_def
                         }
-            ><div className={styles.one_num_block}>{minutes < 10 ? '0': ''}</div><div className={styles.one_num_block}>{minutes}</div>:<div id='forHidden' className={styles.one_num_block}>{seconds < 10 ? '0' : ''}</div><div id='seconds' className={styles.one_num_block}>{seconds}</div></div>
+            ><div id='forHidden_m' className={styles.one_num_block}>{minutes < 10 ? '0' : ''}</div><div id='minutes' className={styles.one_num_block}>{minutes}</div>:<div id='forHidden' className={styles.one_num_block}>{seconds < 10 ? '0' : ''}</div><div id='seconds' className={styles.one_num_block}>{seconds}</div></div>
       </div>
       <div className={styles.btns_and_tasks}>
         <div className={styles.plus_block}>
