@@ -49,6 +49,7 @@
 }
 
 .title{
+  height: 1px;
   width: 20%;
   overflow: hidden;
 }

@@ -151,3 +151,7 @@ h1,h2,h3,p{
   transition: linear .5s;
   opacity: 0;
 }
+
+.b{
+  font-weight: bold;
+}
