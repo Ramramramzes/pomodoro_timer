@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from '../../states/store';
 import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, remWorkMinute, remBreakeMinute, remBigBreakeMinute, setIsRuning, setPauseEnd, setPauseStart, setPausesResult, startTomato,  } from '../../states/timer';
 import { removeFirst } from '../../states/taskSlice';
 import { Minus, Plus } from '../../img/images';
+import { bigBreakSound, breakSound, endSound, startSound } from '../../sound/sounds'
 
 function Timer() {
   const timer = useSelector((state: RootState) => state.timer)
@@ -75,7 +76,7 @@ function Timer() {
       minutes > 9 ? document.getElementById('forHidden_m')?.classList.add('dn') : document.getElementById('forHidden_m')?.classList.remove('dn')
       seconds > 9 ? document.getElementById('seconds')?.classList.add('one_num_block_seconds_two') : document.getElementById('seconds')?.classList.remove('one_num_block_seconds_two')
       minutes > 9 ? document.getElementById('minutes')?.classList.add('one_num_block_minutes_two') : document.getElementById('minutes')?.classList.remove('one_num_block_minutes_two')
-      
+      minutes == 0 && seconds == 0 ? endSound() : false
     },[minutes, seconds,])
     useEffect(() => {
       if(timer.workActive){
@@ -165,6 +166,9 @@ function Timer() {
                                             resume()
                                             dispatch(pauseState(false))
                                             document.getElementById('start_btn')?.textContent === 'Продолжить' ? dispatch(setPauseEnd(new Date().getTime())) : false
+                                            document.getElementById('start_btn')?.textContent === 'Старт' && timer.workActive ? startSound() : false
+                                            document.getElementById('start_btn')?.textContent === 'Старт' && timer.breakActive ? breakSound() : false
+                                            document.getElementById('start_btn')?.textContent === 'Старт' && timer.bigBreakActive ? bigBreakSound() : false
                                             }}>{!timer.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
 
       {timer.workActive && !timer.pauseState ? <button  className={!isRunning ? styles.stop_btn_dis + ' btn-animation' : styles.stop_btn + ' btn-animation'}
@@ -192,7 +196,9 @@ function Timer() {
                                                       }
                                                       pause()
                                                     }}>Сделано</button>: ''}
-      {timer.breakActive || timer.bigBreakActive ? <button className={styles.skip_btn + ' btn-animation'} onClick={()=> skipFn(0,0)}>Пропустить</button> : ''}
+      {timer.breakActive || timer.bigBreakActive ? <button className={styles.skip_btn + ' btn-animation'} onClick={()=> {
+                                                                                                                        skipFn(0,0)
+                                                                                                                        endSound()}}>Пропустить</button> : ''}
       </div>
     </div>
   );
