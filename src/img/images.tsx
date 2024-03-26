@@ -106,7 +106,7 @@ export function Close(){
 
 
 export function Plus({color}:{color:boolean}){
-  const defColorP = !color ? `rgb(169, 255, 170)` : `#C4C4C4`
+  const defColorP = !color ? `var(--plus)` : `#C4C4C4`
   return(
     <>
       <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -118,7 +118,7 @@ export function Plus({color}:{color:boolean}){
 }
 
 export function Minus({color}:{color:boolean}){
-  const defColorM = !color ? `rgb(255, 169, 169)` : `#C4C4C4`
+  const defColorM = !color ? `var(--minus)` : `#C4C4C4`
 
   return(
     <>
