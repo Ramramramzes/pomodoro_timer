@@ -123,7 +123,7 @@ function Timer() {
                                                         pause()}}><Plus /></button>}
                                                     {/* большой перерыв */}
       </div>
-      {taskList.value.length != 0 ? <p className={styles.list_status}>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} - {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p className={styles.list_status}>Задач нет</p>}
+      {taskList.value.length != 0 ? <p title={taskList.value[0].content} className={styles.list_status}>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} : {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p className={styles.list_status}>Задач нет</p>}
       <div className={styles.btn_block}>
       {isRunning ? <button  className='green_btn'
                             onClick={() => {

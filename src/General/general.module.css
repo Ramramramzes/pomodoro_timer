@@ -44,6 +44,11 @@
   border: 1px solid var(--app-green);
 }
 
+.title{
+  width: 20%;
+  overflow: hidden;
+}
+
 .title,
 .count{
   padding: 20px 40px;
@@ -81,4 +86,5 @@
   background-color: var(--grayc4);
   justify-content: space-between;
   margin-bottom: 50px;
+  flex-grow: 0;
 }

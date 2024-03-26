@@ -26,7 +26,7 @@ export function General() {
                             (timer.isRuning && (timer.breakActive || timer.bigBreakActive)) ? styles.title_green :
                             styles.title_def}>
                             
-            <span className={styles.title}>{list.value.length != 0 ? list.value[0].content : 'Задач нет'}</span>
+            <span title={list.value.length != 0 ? list.value[0].content : 'Задач нет'} className={styles.title}>{list.value.length != 0 ? list.value[0].content : 'Задач нет'}</span>
             <span className={styles.count}>{timer.workActive ? 'Помидор' : timer.breakActive ? 'Перерыв' : ''} {tomatoCount != 4 && !timer.breakActive? tomatoCount + 1 : ''}{tomatoCount != 4 && !timer.workActive ? tomatoCount : ''}{timer.bigBreakActive ? 'Большой перерыв' : ''}</span>
           </div>
           <Timer />
