@@ -71,6 +71,9 @@ function Timer() {
     },[timer.tomatoCount])
     useEffect(() => {
       skipFn(minutes,seconds)
+      seconds > 9 ? document.getElementById('forHidden')?.classList.add('dn') : document.getElementById('forHidden')?.classList.remove('dn')
+      seconds > 9 ? document.getElementById('seconds')?.classList.add('one_num_block_seconds_two') : document.getElementById('seconds')?.classList.remove('one_num_block_seconds_two')
+      
     },[minutes, seconds,])
     useEffect(() => {
       if(timer.workActive){
@@ -102,7 +105,7 @@ function Timer() {
                           (isRunning && (timer.breakActive || timer.bigBreakActive)) ? styles.num_green :
                           styles.num_def
                         }
-            ><div className={styles.one_num_block}>{minutes < 10 ? '0': ''}</div><div className={styles.one_num_block}>{minutes}</div>:<div className={styles.one_num_block}>{seconds < 10 ? '0': ''}</div><div className={styles.one_num_block}>{seconds}</div></div>
+            ><div className={styles.one_num_block}>{minutes < 10 ? '0': ''}</div><div className={styles.one_num_block}>{minutes}</div>:<div id='forHidden' className={styles.one_num_block}>{seconds < 10 ? '0' : ''}</div><div id='seconds' className={styles.one_num_block}>{seconds}</div></div>
         {timer.workActive && !isRunning && <button  className={styles.plus_btn}
                                                     onClick={()=>{
                                                     dispatch(addWorkMinute())

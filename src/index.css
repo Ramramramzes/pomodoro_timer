@@ -71,3 +71,11 @@ h1,h2,h3,p{
 .red_color{
   color: #B7280F;
 }
+
+.dn{
+  display: none;
+}
+
+.one_num_block_seconds_two{
+  width: 200px;
+}
