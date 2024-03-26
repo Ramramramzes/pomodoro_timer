@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { AppDispatch, RootState } from '../../states/store';
-import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, setIsRuning, setPauseEnd, setPauseStart, setPausesResult, startTomato,  } from '../../states/timer';
+import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, remWorkMinute, remBreakeMinute, remBigBreakeMinute, setIsRuning, setPauseEnd, setPauseStart, setPausesResult, startTomato,  } from '../../states/timer';
 import { removeFirst } from '../../states/taskSlice';
-import { Plus } from '../../img/images';
+import { Minus, Plus } from '../../img/images';
 
 function Timer() {
   const timer = useSelector((state: RootState) => state.timer)
@@ -109,37 +109,43 @@ function Timer() {
       </div>
       <div className={styles.btns_and_tasks}>
         <div className={styles.plus_block}>
-          {timer.workActive && !isRunning && <button  className={styles.plus_btn}
+          {timer.workActive && <button  className={styles.plus_min}
+                                                      disabled={isRunning  || minutes <= 1}
                                                       onClick={()=>{
-                                                      dispatch(addWorkMinute())
+                                                      dispatch(remWorkMinute())
                                                       pause()}}>
-                                                      <Plus /></button>}
+                                                      <Minus /></button>}
                                                       {/* рабочее время */}
-          {timer.breakActive && !isRunning && <button className={styles.plus_btn}
+          {timer.breakActive && <button className={styles.plus_min}
+                                                      disabled={isRunning  || minutes <= 1}
                                                       onClick={()=>{
-                                                      dispatch(addBreakeMinute())
-                                                      pause()}}><Plus /></button>}
+                                                      dispatch(remBreakeMinute())
+                                                      pause()}}><Minus /></button>}
                                                       {/* перерыв */}
-          {timer.bigBreakActive && !isRunning && <button  className={styles.plus_btn}
+          {timer.bigBreakActive && <button  className={styles.plus_min}
+                                                      disabled={isRunning  || minutes <= 1}
                                                           onClick={()=>{
-                                                          dispatch(addBigBreakeMinute())
-                                                          pause()}}><Plus /></button>}
+                                                          dispatch(remBigBreakeMinute())
+                                                          pause()}}><Minus /></button>}
                                                       {/* большой перерыв */}
         </div>
         {taskList.value.length != 0 ? <p title={taskList.value[0].content} className={taskList.value[0].content.length > 30 ? styles.list_status_long : styles.list_status_short}>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} : {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p className={styles.no_task}>Задач нет</p>}
         <div className={styles.plus_block}>
-          {timer.workActive && !isRunning && <button  className={styles.plus_btn}
+          {timer.workActive  && <button  className={styles.plus_btn}
+                                                      disabled={isRunning}
                                                       onClick={()=>{
                                                       dispatch(addWorkMinute())
                                                       pause()}}>
                                                       <Plus /></button>}
                                                       {/* рабочее время */}
-          {timer.breakActive && !isRunning && <button className={styles.plus_btn}
+          {timer.breakActive && <button className={styles.plus_btn}
+                                                      disabled={isRunning}
                                                       onClick={()=>{
                                                       dispatch(addBreakeMinute())
                                                       pause()}}><Plus /></button>}
                                                       {/* перерыв */}
-          {timer.bigBreakActive && !isRunning && <button  className={styles.plus_btn}
+          {timer.bigBreakActive && <button  className={styles.plus_btn}
+                                                          disabled={isRunning}
                                                           onClick={()=>{
                                                           dispatch(addBigBreakeMinute())
                                                           pause()}}><Plus /></button>}

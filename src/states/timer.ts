@@ -49,6 +49,15 @@ const timerSlice = createSlice({
     addBigBreakeMinute: (state) => {
       state.bigBrakeTime += 1
     },
+    remWorkMinute: (state) => {
+      state.userTime = state.userTime === 1 ? state.userTime : state.userTime -= 1
+    },
+    remBreakeMinute: (state) => {
+      state.breakTime = state.breakTime === 1 ? state.breakTime : state.breakTime -= 1
+    },
+    remBigBreakeMinute: (state) => {
+      state.bigBrakeTime = state.bigBrakeTime === 1 ? state.bigBrakeTime : state.bigBrakeTime -= 1
+    },
     changeWork: (state,action) => {
       state.workActive = action.payload
     },
@@ -86,5 +95,5 @@ const timerSlice = createSlice({
   }
 })
 
-export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound, pauseState, setPauseStart, setPauseEnd, setPausesResult, setIsRuning} = timerSlice.actions
+export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound, pauseState, setPauseStart, setPauseEnd, setPausesResult, setIsRuning, remWorkMinute , remBreakeMinute, remBigBreakeMinute } = timerSlice.actions
 export default timerSlice.reducer
