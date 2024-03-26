@@ -28,9 +28,8 @@ const taskSlice = createSlice({
       state.value.push({content: action.payload.content, menuState:false, taskIndex: action.payload.tastIndex, listFontSize: 16})
     },
     removeFirst: (state) => {
-      if(state.value.length != 0){
-        const newValue = [...state.value.slice(1)];
-        return { ...state, value: newValue }
+      if (state.value.length !== 0) {
+        state.value.shift();
       }
     },
     delTask: (state,action) => {

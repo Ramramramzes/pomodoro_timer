@@ -41,12 +41,12 @@ export function  Popup({el,index}:{el: string,index: number}) {
             const mainRenderedList = document.getElementById('task_list')
             const neededLi = mainRenderedList?.getElementsByTagName('li')
             if(taskList.length >= index && neededLi){
-              neededLi[index].classList.add('strike-animation')
-              neededLi[index].classList.add('fade_out')
+              neededLi[index].classList.add('strike-animation','fade_out')
+              setTimeout(() => {
+                delHandler(el)
+                neededLi[index].classList.remove('strike-animation','fade_out')
+              }, 500);
             }
-          setTimeout(() => {
-            delHandler(el)
-          }, 500);
           dispatch(openPopup())
         }}>Удалить</button>
         <button 

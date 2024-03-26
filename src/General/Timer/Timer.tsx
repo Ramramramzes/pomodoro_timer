@@ -179,7 +179,15 @@ function Timer() {
                                                       if(timer.workActive){
                                                         //? непонятно сбрасывать таймер или нет
                                                         // restart(createNewTime(timer.userTime));
-                                                        dispatch(removeFirst())
+                                                        const mainRenderedList = document.getElementById('task_list')
+                                                        const neededLi = mainRenderedList?.getElementsByTagName('li')
+                                                        if(taskList.value.length != 0 && neededLi){
+                                                          neededLi[0].classList.add('strike-animation','fade_out')
+                                                          setTimeout(() => {
+                                                            dispatch(removeFirst())
+                                                            neededLi[0].classList.remove('strike-animation','fade_out')
+                                                          }, 600);
+                                                        }
                                                         dispatch(pauseState(false))
                                                       }
                                                       pause()

@@ -28,7 +28,7 @@ export function TaskInput() {
     dispatch(change(''))
     dispatch(change_active())
   }
-//! ПРОДОЛЖИТЬ ТУТ
+
   return (
     <div className={styles.input_block}>
       <form onSubmit={(e) => e.preventDefault()}>
