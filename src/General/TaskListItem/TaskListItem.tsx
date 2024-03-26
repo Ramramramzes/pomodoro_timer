@@ -21,9 +21,9 @@ export function TaskListItem() {
   }
   
   return (
-    <ul className={styles.list}>
+    <ul id='task_list' className={styles.list}>
       {taskList && taskList.map((el,index) => {
-        return  <li className={styles.item}
+        return  <li className={styles.item + ' btn-animation'}
                     key={index}>
                     <div className={styles.index_content}>
                       <div className={styles.circle_container}>

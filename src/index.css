@@ -116,3 +116,36 @@ h1,h2,h3,p{
 .btn-animation {
   animation: fadeInOut 0.5s ease-in-out;
 }
+
+.strike-animation {
+  overflow: hidden; 
+  position: relative;
+}
+
+.strike-animation::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--app-red); 
+  transform-origin: left;
+  animation: strike .4s linear forwards;
+  opacity: 0; 
+}
+
+@keyframes strike {
+  0% {
+      transform: scaleX(0);
+  }
+  100% {
+      transform: scaleX(1);
+      opacity: 1;
+  }
+}
+
+.fade_out{
+  transition: linear .5s;
+  opacity: 0;
+}

@@ -1,12 +1,13 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./popup.module.css"
-import { AppDispatch } from "../../../../states/store";
+import { AppDispatch, RootState } from "../../../../states/store";
 import { openPopup } from "../../../../states/taskInputSlice";
 import { delTask, showMenu } from "../../../../states/taskSlice";
 import { useEffect } from "react";
 import { Close } from "../../../../img/images";
 
 export function  Popup({el,index}:{el: string,index: number}) {
+  const taskList = useSelector((state:RootState) => state.taskList.value)
   const dispatch = useDispatch<AppDispatch>()
   
   const delHandler = (el:string) => {
@@ -37,7 +38,15 @@ export function  Popup({el,index}:{el: string,index: number}) {
         <button 
           className={styles.del_btn}
           onClick={() => {
-          delHandler(el)
+            const mainRenderedList = document.getElementById('task_list')
+            const neededLi = mainRenderedList?.getElementsByTagName('li')
+            if(taskList.length >= index && neededLi){
+              neededLi[index].classList.add('strike-animation')
+              neededLi[index].classList.add('fade_out')
+            }
+          setTimeout(() => {
+            delHandler(el)
+          }, 500);
           dispatch(openPopup())
         }}>Удалить</button>
         <button 
