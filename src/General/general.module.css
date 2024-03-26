@@ -20,6 +20,8 @@
   justify-content: start;
   width: 100%;
   padding-bottom: 10%;
+  border: 1px solid transparent;
+  transition: border .3s;
 }
 
 .rightside_red{
@@ -31,6 +33,7 @@
   padding-bottom: 10%;
   background-color: #f4f4f4;
   border: 1px solid var(--back-red);
+  transition: border .3s;
 }
 
 .rightside_green{
@@ -42,6 +45,7 @@
   padding-bottom: 10%;
   background-color: #f4f4f4;
   border: 1px solid var(--app-green);
+  transition: border .3s;
 }
 
 .title{
@@ -60,6 +64,7 @@
   background-color: var(--grayc4);
   justify-content: space-between;
   margin-bottom: 50px;
+  transition: linear .3s;
 }
 
 .title_green{
@@ -69,6 +74,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
+  transition: linear .3s;
 }
 .title_red{
   background-color: var(--back-red);
@@ -77,6 +83,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
+  transition: linear .3s;
 }
 .title_def{
   background-color: #333;
@@ -87,4 +94,5 @@
   justify-content: space-between;
   margin-bottom: 50px;
   flex-grow: 0;
+  transition: linear .3s;
 }

@@ -155,26 +155,26 @@ function Timer() {
         </div>
       </div>
       <div className={styles.btn_block}>
-      {isRunning ? <button  className='green_btn'
+      {isRunning ? <button  className='green_btn_pause btn-animation'
                             onClick={() => {
                             dispatch(pauseState(true))
                             dispatch(setPauseStart(new Date().getTime()))
                             pause()
                             }}>Пауза</button>:''}
-      {!isRunning ? <button className='green_btn' id='start_btn'  onClick={() => {
+      {!isRunning ? <button className='green_btn btn-animation' id='start_btn'  onClick={() => {
                                             resume()
                                             dispatch(pauseState(false))
                                             document.getElementById('start_btn')?.textContent === 'Продолжить' ? dispatch(setPauseEnd(new Date().getTime())) : false
                                             }}>{!timer.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
 
-      {timer.workActive && !timer.pauseState ? <button  className={!isRunning ? styles.stop_btn_dis : styles.stop_btn}
+      {timer.workActive && !timer.pauseState ? <button  className={!isRunning ? styles.stop_btn_dis + ' btn-animation' : styles.stop_btn + ' btn-animation'}
                                                         onClick={() => {
                                                         if(timer.workActive){
                                                           restart(createNewTime(timer.userTime));
                                                         }
                                                         pause()
                                                       }}>Стоп</button> : ''}
-      {timer.workActive && timer.pauseState ? <button className={styles.skip_btn}
+      {timer.workActive && timer.pauseState ? <button className={styles.skip_btn + ' btn-animation'}
                                                       onClick={() => {
                                                       if(timer.workActive){
                                                         //? непонятно сбрасывать таймер или нет
@@ -184,7 +184,7 @@ function Timer() {
                                                       }
                                                       pause()
                                                     }}>Сделано</button>: ''}
-      {timer.breakActive || timer.bigBreakActive ? <button className={styles.skip_btn} onClick={()=> skipFn(0,0)}>Пропустить</button> : ''}
+      {timer.breakActive || timer.bigBreakActive ? <button className={styles.skip_btn + ' btn-animation'} onClick={()=> skipFn(0,0)}>Пропустить</button> : ''}
       </div>
     </div>
   );

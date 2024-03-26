@@ -50,7 +50,31 @@ h1,h2,h3,p{
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
+  border: 2px solid var(--app-green);
 }
+
+.green_btn_pause{
+  color: var(--app-green);
+  background-color: transparent;
+  padding: 20px 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid var(--app-green);
+  transition: linear .2s;
+}
+
+.green_btn_pause:hover{
+  color: #fff;
+  background-color: var(--app-green);
+  padding: 20px 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid var(--app-green);
+  transition: linear .2s;
+}
+
 .green_btn:active{
   background-color: #899441;
   border-color: #899441;
@@ -82,4 +106,13 @@ h1,h2,h3,p{
 
 .one_num_block_minutes_two{
   width: 200px;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  100% { opacity: 1;}
+}
+
+.btn-animation {
+  animation: fadeInOut 0.5s ease-in-out;
 }

@@ -70,12 +70,14 @@
   background-color: transparent;
   color: var(--back-red);
   border: 2px solid var(--back-red);
+  transition: linear .2s;
 }
 
 .stop_btn:hover{
   color: #fff;
   background-color: var(--back-red);
   border: 2px solid var(--back-red);
+  transition: linear .2s;
 }
 
 .stop_btn_dis{
@@ -91,12 +93,14 @@
   padding: 20px 50px;
   color: var(--back-red);
   border: 2px solid var(--back-red);
+  transition: linear .2s;
 }
 
 .skip_btn:hover{
   color: #fff;
   background-color: var(--back-red);
   border: 2px solid var(--back-red);
+  transition: linear .2s;
 }
 
 .btn_block{
@@ -113,14 +117,18 @@
 
 
 .num_green{
+  transition: color .3s;
   color: var(--app-green);
   display: flex;
 }
+
 .num_red{
+  transition: color .3s;
   color: var(--back-red);
   display: flex;
 }
 .num_def{
+  transition: color .3s;
   color: #333;
   display: flex;
 }
