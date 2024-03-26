@@ -116,19 +116,19 @@ function Timer() {
                                                       onClick={()=>{
                                                       dispatch(remWorkMinute())
                                                       pause()}}>
-                                                      <Minus /></button>}
+                                                      <Minus color={isRunning} /></button>}
                                                       {/* рабочее время */}
           {timer.breakActive && <button className={styles.plus_min}
                                                       disabled={isRunning  || minutes <= 1}
                                                       onClick={()=>{
                                                       dispatch(remBreakeMinute())
-                                                      pause()}}><Minus /></button>}
+                                                      pause()}}><Minus color={isRunning} /></button>}
                                                       {/* перерыв */}
           {timer.bigBreakActive && <button  className={styles.plus_min}
                                                       disabled={isRunning  || minutes <= 1}
                                                           onClick={()=>{
                                                           dispatch(remBigBreakeMinute())
-                                                          pause()}}><Minus /></button>}
+                                                          pause()}}><Minus color={isRunning} /></button>}
                                                       {/* большой перерыв */}
         </div>
         {taskList.value.length != 0 ? <p title={taskList.value[0].content} className={taskList.value[0].content.length > 30 ? styles.list_status_long : styles.list_status_short}>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} : {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p className={styles.no_task}>Задач нет</p>}
@@ -138,19 +138,19 @@ function Timer() {
                                                       onClick={()=>{
                                                       dispatch(addWorkMinute())
                                                       pause()}}>
-                                                      <Plus /></button>}
+                                                      <Plus color={isRunning} /></button>}
                                                       {/* рабочее время */}
           {timer.breakActive && <button className={styles.plus_btn}
                                                       disabled={isRunning}
                                                       onClick={()=>{
                                                       dispatch(addBreakeMinute())
-                                                      pause()}}><Plus /></button>}
+                                                      pause()}}><Plus color={isRunning} /></button>}
                                                       {/* перерыв */}
           {timer.bigBreakActive && <button  className={styles.plus_btn}
                                                           disabled={isRunning}
                                                           onClick={()=>{
                                                           dispatch(addBigBreakeMinute())
-                                                          pause()}}><Plus /></button>}
+                                                          pause()}}><Plus color={isRunning} /></button>}
                                                       {/* большой перерыв */}
         </div>
       </div>
