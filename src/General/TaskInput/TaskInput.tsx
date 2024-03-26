@@ -37,7 +37,7 @@ export function TaskInput() {
                 value={taskInput} 
                 placeholder={taskInput ? '' : 'Название задачи'}
                 type="text" />
-        {activeChange.value ? <input type="submit" value='Принять' className={styles.btn + ' green_btn'} onClick={redTaskHandler}></input> : <input type="submit" value='Добавить' className={styles.btn + ' green_btn'} disabled={taskInput ? false : true} onClick={addTaskHandler}></input>}
+        {activeChange.value ? <input type="submit" value='Применить' className={styles.btn + ' green_btn'} onClick={redTaskHandler}></input> : <input type="submit" value='Добавить' className={styles.btn + ' green_btn'} disabled={taskInput ? false : true} onClick={addTaskHandler}></input>}
       </form>
     </div>
   );
