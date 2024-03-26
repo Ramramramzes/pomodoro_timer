@@ -24,8 +24,15 @@
   justify-content: center;
 }
 
-.list_status{
-  width: 50%;
+.list_status_long{
+  width: 20%;
+  overflow: hidden;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.list_status_short{
+  width: 100%;
   overflow: hidden;
   margin-left: 2%;
   margin-right: 2%;
