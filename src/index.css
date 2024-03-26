@@ -57,7 +57,7 @@ h1,h2,h3,p{
 }
 
 .tymer_num_green{
-  color: var(--app-green);
+  color: var(--app-green);;
 }
 
 .tymer_num_red{

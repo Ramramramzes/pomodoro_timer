@@ -31,12 +31,14 @@ export function TaskInput() {
 //! ПРОДОЛЖИТЬ ТУТ
   return (
     <div className={styles.input_block}>
-      <input  className={styles.input}
-              onChange={changeHandler}
-              value={taskInput} 
-              placeholder={taskInput ? '' : 'Название задачи'}
-              type="text" />
-      {activeChange.value ? <button className={styles.btn + ' green_btn'} onClick={redTaskHandler}>Редактировать</button> : <button className={styles.btn + ' green_btn'} disabled={taskInput ? false : true} onClick={addTaskHandler}>Добавить</button>}
+      <form onSubmit={(e) => e.preventDefault()}>
+        <input  className={styles.input}
+                onChange={changeHandler}
+                value={taskInput} 
+                placeholder={taskInput ? '' : 'Название задачи'}
+                type="text" />
+        {activeChange.value ? <input type="submit" value='Принять' className={styles.btn + ' green_btn'} onClick={redTaskHandler}></input> : <input type="submit" value='Добавить' className={styles.btn + ' green_btn'} disabled={taskInput ? false : true} onClick={addTaskHandler}></input>}
+      </form>
     </div>
   );
 }
