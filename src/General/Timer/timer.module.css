@@ -7,10 +7,14 @@
   align-items: center;
 }
 .plus_btn{
-  position: absolute;
-  top: 40%;
-  right: -25%;
   background-color: transparent;
+}
+
+.btns_and_tasks{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 .main_timer{
@@ -21,9 +25,16 @@
 }
 
 .list_status{
-  margin-bottom: 30px;
-  width: 70%;
+  width: 30%;
   overflow: hidden;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.no_task{
+  width: 100px;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .stop_btn{

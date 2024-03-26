@@ -106,24 +106,46 @@ function Timer() {
                           styles.num_def
                         }
             ><div className={styles.one_num_block}>{minutes < 10 ? '0': ''}</div><div className={styles.one_num_block}>{minutes}</div>:<div id='forHidden' className={styles.one_num_block}>{seconds < 10 ? '0' : ''}</div><div id='seconds' className={styles.one_num_block}>{seconds}</div></div>
-        {timer.workActive && !isRunning && <button  className={styles.plus_btn}
-                                                    onClick={()=>{
-                                                    dispatch(addWorkMinute())
-                                                    pause()}}>
-                                                    <Plus /></button>}
-                                                    {/* рабочее время */}
-        {timer.breakActive && !isRunning && <button className={styles.plus_btn}
-                                                    onClick={()=>{
-                                                    dispatch(addBreakeMinute())
-                                                    pause()}}><Plus /></button>}
-                                                    {/* перерыв */}
-        {timer.bigBreakActive && !isRunning && <button  className={styles.plus_btn}
-                                                        onClick={()=>{
-                                                        dispatch(addBigBreakeMinute())
-                                                        pause()}}><Plus /></button>}
-                                                    {/* большой перерыв */}
       </div>
-      {taskList.value.length != 0 ? <p title={taskList.value[0].content} className={styles.list_status}>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} : {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p className={styles.list_status}>Задач нет</p>}
+      <div className={styles.btns_and_tasks}>
+        <div className={styles.plus_block}>
+          {timer.workActive && !isRunning && <button  className={styles.plus_btn}
+                                                      onClick={()=>{
+                                                      dispatch(addWorkMinute())
+                                                      pause()}}>
+                                                      <Plus /></button>}
+                                                      {/* рабочее время */}
+          {timer.breakActive && !isRunning && <button className={styles.plus_btn}
+                                                      onClick={()=>{
+                                                      dispatch(addBreakeMinute())
+                                                      pause()}}><Plus /></button>}
+                                                      {/* перерыв */}
+          {timer.bigBreakActive && !isRunning && <button  className={styles.plus_btn}
+                                                          onClick={()=>{
+                                                          dispatch(addBigBreakeMinute())
+                                                          pause()}}><Plus /></button>}
+                                                      {/* большой перерыв */}
+        </div>
+        {taskList.value.length != 0 ? <p title={taskList.value[0].content} className={styles.list_status}>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} : {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p className={styles.no_task}>Задач нет</p>}
+        <div className={styles.plus_block}>
+          {timer.workActive && !isRunning && <button  className={styles.plus_btn}
+                                                      onClick={()=>{
+                                                      dispatch(addWorkMinute())
+                                                      pause()}}>
+                                                      <Plus /></button>}
+                                                      {/* рабочее время */}
+          {timer.breakActive && !isRunning && <button className={styles.plus_btn}
+                                                      onClick={()=>{
+                                                      dispatch(addBreakeMinute())
+                                                      pause()}}><Plus /></button>}
+                                                      {/* перерыв */}
+          {timer.bigBreakActive && !isRunning && <button  className={styles.plus_btn}
+                                                          onClick={()=>{
+                                                          dispatch(addBigBreakeMinute())
+                                                          pause()}}><Plus /></button>}
+                                                      {/* большой перерыв */}
+        </div>
+      </div>
       <div className={styles.btn_block}>
       {isRunning ? <button  className='green_btn'
                             onClick={() => {
