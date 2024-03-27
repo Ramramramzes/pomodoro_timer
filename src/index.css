@@ -169,4 +169,10 @@ h1,h2,h3,p{
   .green_btn_pause{
     padding: 10px 25px;
   }
+  .one_num_block_seconds_two,.one_num_block_minutes_two{
+    width: 160px;
+  }
+  .green_btn_pause:hover{
+    padding: 10px 25px;
+  }
 }

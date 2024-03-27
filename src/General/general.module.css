@@ -100,7 +100,7 @@
 
 @media (max-width:500px) {
   .general{
-    flex-direction: column;
+    flex-direction: column-reverse;
     padding: 30px 15px;
   }
   .leftside{
@@ -109,5 +109,6 @@
   }
   .rightside_main{
     width: 100%;
+    margin-bottom: 10%;
   }
 }
