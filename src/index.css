@@ -119,6 +119,10 @@ h1,h2,h3,p{
   animation: fadeInOut 0.5s ease-in-out;
 }
 
+.btn-animation-sec {
+  animation: fadeInOut 0.5s ease-in-out;
+}
+
 .strike-animation {
   overflow: hidden; 
   position: relative;
@@ -154,4 +158,8 @@ h1,h2,h3,p{
 
 .b{
   font-weight: bold;
+}
+
+.greenBorder{
+  border: 2px solid var(--app-green);
 }

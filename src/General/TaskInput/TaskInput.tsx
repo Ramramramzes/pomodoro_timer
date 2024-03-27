@@ -27,17 +27,18 @@ export function TaskInput() {
     dispatch(redTask({prev: prev, new: taskInput}))
     dispatch(change(''))
     dispatch(change_active())
+    
   }
 
   return (
     <div className={styles.input_block}>
       <form onSubmit={(e) => e.preventDefault()}>
-        <input  className={styles.input}
+        <input  className={!activeChange.value ? styles.input : styles.input + ' greenBorder btn-animation'}
                 onChange={changeHandler}
                 value={taskInput} 
                 placeholder={taskInput ? '' : 'Название задачи'}
                 type="text" />
-        {activeChange.value ? <input type="submit" value='Применить' className={styles.btn + ' green_btn'} onClick={redTaskHandler}></input> : <input type="submit" value='Добавить' className={styles.btn + ' green_btn'} disabled={taskInput ? false : true} onClick={addTaskHandler}></input>}
+        {activeChange.value ? <input type="submit" value='Применить' className={styles.btn + ' green_btn'} onClick={redTaskHandler}></input> : <input type="submit" value='Добавить' className={styles.btn + ' green_btn btn-animation'} disabled={taskInput ? false : true} onClick={addTaskHandler}></input>}
       </form>
     </div>
   );
