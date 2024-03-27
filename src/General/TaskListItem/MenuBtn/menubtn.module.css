@@ -43,3 +43,16 @@
   margin-left: 10px;
 }
 
+@media (max-width:500px) {
+  .menu{
+    top: 60px;
+    right: 0px;
+    border: 1px solid var(--app-green);
+  }
+  .btn_block{
+    margin: 0;
+  }
+  .kontur{
+    display: none;
+  }
+}

@@ -49,3 +49,10 @@
   text-decoration: underline;
   color: #333;
 }
+
+@media (max-width:500px) {
+  .popup_panel_content{
+    width: 70%;
+    padding: 20px 40px;
+  }
+}
