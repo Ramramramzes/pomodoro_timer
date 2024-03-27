@@ -152,4 +152,7 @@
   .stop_btn_dis{
     padding: 10px 25px;
   }
+  .btn_block{
+    width: 100%;
+  }
 }
