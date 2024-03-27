@@ -54,3 +54,13 @@
   overflow: auto;
   word-wrap: break-word;
 }
+
+.arrow_down:hover{
+  transform: scale(1.1);
+  transition: linear .3s;
+}
+
+.arrow_down{
+  transform: scale(.9);
+  transition: linear .3s;
+}

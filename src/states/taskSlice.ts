@@ -87,8 +87,12 @@ const taskSlice = createSlice({
         return task;
       });
     },
+    pushUp: (state,action) => {
+      const el = state.value.splice(action.payload,1)
+      state.value.unshift(el[0])
+    },
   }
 })
 
-export const { addTask, delTask, redTask, showMenu, removeFirst, fontBigger, fontLower } = taskSlice.actions
+export const { addTask, delTask, redTask, showMenu, removeFirst, fontBigger, fontLower, pushUp } = taskSlice.actions
 export default taskSlice.reducer

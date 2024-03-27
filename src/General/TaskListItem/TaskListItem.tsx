@@ -2,10 +2,10 @@ import styles from './tasklistitem.module.css'
 import { useSelector,useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../states/store";
 import { MenuBtn } from "./MenuBtn";
-import { showMenu } from "../../states/taskSlice";
+import { pushUp, showMenu } from "../../states/taskSlice";
 import { change } from "../../states/taskInputSlice";
 import { change_active } from "../../states/activchange";
-import { Dots } from "../../img/images";
+import { ArrowDown, Dots } from "../../img/images";
 
 export function TaskListItem() {
   const taskList = useSelector((state:RootState) => state.taskList.value)
@@ -19,7 +19,7 @@ export function TaskListItem() {
       dispatch(change_active());
     }
   }
-  
+
   return (
     <ul id='task_list' className={styles.list}>
       {taskList && taskList.map((el,index) => {
@@ -31,6 +31,7 @@ export function TaskListItem() {
                       </div>
                       {index == 0 ? <span className={styles.task_text} style={{fontSize:`${el.listFontSize + 2}`+'px',color: 'var(--app-green)'}}>{el.content}</span> : <span className={styles.task_text} style={{fontSize:`${el.listFontSize}`+'px'}}>{el.content}</span>}
                     </div>
+                    <button className={styles.arrow_down} onClick={() => dispatch(pushUp(index))}><ArrowDown size={30} /></button>
                     <button onClick={() => settingsItemHandler(index)}>{<Dots />}</button>
                     {el.menuState && <MenuBtn el={el.content} index={index}/>}
                 </li>
