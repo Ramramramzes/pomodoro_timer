@@ -113,20 +113,20 @@ function Timer() {
       <div className={styles.btns_and_tasks}>
         <div className={styles.plus_block}>
           {timer.workActive && <button  className={styles.plus_min}
-                                                      disabled={isRunning  || minutes <= 1}
+                                                      disabled={isRunning  || minutes <= 0}
                                                       onClick={()=>{
                                                       dispatch(remWorkMinute())
                                                       pause()}}>
                                                       <Minus color={isRunning} /></button>}
                                                       {/* рабочее время */}
           {timer.breakActive && <button className={styles.plus_min}
-                                                      disabled={isRunning  || minutes <= 1}
+                                                      disabled={isRunning  || minutes <= 0}
                                                       onClick={()=>{
                                                       dispatch(remBreakeMinute())
                                                       pause()}}><Minus color={isRunning} /></button>}
                                                       {/* перерыв */}
           {timer.bigBreakActive && <button  className={styles.plus_min}
-                                                      disabled={isRunning  || minutes <= 1}
+                                                      disabled={isRunning  || minutes <= 0}
                                                           onClick={()=>{
                                                           dispatch(remBigBreakeMinute())
                                                           pause()}}><Minus color={isRunning} /></button>}

@@ -50,13 +50,13 @@ const timerSlice = createSlice({
       state.bigBrakeTime += 1
     },
     remWorkMinute: (state) => {
-      state.userTime = state.userTime === 1 ? state.userTime : state.userTime -= 1
+      state.userTime = state.userTime <= 0 ? 0 : state.userTime -= 1
     },
     remBreakeMinute: (state) => {
-      state.breakTime = state.breakTime === 1 ? state.breakTime : state.breakTime -= 1
+      state.breakTime = state.breakTime <= 0 ? 0 : state.breakTime -= 1
     },
     remBigBreakeMinute: (state) => {
-      state.bigBrakeTime = state.bigBrakeTime === 1 ? state.bigBrakeTime : state.bigBrakeTime -= 1
+      state.bigBrakeTime = state.bigBrakeTime <= 0 ? 0 : state.bigBrakeTime -= 1
     },
     changeWork: (state,action) => {
       state.workActive = action.payload
