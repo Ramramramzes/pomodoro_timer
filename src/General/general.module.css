@@ -97,3 +97,17 @@
   flex-grow: 0;
   transition: linear .3s;
 }
+
+@media (max-width:500px) {
+  .general{
+    flex-direction: column;
+    padding: 30px 15px;
+  }
+  .leftside{
+    width: 100%;
+    margin-bottom: 10%;
+  }
+  .rightside_main{
+    width: 100%;
+  }
+}

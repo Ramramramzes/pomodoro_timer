@@ -64,3 +64,12 @@
   transform: scale(.9);
   transition: linear .3s;
 }
+
+@media (max-width:500px) {
+  .item{
+    width: 100%;
+  }
+  .index_content{
+    width: 65%;
+  }
+}

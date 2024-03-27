@@ -163,3 +163,10 @@ h1,h2,h3,p{
 .greenBorder{
   border: 2px solid var(--app-green);
 }
+
+@media (max-width:500px) {
+  .green_btn,
+  .green_btn_pause{
+    padding: 10px 25px;
+  }
+}

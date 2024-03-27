@@ -136,3 +136,20 @@
 .one_num_block{
   width: 100px;
 }
+
+@media (max-width:500px) {
+  .main_timer{
+    font-size: 120px;
+  }
+  .one_num_block{
+    width: 80px;
+  }
+  .list_status_long{
+    width: 200px;
+  }
+  .skip_btn,
+  .stop_btn,
+  .stop_btn_dis{
+    padding: 10px 25px;
+  }
+}
