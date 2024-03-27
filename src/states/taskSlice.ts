@@ -6,6 +6,7 @@ interface ITaskState{
     menuState: boolean,
     taskIndex:number,
     listFontSize: number,
+    opened: number,
   }[]
 }
 
@@ -25,7 +26,7 @@ const taskSlice = createSlice({
   initialState,
   reducers:{
     addTask: (state,action) => {
-      state.value.push({content: action.payload.content, menuState:false, taskIndex: action.payload.tastIndex, listFontSize: 16})
+      state.value.push({content: action.payload.content, menuState:false, taskIndex: action.payload.tastIndex, listFontSize: 16,opened: 0})
     },
     removeFirst: (state) => {
       if (state.value.length !== 0) {
@@ -87,9 +88,11 @@ const taskSlice = createSlice({
         return task;
       });
     },
-    
+    openedYet: (state, action) => {
+      state.value[action.payload.index].opened = action.payload.opened
+    }
   }
 })
 
-export const { addTask, delTask, redTask, showMenu, removeFirst, fontBigger, fontLower } = taskSlice.actions
+export const { addTask, delTask, redTask, showMenu, removeFirst, fontBigger, fontLower, openedYet } = taskSlice.actions
 export default taskSlice.reducer

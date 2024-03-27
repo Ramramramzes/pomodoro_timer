@@ -5,17 +5,11 @@ import { TaskInput } from './TaskInput';
 import { TaskListItem } from './TaskListItem';
 import Timer from './Timer/Timer';
 import { RootState } from '../states/store';
-import { useEffect } from 'react';
 
 export function General() {
   const list = useSelector((state: RootState) => state.taskList)
   const timer = useSelector((state: RootState) => state.timer)
   const tomatoCount = useSelector((state: RootState) => state.timer.tomatoCount)
-  
-  useEffect(() => {
-    console.log(list.value);
-  },[list])
-
 
   return (
     <div className={styles.general}>

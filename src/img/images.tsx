@@ -87,7 +87,7 @@ export function Kontur(){
   return(
     <>
       <svg width="165" height="153" viewBox="0 0 165 153" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M89 6.5H164.5V152.5H0.5V6.5H76H76.1955L76.3391 6.3674L82.5 0.680456L88.6609 6.3674L88.8045 6.5H89Z" fill="white" stroke="#C4C4C4"/>
+        <path id="kontur" d="M89 6.5H164.5V152.5H0.5V6.5H76H76.1955L76.3391 6.3674L82.5 0.680456L88.6609 6.3674L88.8045 6.5H89Z" fill="white" stroke="#C4C4C4"/>
       </svg>
     </>
   );
