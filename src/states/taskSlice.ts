@@ -47,8 +47,10 @@ const taskSlice = createSlice({
       state.value = filtered;
     },
     redTask: (state, action: IRedAction) => {
+      let updateYet:boolean = false;
       state.value = state.value.map((el) => {
-        if (el.content === action.payload.prev) {
+        if (el.content === action.payload.prev && !updateYet) {
+          updateYet = true;
           return { ...el, content: action.payload.new };
         }
         return el;
