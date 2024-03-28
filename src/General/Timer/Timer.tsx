@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { AppDispatch, RootState } from '../../states/store';
-import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, remWorkMinute, remBreakeMinute, remBigBreakeMinute, setIsRuning, setPauseEnd, setPauseStart, setPausesResult, startTomato,  } from '../../states/timer';
+import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, remWorkMinute, remBreakeMinute, remBigBreakeMinute, setIsRuning, setPauseEnd, setPauseStart, setPausesResult, startTomato, setMin, setSec,  } from '../../states/timer';
 import { removeFirst } from '../../states/taskSlice';
 import { Minus, Plus } from '../../img/images';
 import { bigBreakSound, breakSound, endSound, startSound } from '../../sound/sounds'
@@ -77,6 +77,8 @@ function Timer() {
       seconds > 9 ? document.getElementById('seconds')?.classList.add('one_num_block_seconds_two') : document.getElementById('seconds')?.classList.remove('one_num_block_seconds_two')
       minutes > 9 ? document.getElementById('minutes')?.classList.add('one_num_block_minutes_two') : document.getElementById('minutes')?.classList.remove('one_num_block_minutes_two')
       minutes == 0 && seconds == 0 ? endSound() : false
+      dispatch(setMin(minutes))
+      dispatch(setSec(seconds))
     },[minutes, seconds,])
     useEffect(() => {
       if(timer.workActive){
