@@ -27,8 +27,6 @@ export function Message() {
       if(timer.minutes === 0 && timer.seconds === 4){
         msgFn()
       }
-      console.log(timer.minutes, timer.seconds);
-      
     }, [timer.seconds]);
 
 

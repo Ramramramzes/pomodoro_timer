@@ -76,7 +76,6 @@ function Timer() {
       minutes > 9 ? document.getElementById('forHidden_m')?.classList.add('dn') : document.getElementById('forHidden_m')?.classList.remove('dn')
       seconds > 9 ? document.getElementById('seconds')?.classList.add('one_num_block_seconds_two') : document.getElementById('seconds')?.classList.remove('one_num_block_seconds_two')
       minutes > 9 ? document.getElementById('minutes')?.classList.add('one_num_block_minutes_two') : document.getElementById('minutes')?.classList.remove('one_num_block_minutes_two')
-      minutes == 0 && seconds == 0 ? endSound() : false
       dispatch(setMin(minutes))
       dispatch(setSec(seconds))
     },[minutes, seconds,])
@@ -101,7 +100,12 @@ function Timer() {
     useEffect(() => {
       dispatch(setIsRuning(isRunning))
     },[dispatch, isRunning])
-
+// !---- Конец звук
+    useEffect(() => {
+      if(timer.minutes === 0 && timer.seconds === 1){
+        endSound()
+      }
+    },[timer.minutes,timer.seconds])
   return (
     <div className={styles.main}>
       <div className={styles.main_timer}>
