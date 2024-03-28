@@ -4,12 +4,14 @@ interface ITaskInputState{
   value: string;
   forChange: string;
   popupState: boolean;
+  textState: boolean;
 }
 
 const initialState: ITaskInputState ={
   value: "",
   forChange: "",
   popupState: false,
+  textState: false,
 }
 
 export const taskInputSlice = createSlice({
@@ -25,10 +27,13 @@ export const taskInputSlice = createSlice({
     openPopup: (state) => {
       state.popupState = !state.popupState;
     },
+    hideText: (state) => {
+      state.textState = !state.textState
+    }
 
 
   }
 })
 
-export const { change, forchange, openPopup } = taskInputSlice.actions
+export const { change, forchange, openPopup, hideText } = taskInputSlice.actions
 export default taskInputSlice.reducer

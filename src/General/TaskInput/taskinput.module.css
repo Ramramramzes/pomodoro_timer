@@ -1,3 +1,6 @@
+.form{
+  position: relative;
+}
 .input_block{
   display: flex;
   flex-direction: column;
@@ -19,7 +22,8 @@
   font-family: 'SFUI_light';
 }
 
-.input:focus{
+.input:focus,
+.btn_hide:focus{
   outline: none;
 }
 
@@ -28,12 +32,24 @@
   margin-bottom: 25px;
 }
 
+.btn_hide{
+  position: absolute;
+  bottom: 20px;
+  right: 25%;
+  opacity: .5;
+}
+
 @media (max-width:500px) {
   .btn{
-    width: 100%;
+    width: 80%;
   }
   .input{
     padding: 5% 3%;
     width: 93%;
+  }
+  .btn_hide{
+    position: absolute;
+    bottom: 9%;
+    right: 0%;
   }
 }
