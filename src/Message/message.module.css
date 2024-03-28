@@ -1,0 +1,27 @@
+.msg_block {
+  width: 30%;
+  text-align: center;
+  padding: 30px 0px;
+  border-radius: 12px;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  visibility: hidden;
+  background-color: #fff;
+}
+
+.green {
+  border: 1px solid var(--app-green);
+  box-shadow: 5px 5px 6px var(--app-green);
+}
+
+.red {
+  border: 1px solid var(--app-red);
+  box-shadow: 5px 5px 6px var(--back-red);
+}
+
+@media (max-width:500px) {
+  .msg_block{
+    width: 90%;
+  }
+}

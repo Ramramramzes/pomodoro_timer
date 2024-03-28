@@ -176,3 +176,37 @@ h1,h2,h3,p{
     padding: 10px 25px;
   }
 }
+
+@keyframes fade_in{
+  0%{
+    visibility: inherit;
+    bottom: -10%;
+  }
+  40%{
+    visibility: visible;
+    bottom: 5%;
+  }
+  100%{
+    visibility: visible;
+    bottom: 5%;
+  }
+}
+
+@keyframes fade_out{
+  0%{
+    visibility: visible;
+    bottom: 5%;
+  }
+  100%{
+    visibility: hidden;
+    bottom: -10%;
+  }
+}
+
+.fade_in{
+  animation: fade_in 3s;
+}
+
+.fade_out{
+  animation: fade_out 1s;
+}
