@@ -100,12 +100,6 @@ function Timer() {
     useEffect(() => {
       dispatch(setIsRuning(isRunning))
     },[dispatch, isRunning])
-// !---- Конец звук
-    useEffect(() => {
-      if(timer.minutes === 0 && timer.seconds === 1){
-        endSound()
-      }
-    },[timer.minutes,timer.seconds])
   return (
     <div className={styles.main}>
       <div className={styles.main_timer}>

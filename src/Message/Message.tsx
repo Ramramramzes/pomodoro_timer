@@ -3,6 +3,7 @@ import styles from './message.module.css';
 import { useSelector } from "react-redux";
 import { RootState } from "../states/store";
 import { useEffect } from 'react';
+import { endSound } from '../sound/sounds';
 
 
 
@@ -26,6 +27,7 @@ export function Message() {
     useEffect(() => {
       if(timer.minutes === 0 && timer.seconds === 4){
         msgFn()
+        endSound()
       }
     }, [timer.seconds]);
 
