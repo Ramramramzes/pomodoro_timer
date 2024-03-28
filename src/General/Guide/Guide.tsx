@@ -15,7 +15,7 @@ export function Guide() {
   },[taskList])
 
     return (
-      <div id='guide_block' className={!inputChange.textState ? styles.before : styles.guide_block}>
+      <div id='guide_block' className={!inputChange.textState ? '' : 'dn'}>
         <h3 className={styles.title}>Ура! Теперь можно начать работать:</h3>
         <ul>
           <li className={styles.list_item}><span className={styles.marker}>•</span>Выберите категорию и напишите название текущей задачи</li>
