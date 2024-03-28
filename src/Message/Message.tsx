@@ -15,11 +15,11 @@ export function Message() {
           msgBlock.classList.add('fade_in');
           setTimeout(() => {
             msgBlock.classList.add('fade_out');
-          }, 3000);
+          }, 2000);
         setTimeout(() => {
           msgBlock.classList.remove('fade_in');
           msgBlock.classList.remove('fade_out');
-        }, 4000);
+        }, 3000);
       }
     }
 

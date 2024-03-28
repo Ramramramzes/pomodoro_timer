@@ -204,7 +204,7 @@ h1,h2,h3,p{
 }
 
 .fade_in{
-  animation: fade_in 3s;
+  animation: fade_in 2s;
 }
 
 .fade_out{
