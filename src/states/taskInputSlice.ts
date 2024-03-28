@@ -27,8 +27,8 @@ export const taskInputSlice = createSlice({
     openPopup: (state) => {
       state.popupState = !state.popupState;
     },
-    hideText: (state) => {
-      state.textState = !state.textState
+    hideText: (state,action) => {
+      state.textState = action.payload
     }
 
 

@@ -1,12 +1,21 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './guide.module.css';
-import { RootState } from '../../states/store';
+import { AppDispatch, RootState } from '../../states/store';
+import { hideText } from '../../states/taskInputSlice';
+import { useEffect } from 'react';
 
 export function Guide() {
+  const dispatch = useDispatch<AppDispatch>()
   const inputChange = useSelector((state: RootState) => state.inputChange)
-  
+  const taskList = useSelector((state: RootState) => state.taskList)
+
+
+  useEffect(() => {
+    taskList.value.length != 0 ? dispatch(hideText(true)) : dispatch(hideText(false));
+  },[taskList])
+
     return (
-      <div className={!inputChange.textState ? styles.guide_block : ' dn'}>
+      <div id='guide_block' className={!inputChange.textState ? styles.before : styles.guide_block}>
         <h3 className={styles.title}>Ура! Теперь можно начать работать:</h3>
         <ul>
           <li className={styles.list_item}><span className={styles.marker}>•</span>Выберите категорию и напишите название текущей задачи</li>

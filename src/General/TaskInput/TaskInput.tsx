@@ -1,10 +1,9 @@
 import styles from './taskinput.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../states/store";
-import { change, hideText } from "../../states/taskInputSlice";
+import { change } from "../../states/taskInputSlice";
 import { addTask, redTask } from "../../states/taskSlice";
 import { change_active } from "../../states/activchange";
-import { Hide_btn } from '../../img/images';
 
 
 
@@ -41,7 +40,6 @@ export function TaskInput() {
                 placeholder={taskInput ? '' : 'Название задачи'}
                 type="text" />
         {activeChange.value ? <input type="submit" value='Применить' className={styles.btn + ' green_btn'} onClick={redTaskHandler}></input> : <input type="submit" value='Добавить' className={styles.btn + ' green_btn btn-animation'} disabled={taskInput ? false : true} onClick={addTaskHandler}></input>}
-        <button className={styles.btn_hide} onClick={() => {dispatch(hideText())}}><Hide_btn /></button>
       </form>
     </div>
   );

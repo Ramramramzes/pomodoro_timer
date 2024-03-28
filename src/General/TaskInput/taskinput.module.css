@@ -1,5 +1,6 @@
 .form{
   position: relative;
+  width: 100%;
 }
 .input_block{
   display: flex;
@@ -7,8 +8,8 @@
 }
 
 .input{
-  padding: 20px 20px 20px 15px;
-  width: 80%;
+  padding: 20px;
+  width: calc(100% - 40px);
   margin: 25px 0px;
   background-color: #F4F4F4;
   border: none;
@@ -41,7 +42,7 @@
 
 @media (max-width:500px) {
   .btn{
-    width: 80%;
+    width: 100%;
   }
   .input{
     padding: 5% 3%;

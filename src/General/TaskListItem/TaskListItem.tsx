@@ -3,7 +3,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../states/store";
 import { MenuBtn } from "./MenuBtn";
 import { pushUp, showMenu } from "../../states/taskSlice";
-import { change } from "../../states/taskInputSlice";
+import { change} from "../../states/taskInputSlice";
 import { change_active } from "../../states/activchange";
 import { ArrowDown, Dots } from "../../img/images";
 
