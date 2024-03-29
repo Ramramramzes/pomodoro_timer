@@ -10,6 +10,7 @@ import { Kontur, LupaM, LupaP, Pen, Trash } from '../../../img/images';
 export function MenuBtn({el,index} : {el:string,index:number}) {
   const popup = useSelector((state:RootState) => state.inputChange.popupState)
   const dispatch = useDispatch<AppDispatch>()
+  const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
 
   const redHandler = (el:string,index:number) => {
     dispatch(change(el))
@@ -31,7 +32,7 @@ export function MenuBtn({el,index} : {el:string,index:number}) {
         }}><Trash/><span className={styles.btn_text}>Удалить</span></button>
         {popup ? <Popup el={el} index={index}/> : ''}
       </div>
-      <div className={styles.kontur}><Kontur /></div>
+      <div className={styles.kontur}><Kontur color={darkmode} /></div>
     </div>
   );
 }

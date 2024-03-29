@@ -135,6 +135,8 @@
 
 .num_def_dark{
   color: #fff;
+  transition: color .3s;
+  display: flex;
 }
 
 .one_num_block{

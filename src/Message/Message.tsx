@@ -9,6 +9,7 @@ import { endSound } from '../sound/sounds';
 
 export function Message() {
   const timer = useSelector((state: RootState) => state.timer)
+  const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
 
   const msgFn = () => {
     const msgBlock = document.getElementById('msg_block');
@@ -34,7 +35,7 @@ export function Message() {
 
   return (
     <div>
-      <div id='msg_block' className={`${styles.msg_block} ${timer.workActive ? styles.green : styles.red}`}>
+      <div id='msg_block' className={ (darkmode ? `${styles.msg_block} `: `${styles.msg_block_dark} ` )+ `${timer.workActive ? styles.green : styles.red}`}>
         {timer.workActive ? '⏳ Рабочее время подходит к концу' : '⏳ Перерыв подходит к концу'}
       </div>
     </div>

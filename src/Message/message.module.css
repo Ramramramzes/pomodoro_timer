@@ -11,6 +11,14 @@
 }
 
 .msg_block_dark{
+  width: 30%;
+  text-align: center;
+  padding: 30px 0px;
+  border-radius: 12px;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  visibility: hidden;
   background-color: #6b6b6b;
 }
 

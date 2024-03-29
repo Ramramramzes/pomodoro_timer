@@ -3,7 +3,8 @@ import taskListReducer from "./taskSlice"
 import inputChangeReducer from "./taskInputSlice"
 import activChangeReducer from "./activchange";
 import timerReducer from "./timer"
-import darkmodeReducer from "./activchange"
+import darkmodeReducer from "./settings"
+import hoverReducer from "./hoverStates"
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   activeChange: activChangeReducer,
   timer: timerReducer,
   darkmode: darkmodeReducer,
+  hoverState: hoverReducer,
 })
 
 const persistConfig = {

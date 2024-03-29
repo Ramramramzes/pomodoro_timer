@@ -13,7 +13,9 @@ export function TaskInput() {
   const prev = useSelector((state: RootState) => state.inputChange.forChange)
   const inputChange = useSelector((state: RootState) => state.inputChange)
   const activeChange = useSelector((state: RootState) => state.activeChange)
+  const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
 
+  
   const dispatch = useDispatch<AppDispatch>()
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(change(event.target.value))
@@ -34,7 +36,7 @@ export function TaskInput() {
   return (
     <div className={styles.input_block}>
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-        <input  className={!activeChange.value ? styles.input : styles.input + ' greenBorder btn-animation'} style={inputChange.textState ? {marginTop: '0%'} : {}}
+        <input  className={darkmode ? !activeChange.value ? styles.input : styles.input + ' greenBorder btn-animation' : !activeChange.value ? styles.input_dark : styles.input_dark + ' greenBorder btn-animation'} style={inputChange.textState ? {marginTop: '0%'} : {}}
                 onChange={changeHandler}
                 value={taskInput} 
                 placeholder={taskInput ? '' : 'Название задачи'}

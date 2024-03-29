@@ -17,6 +17,8 @@
 
 .list_item_dark{
   color: #fff;
+  line-height: 2;
+  display: flex;
 }
 
 .list_item:last-child{

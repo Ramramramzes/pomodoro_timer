@@ -11,6 +11,7 @@ import { bigBreakSound, breakSound, endSound, startSound } from '../../sound/sou
 function Timer() {
   const timer = useSelector((state: RootState) => state.timer)
   const taskList = useSelector((state: RootState) => state.taskList)
+  const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
   const dispatch = useDispatch<AppDispatch>();
 
   //! Функция создания времени по данным пользователя
@@ -106,7 +107,7 @@ function Timer() {
         <div className={
                           isRunning && timer.workActive ? styles.num_red :
                           (isRunning && (timer.breakActive || timer.bigBreakActive)) ? styles.num_green :
-                          styles.num_def
+                          !darkmode ? styles.num_def_dark : styles.num_def
                         }
             ><div id='forHidden_m' className={styles.one_num_block}>{minutes < 10 ? '0' : ''}</div><div id='minutes' className={styles.one_num_block}>{minutes}</div>:<div id='forHidden' className={styles.one_num_block}>{seconds < 10 ? '0' : ''}</div><div id='seconds' className={styles.one_num_block}>{seconds}</div></div>
       </div>

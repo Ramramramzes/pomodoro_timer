@@ -1,0 +1,28 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 80px;
+}
+.stat_btn{
+  background-color: transparent;
+  color: var(--back-red);
+  display: flex;
+  align-items: center;
+}
+
+.stat_btn:hover{
+  color: var(--app-red);
+}
+
+.btns{
+  display: flex;
+  align-items: center;
+}
+
+.darkmode_btn{
+  background-color: transparent;
+}
+
+.darkmode_btn:focus{
+  outline: none;
+}

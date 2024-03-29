@@ -24,6 +24,7 @@
   margin: 25px 0px;
   border: none;
   font-family: 'SFUI_reg';
+  color: #fff;
   font-size: 20px;
 
   background-color: transparent !important;
@@ -39,6 +40,7 @@
 }
 
 .input:focus,
+.input_dark:focus,
 .btn_hide:focus{
   outline: none;
 }
