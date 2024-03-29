@@ -63,6 +63,11 @@
 .arrow_down{
   transform: scale(.9);
   transition: linear .3s;
+  background-color: transparent;
+}
+
+.dots{
+  background-color: transparent;
 }
 
 @media (max-width:500px) {

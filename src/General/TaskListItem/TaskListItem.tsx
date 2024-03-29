@@ -32,7 +32,7 @@ export function TaskListItem() {
                       {index == 0 ? <span className={styles.task_text} style={{fontSize:`${el.listFontSize + 2}`+'px',color: 'var(--app-green)'}}>{el.content}</span> : <span className={styles.task_text} style={{fontSize:`${el.listFontSize}`+'px'}}>{el.content}</span>}
                     </div>
                     <button className={styles.arrow_down} onClick={() => dispatch(pushUp(index))}><ArrowDown size={30} /></button>
-                    <button onClick={() => settingsItemHandler(index)}>{<Dots />}</button>
+                    <button className={styles.dots}  onClick={() => settingsItemHandler(index)}>{<Dots />}</button>
                     {el.menuState && <MenuBtn el={el.content} index={index}/>}
                 </li>
       })}

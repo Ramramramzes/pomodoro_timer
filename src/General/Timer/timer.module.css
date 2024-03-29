@@ -133,6 +133,10 @@
   display: flex;
 }
 
+.num_def_dark{
+  color: #fff;
+}
+
 .one_num_block{
   width: 100px;
 }

@@ -18,6 +18,21 @@
   border: 2px solid transparent;
 }
 
+.input_dark{
+  padding: 20px;
+  width: calc(100% - 40px);
+  margin: 25px 0px;
+  border: none;
+  font-family: 'SFUI_reg';
+  font-size: 20px;
+
+  background-color: transparent !important;
+  border: 2px solid #fff;
+}
+.input_dark::placeholder{
+  color: #ffffff9a;
+  font-family: 'SFUI_light';
+}
 .input::placeholder{
   color: #999;
   font-family: 'SFUI_light';

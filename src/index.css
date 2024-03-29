@@ -210,3 +210,9 @@ h1,h2,h3,p{
 .fade_out{
   animation: fade_out 1s;
 }
+
+
+.body_dark{
+  color: #fff;
+  background-color: #333;
+}

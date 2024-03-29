@@ -10,6 +10,10 @@
   background-color: #fff;
 }
 
+.msg_block_dark{
+  background-color: #6b6b6b;
+}
+
 .green {
   border: 1px solid var(--app-green);
   box-shadow: 5px 5px 6px var(--app-green);
