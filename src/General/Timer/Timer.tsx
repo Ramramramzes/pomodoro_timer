@@ -195,7 +195,7 @@ function Timer() {
                                                         }
                                                         dispatch(pauseState(false))
                                                       }
-                                                      dispatch(setPausesResult((Math.round((new Date().getTime() - statistic.pauseStart)/1000))))
+                                                      dispatch(setPausesResult({number:(Math.round((new Date().getTime() - statistic.pauseStart)/1000)),dayNum:dayNum}))
                                                       pause()
                                                       dispatch(readyTasks(dayNum))
                                                     }}>Сделано</button>: ''}
