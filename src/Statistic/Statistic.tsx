@@ -10,18 +10,21 @@ export function Statistic() {
   const statistic = useSelector((state: RootState) => state.statistic)
   const dispatch = useDispatch<AppDispatch>();
   const dayNum = new Date().getDay(); //? день недели
+  const day = statistic.curWeek[dayNum];
+  const totalWorkTime = day.workTime.reduce((acc, cur) => acc + cur, 0);
+
+
   useEffect(() => {
-    dispatch(setFocus({dayNum:dayNum, focus: statistic.curWeek[dayNum].readyTask != 0 ? (statistic.curWeek[dayNum].workTime.reduce((acc,cur) => acc + cur,0) * 60 / statistic.curWeek[dayNum].readyTask) : 0}))
+    dispatch(setFocus({dayNum:dayNum, focus: day.readyTask !== 0 ? Math.round((totalWorkTime / day.tomatoes) / totalWorkTime * 100) : 0 }))
   },[])
-  dispatch
 
   return (
     <div className={styles.statistic}>
-      <div>Законченных заданий {statistic.curWeek[dayNum].readyTask}</div>
-      <div>Время на паузе - {statistic.curWeek[dayNum].pauseTime && statistic.curWeek[dayNum].pauseTime.reduce((acc,cur) => acc + cur,0)} сек</div>
-      <div>Помидоров за сегодня {statistic.curWeek[dayNum].tomatoes}</div>
-      <div>Время работы за сегодня {statistic.curWeek[dayNum].workTime.reduce((acc,cur) => acc + cur,0) * 60} сек </div>
-      <div>Фокусирование {statistic.curWeek[dayNum].focus}</div>
+      <div>Законченных заданий {day.readyTask}</div>
+      <div>Время на паузе - {day.pauseTime && day.pauseTime.reduce((acc,cur) => acc + cur,0)} сек</div>
+      <div>Помидоров за сегодня {day.tomatoes}</div>
+      <div>Время работы за сегодня {Math.round(day.workTime.reduce((acc,cur) => acc + cur,0))} мин </div>
+      <div>Фокусирование {day.focus}%</div>
     </div>
   );
 }
