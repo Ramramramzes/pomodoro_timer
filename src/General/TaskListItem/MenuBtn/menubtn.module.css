@@ -6,7 +6,18 @@
   right: 0px;
   top: 20px;
   z-index: 5;
-  background-color: transparent;
+  background-color: #fff;
+}
+
+.menu_dark{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  right: 0px;
+  top: 20px;
+  z-index: 5;
+  background-color: #333;
 }
 
 .btn_block{
@@ -46,6 +57,11 @@
 
 @media (max-width:500px) {
   .menu{
+    top: 60px;
+    right: 0px;
+    border: 1px solid var(--app-green);
+  }
+  .menu_dark{
     top: 60px;
     right: 0px;
     border: 1px solid var(--app-green);

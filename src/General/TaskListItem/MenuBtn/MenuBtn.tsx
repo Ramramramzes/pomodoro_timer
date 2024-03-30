@@ -22,13 +22,13 @@ export function MenuBtn({el,index} : {el:string,index:number}) {
   return (
     <div onMouseLeave={()=> {
       dispatch(showMenu(index))
-    }} className={styles.menu}>
+    }} className={darkmode ? styles.menu : styles.menu_dark}>
       <div className={styles.btn_block}>
         <button className={styles.btn} onClick={() => {dispatch(fontBigger(index))}}><LupaP/><span className={styles.btn_text}>Увеличить</span></button>
         <button className={styles.btn} onClick={() => {dispatch(fontLower(index))}}><LupaM/><span className={styles.btn_text}>Уменьшить</span></button>
         <button className={styles.btn} onClick={() => redHandler(el,index)}><Pen/><span className={styles.btn_text}>Редактировать</span></button>
         <button className={styles.btn} onClick={() => {
-          dispatch(openPopup())
+          dispatch(openPopup());
         }}><Trash/><span className={styles.btn_text}>Удалить</span></button>
         {popup ? <Popup el={el} index={index}/> : ''}
       </div>
