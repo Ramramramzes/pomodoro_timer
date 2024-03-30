@@ -26,3 +26,13 @@
 .darkmode_btn:focus{
   outline: none;
 }
+
+@media (max-width: 500px) {
+  .header{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0px;
+    align-items: center;
+
+  }
+}
