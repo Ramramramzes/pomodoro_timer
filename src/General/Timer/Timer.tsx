@@ -7,7 +7,7 @@ import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute
 import { removeFirst } from '../../states/taskSlice';
 import { Minus, Plus } from '../../img/images';
 import { bigBreakSound, breakSound, endSound, startSound } from '../../sound/sounds'
-import { pauseState, readyTasks, setPauseStart, setPausesResult, setWorkTime,  } from '../../states/statistic';
+import { pauseState, readyTasks, setPauseStart, setPausesResult, setStopCount, setWorkTime,  } from '../../states/statistic';
 
 function Timer() {
   const dayNum = new Date().getDay()
@@ -177,11 +177,13 @@ function Timer() {
                                             }}>{!statistic.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
 
       {timer.workActive && !statistic.pauseState ? <button  className={!isRunning ? styles.stop_btn_dis + ' btn-animation' : styles.stop_btn + ' btn-animation'}
+                                                            disabled={!isRunning}
                                                         onClick={() => {
-                                                        if(timer.workActive){
-                                                          restart(createNewTime(timer.userTime));
-                                                        }
-                                                        pause()
+                                                          dispatch(setStopCount(dayNum))
+                                                          if(timer.workActive){
+                                                            restart(createNewTime(timer.userTime));
+                                                          }
+                                                          pause()
                                                       }}>Стоп</button> : ''}
       {timer.workActive && statistic.pauseState ? <button className={styles.skip_btn + ' btn-animation'}
                                                       style={taskList.value.length === 0 ? {filter: 'grayscale(100%)',color: 'white', borderColor: 'gray'} : {}}

@@ -25,6 +25,7 @@ export function Statistic() {
       <div>Помидоров за сегодня {day.tomatoes}</div>
       <div>Время работы за сегодня {Math.round(day.workTime.reduce((acc,cur) => acc + cur,0))} мин </div>
       <div>Фокусирование {day.focus}%</div>
+      <div>Стопов {day.stops}</div>
     </div>
   );
 }
