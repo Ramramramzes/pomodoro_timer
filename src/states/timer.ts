@@ -9,27 +9,13 @@ interface ITimerState{
   bigBrakeTime: number,
   tomatoCount: number,
   rounds: number,
-  pauseState: boolean,
   isRuning: boolean,
-  forStatistic: {
-    pauseStart: number,
-    pauseEnd: number,
-    pauseResult: number,
-    curWeek: day[]
-    lastWeek: day[]
-    pastWeek: day[]
-  }
   minutes:number,
   seconds: number,
 }
 
-interface day{
-  name: string, //Понедельник
-  tomatoes: number, // Кол-во помидоров
-  focus: number, // % Фокус = рабочее время / выполненные задачи
-  pauseTime: number, // Время общих пауз
-  stops: number, //Кол-во стопов
-}
+
+
 
 const initialState:ITimerState = {
   userTime: 0.1,
@@ -40,16 +26,7 @@ const initialState:ITimerState = {
   breakActive: false,
   tomatoCount: 0,
   rounds:0,
-  pauseState: false,
   isRuning: false,
-  forStatistic: {
-    pauseStart: 0,
-    pauseEnd: 0,
-    pauseResult: 0,
-    curWeek: [],
-    lastWeek: [],
-    pastWeek: [],
-  },
   minutes: 0,
   seconds: 0,
 }
@@ -94,9 +71,7 @@ const timerSlice = createSlice({
     addRound: (state) => {
       state.rounds += 1
     },
-    setPausesResult: (state,action) => {
-      state.forStatistic.pauseResult = state.forStatistic.pauseResult + action.payload
-    },
+
     setIsRuning: (state,action) => {
       state.isRuning = action.payload
     },
@@ -106,18 +81,8 @@ const timerSlice = createSlice({
     setSec: (state,action) => {
       state.seconds = action.payload
     },
-    //! Экшены статы 
-    pauseState: (state,action) => {
-      state.pauseState = action.payload
-    },
-    setPauseStart: (state,action) => {
-      state.forStatistic.pauseStart = action.payload
-    },
-    setPauseEnd: (state,action) => {
-      state.forStatistic.pauseEnd = action.payload
-    },
   }
 })
 
-export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound, pauseState, setPauseStart, setPauseEnd, setPausesResult, setIsRuning, remWorkMinute , remBreakeMinute, remBigBreakeMinute, setMin, setSec } = timerSlice.actions
+export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound, setIsRuning, remWorkMinute , remBreakeMinute, remBigBreakeMinute, setMin, setSec} = timerSlice.actions
 export default timerSlice.reducer

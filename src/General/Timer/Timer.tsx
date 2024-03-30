@@ -3,13 +3,16 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { AppDispatch, RootState } from '../../states/store';
-import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, pauseState, remWorkMinute, remBreakeMinute, remBigBreakeMinute, setIsRuning, setPauseEnd, setPauseStart, setPausesResult, startTomato, setMin, setSec,  } from '../../states/timer';
+import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute, changeBigBreak, changeBreak, changeWork, remWorkMinute, remBreakeMinute, remBigBreakeMinute, setIsRuning,  startTomato, setMin, setSec, } from '../../states/timer';
 import { removeFirst } from '../../states/taskSlice';
 import { Minus, Plus } from '../../img/images';
 import { bigBreakSound, breakSound, endSound, startSound } from '../../sound/sounds'
+import { pauseState, readyTasks, setPauseEnd, setPauseStart, setPausesResult } from '../../states/statistic';
 
 function Timer() {
+  const dayNum = new Date().getDay()
   const timer = useSelector((state: RootState) => state.timer)
+  const statistic = useSelector((state: RootState) => state.statistic)
   const taskList = useSelector((state: RootState) => state.taskList)
   const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
   const dispatch = useDispatch<AppDispatch>();
@@ -94,8 +97,8 @@ function Timer() {
     }, [pause, restart, timer.workActive, timer.breakActive, timer.bigBreakActive, timer.userTime, timer.breakTime, timer.bigBrakeTime]);
 // !---- Расчет времени пауз в секундак
     useEffect(() => {
-      dispatch(setPausesResult(Math.round((timer.forStatistic.pauseEnd - timer.forStatistic.pauseStart)/1000)))
-    },[timer.forStatistic.pauseEnd])
+      dispatch(setPausesResult(Math.round((statistic.pauseEnd - statistic.pauseStart)/1000)))
+    },[statistic.pauseEnd])
 
 // !---- isRuning в общий стор
     useEffect(() => {
@@ -112,7 +115,7 @@ function Timer() {
             ><div id='forHidden_m' className={styles.one_num_block}>{minutes < 10 ? '0' : ''}</div><div id='minutes' className={styles.one_num_block}>{minutes}</div>:<div id='forHidden' className={styles.one_num_block}>{seconds < 10 ? '0' : ''}</div><div id='seconds' className={styles.one_num_block}>{seconds}</div></div>
       </div>
       <div className={styles.btns_and_tasks}>
-        <div className={styles.plus_block}>
+        <div>
           {timer.workActive && <button  className={styles.plus_min}
                                                       disabled={isRunning  || minutes <= 0}
                                                       onClick={()=>{
@@ -134,7 +137,7 @@ function Timer() {
                                                       {/* большой перерыв */}
         </div>
         {taskList.value.length != 0 ? <p title={taskList.value[0].content} className={taskList.value[0].content.length > 30 ? styles.list_status_long : styles.list_status_short}><span className='b'>Задача {taskList.value.length != 0 ? taskList.value[0].taskIndex : ''} :</span> {taskList.value.length != 0 ? taskList.value[0].content: ''}</p> : <p className={styles.no_task}>Задач нет</p>}
-        <div className={styles.plus_block}>
+        <div>
           {timer.workActive  && <button  className={styles.plus_btn}
                                                       disabled={isRunning}
                                                       onClick={()=>{
@@ -170,16 +173,16 @@ function Timer() {
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.workActive ? startSound() : false
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.breakActive ? breakSound() : false
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.bigBreakActive ? bigBreakSound() : false
-                                            }}>{!timer.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
+                                            }}>{!statistic.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
 
-      {timer.workActive && !timer.pauseState ? <button  className={!isRunning ? styles.stop_btn_dis + ' btn-animation' : styles.stop_btn + ' btn-animation'}
+      {timer.workActive && !statistic.pauseState ? <button  className={!isRunning ? styles.stop_btn_dis + ' btn-animation' : styles.stop_btn + ' btn-animation'}
                                                         onClick={() => {
                                                         if(timer.workActive){
                                                           restart(createNewTime(timer.userTime));
                                                         }
                                                         pause()
                                                       }}>Стоп</button> : ''}
-      {timer.workActive && timer.pauseState ? <button className={styles.skip_btn + ' btn-animation'}
+      {timer.workActive && statistic.pauseState ? <button className={styles.skip_btn + ' btn-animation'}
                                                       onClick={() => {
                                                       if(timer.workActive){
                                                         //? непонятно сбрасывать таймер или нет
@@ -196,6 +199,7 @@ function Timer() {
                                                         dispatch(pauseState(false))
                                                       }
                                                       pause()
+                                                      dispatch(readyTasks(dayNum))
                                                     }}>Сделано</button>: ''}
       {timer.breakActive || timer.bigBreakActive ? <button className={styles.skip_btn + ' btn-animation'} onClick={()=> {
                                                                                                                         skipFn(0,0)
