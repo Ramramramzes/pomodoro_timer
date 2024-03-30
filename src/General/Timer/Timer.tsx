@@ -165,7 +165,7 @@ function Timer() {
                                             resume()
                                             dispatch(pauseState(false))
                                             if(document.getElementById('start_btn')?.textContent === 'Продолжить'){
-                                              dispatch(setPausesResult((Math.round((new Date().getTime() - statistic.pauseStart)/1000))))
+                                              dispatch(setPausesResult({number:(Math.round((new Date().getTime() - statistic.pauseStart)/1000)),dayNum:dayNum}))
                                             }
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.workActive ? startSound() : false
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.breakActive ? breakSound() : false

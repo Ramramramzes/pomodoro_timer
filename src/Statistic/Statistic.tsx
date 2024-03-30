@@ -13,7 +13,7 @@ export function Statistic() {
   return (
     <div className={styles.statistic}>
       <div>Законченных заданий {statistic.curWeek[dayNum].readyTask}</div>
-      <div>Время на паузе - {statistic.pauseResult.reduce((acc,cur) => acc + cur,0)} сек</div>
+      <div>Время на паузе - {statistic.curWeek[dayNum].pauseTime.reduce((acc,cur) => acc + cur,0)} сек</div>
     </div>
   );
 }
