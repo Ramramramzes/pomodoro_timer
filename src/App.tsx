@@ -12,15 +12,15 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <>
-              <Header />
-              <General/>
+              <Header page={false}/>
+              <General />
               <Message />
             </>
   },
   {
     path: "statistic",
     element: <>
-              <Header />
+              <Header page={true} />
               <Statistic />
             </>
   }

@@ -7,7 +7,7 @@ import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute
 import { removeFirst } from '../../states/taskSlice';
 import { Minus, Plus } from '../../img/images';
 import { bigBreakSound, breakSound, endSound, startSound } from '../../sound/sounds'
-import { pauseState, readyTasks, setPauseEnd, setPauseStart, setPausesResult } from '../../states/statistic';
+import { pauseState, readyTasks, setPauseStart, setPausesResult,  } from '../../states/statistic';
 
 function Timer() {
   const dayNum = new Date().getDay()
@@ -95,11 +95,6 @@ function Timer() {
       }
       pause();
     }, [pause, restart, timer.workActive, timer.breakActive, timer.bigBreakActive, timer.userTime, timer.breakTime, timer.bigBrakeTime]);
-// !---- Расчет времени пауз в секундак
-    useEffect(() => {
-      dispatch(setPausesResult(Math.round((statistic.pauseEnd - statistic.pauseStart)/1000)))
-    },[statistic.pauseEnd])
-
 // !---- isRuning в общий стор
     useEffect(() => {
       dispatch(setIsRuning(isRunning))
@@ -162,14 +157,16 @@ function Timer() {
       <div className={styles.btn_block}>
       {isRunning ? <button  className='green_btn_pause btn-animation'
                             onClick={() => {
-                            dispatch(pauseState(true))
-                            dispatch(setPauseStart(new Date().getTime()))
-                            pause()
+                              dispatch(pauseState(true));
+                              dispatch(setPauseStart(new Date().getTime()));
+                              pause()
                             }}>Пауза</button>:''}
       {!isRunning ? <button className='green_btn btn-animation' id='start_btn'  onClick={() => {
                                             resume()
                                             dispatch(pauseState(false))
-                                            document.getElementById('start_btn')?.textContent === 'Продолжить' ? dispatch(setPauseEnd(new Date().getTime())) : false
+                                            if(document.getElementById('start_btn')?.textContent === 'Продолжить'){
+                                              dispatch(setPausesResult((Math.round((new Date().getTime() - statistic.pauseStart)/1000))))
+                                            }
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.workActive ? startSound() : false
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.breakActive ? breakSound() : false
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.bigBreakActive ? bigBreakSound() : false
@@ -198,6 +195,7 @@ function Timer() {
                                                         }
                                                         dispatch(pauseState(false))
                                                       }
+                                                      dispatch(setPausesResult((Math.round((new Date().getTime() - statistic.pauseStart)/1000))))
                                                       pause()
                                                       dispatch(readyTasks(dayNum))
                                                     }}>Сделано</button>: ''}
