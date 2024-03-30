@@ -19,7 +19,9 @@ export function Header({page}:{page:boolean}) {
   const screenWidth = window.innerWidth;
   return (
     <div className={styles.header}>
-      <Logo width={screenWidth > 500 ? 205 : 100} />
+      <Link to="/">
+        <Logo width={screenWidth > 500 ? 205 : 100} />
+      </Link>
       <div className={styles.btns}>
         {darkmode ? <button className={styles.darkmode_btn} onClick={() => dispatch(darkmodeState())}><Moon size={screenWidth > 500 ? 25 : 20} color={true}/></button> : <button className={styles.darkmode_btn} onClick={() => dispatch(darkmodeState())}><Sun size={screenWidth > 500 ? 30 : 25} color={true}/></button>}
         {!page ? <Link to="/statistic">
@@ -27,6 +29,7 @@ export function Header({page}:{page:boolean}) {
                       onMouseEnter={() => dispatch(setStatisticHover())}
                       onMouseLeave={() => dispatch(setStatisticHover())}
                       onClick={() => {
+                        dispatch(setStatisticHover())
                         if(document.getElementById('start_btn')?.textContent === 'Продолжить'){
                           dispatch(setPausesResult((Math.round((new Date().getTime() - statistic.pauseStart)/1000))))
                         }
@@ -35,12 +38,10 @@ export function Header({page}:{page:boolean}) {
                       className={styles.stat_btn}><Statistic size={screenWidth > 500 ? 24 : 20} color={!hoverStates.statistic}/> Статистика</button>
                   </Link>
                   :
-                  <Link to="/">
-                    <button
-                    onMouseEnter={() => dispatch(setStatisticHover())}
-                    onMouseLeave={() => dispatch(setStatisticHover())}
-                    className={styles.stat_btn}><Statistic size={screenWidth > 500 ? 24 : 20} color={!hoverStates.statistic}/> Статистика</button>
-                  </Link>
+                  <button
+                  onMouseEnter={() => dispatch(setStatisticHover())}
+                  onMouseLeave={() => dispatch(setStatisticHover())}
+                  className={styles.stat_btn}><Statistic size={screenWidth > 500 ? 24 : 20} color={!hoverStates.statistic}/> Статистика</button>
         }  
       </div>
     </div>
