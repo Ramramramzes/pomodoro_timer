@@ -5,6 +5,27 @@ import { Header } from "./Header"
 import { Message } from "./Message"
 import { RootState } from "./states/store"
 import { useEffect } from "react"
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Statistic } from "./Statistic"
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <>
+              <Header />
+              <General/>
+              <Message />
+            </>
+  },
+  {
+    path: "statistic",
+    element: <>
+              <Header />
+              <Statistic />
+            </>
+  }
+
+])
 
 function App() {
   const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
@@ -14,9 +35,7 @@ function App() {
   
   return (
     <>
-      <Header />
-      <General/>
-      <Message />
+      <RouterProvider router={router} />
     </>
   )
 }
