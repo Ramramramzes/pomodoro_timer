@@ -15,9 +15,20 @@ interface ITimerState{
     pauseStart: number,
     pauseEnd: number,
     pauseResult: number,
+    curWeek: day[]
+    lastWeek: day[]
+    pastWeek: day[]
   }
   minutes:number,
   seconds: number,
+}
+
+interface day{
+  name: string, //Понедельник
+  tomatoes: number, // Кол-во помидоров
+  focus: number, // % Фокус = рабочее время / выполненные задачи
+  pauseTime: number, // Время общих пауз
+  stops: number, //Кол-во стопов
 }
 
 const initialState:ITimerState = {
@@ -35,6 +46,9 @@ const initialState:ITimerState = {
     pauseStart: 0,
     pauseEnd: 0,
     pauseResult: 0,
+    curWeek: [],
+    lastWeek: [],
+    pastWeek: [],
   },
   minutes: 0,
   seconds: 0,
@@ -80,15 +94,6 @@ const timerSlice = createSlice({
     addRound: (state) => {
       state.rounds += 1
     },
-    pauseState: (state,action) => {
-      state.pauseState = action.payload
-    },
-    setPauseStart: (state,action) => {
-      state.forStatistic.pauseStart = action.payload
-    },
-    setPauseEnd: (state,action) => {
-      state.forStatistic.pauseEnd = action.payload
-    },
     setPausesResult: (state,action) => {
       state.forStatistic.pauseResult = state.forStatistic.pauseResult + action.payload
     },
@@ -101,7 +106,16 @@ const timerSlice = createSlice({
     setSec: (state,action) => {
       state.seconds = action.payload
     },
-    
+    //! Экшены статы 
+    pauseState: (state,action) => {
+      state.pauseState = action.payload
+    },
+    setPauseStart: (state,action) => {
+      state.forStatistic.pauseStart = action.payload
+    },
+    setPauseEnd: (state,action) => {
+      state.forStatistic.pauseEnd = action.payload
+    },
   }
 })
 
