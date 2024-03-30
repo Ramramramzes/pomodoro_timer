@@ -111,10 +111,13 @@ const statisticSlice = createSlice({
     setTomatosForStat: (state,action) => {
       state.curWeek[action.payload.dayNum].tomatoes = action.payload.result
     },
+    setWorkTime: (state,action) => {
+      state.curWeek[action.payload.dayNum].workTime.push(action.payload.number)
+    },
   }
 
 })
 
 
-export const { pauseState , setPauseStart, setPausesResult, readyTasks, setTomatosForStat} = statisticSlice.actions
+export const { pauseState , setPauseStart, setPausesResult, readyTasks, setTomatosForStat, setWorkTime} = statisticSlice.actions
 export default statisticSlice.reducer

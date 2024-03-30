@@ -7,7 +7,7 @@ import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute
 import { removeFirst } from '../../states/taskSlice';
 import { Minus, Plus } from '../../img/images';
 import { bigBreakSound, breakSound, endSound, startSound } from '../../sound/sounds'
-import { pauseState, readyTasks, setPauseStart, setPausesResult,  } from '../../states/statistic';
+import { pauseState, readyTasks, setPauseStart, setPausesResult, setWorkTime,  } from '../../states/statistic';
 
 function Timer() {
   const dayNum = new Date().getDay()
@@ -25,6 +25,7 @@ function Timer() {
   const skipFn = (minutes: number, seconds: number) => {
     if(minutes == 0 && seconds == 0 && timer.tomatoCount != 4){
       if(timer.workActive){
+        dispatch(setWorkTime({dayNum:dayNum,number: timer.userTime}))
         if(timer.tomatoCount != 3){
           dispatch(changeBreak(true))
           dispatch(changeWork(false))
@@ -45,6 +46,9 @@ function Timer() {
       dispatch(pauseState(false))
     }
     if(minutes == 0 && seconds == 0 && timer.tomatoCount === 4){
+      if(timer.workActive){
+        dispatch(setWorkTime({dayNum:dayNum,number: timer.userTime}))
+      }
       dispatch(changeBigBreak(true))
       dispatch(changeWork(false))
       dispatch(changeBreak(false))

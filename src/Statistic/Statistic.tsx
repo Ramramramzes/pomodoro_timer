@@ -15,6 +15,7 @@ export function Statistic() {
       <div>Законченных заданий {statistic.curWeek[dayNum].readyTask}</div>
       <div>Время на паузе - {statistic.curWeek[dayNum].pauseTime && statistic.curWeek[dayNum].pauseTime.reduce((acc,cur) => acc + cur,0)} сек</div>
       <div>Помидоров за сегодня {statistic.curWeek[dayNum].tomatoes}</div>
+      <div>Время работы за сегодня {statistic.curWeek[dayNum].workTime.reduce((acc,cur) => acc + cur,0) * 60} сек </div>
     </div>
   );
 }
