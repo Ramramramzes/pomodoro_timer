@@ -59,8 +59,6 @@ const options: ChartOptions<'bar'> = {
   }
 };
 
-const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-
 export function Statistic() {
   const statistic = useSelector((state: RootState) => state.statistic)
   const dispatch = useDispatch<AppDispatch>();
@@ -68,31 +66,37 @@ export function Statistic() {
   const day = statistic.curWeek[dayNum];
   const totalWorkTime = day.workTime.reduce((acc, cur) => acc + cur, 0);
   const totalBreakTime = day.breakTime.reduce((acc, cur) => acc + cur, 0);
-  
-  const data = {
-    labels,
-    datasets: [
-      {
-        data: labels.map((el) => {
-          if(el == day.name){
-            return totalWorkTime/60
-          }
-          return 0.01
-        }),
-        backgroundColor: labels.map((label, index) => {
-          if(index === 0){
-            return '#C4C4C4'
-          }else{
-            if(index ===  1){
-              return '#DC3E22'
-            } //! Добавить активный элемент ---------------------------------------------
-            return '#EA8A79'
-          }
-        }),
-        hoverBackgroundColor: '#EE735D',
-      },
-    ],
-  };
+  const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+// массив для графика
+const chartData = labels.map((el) => {
+  if (el === day.name) {
+    return totalWorkTime / 60;
+  }
+  return 0.01;
+});
+
+
+const backgroundColor = chartData.map((value, index) => {
+  if (value === 0.01) {
+    return '#C4C4C4';
+  }
+  return index === 2 ? '#DC3E22' : '#EA8A79';
+  //! 1 заменить на activ  ---------------------------------------------
+});
+
+
+const data = {
+  labels,
+  datasets: [
+    {
+      data: chartData,
+      backgroundColor,
+      hoverBackgroundColor: '#EE735D',
+    },
+  ],
+};
+
 
   useEffect(() => {
     dispatch(setFocus({dayNum:dayNum, focus: day.readyTask !== 0 ? Math.round(((totalWorkTime * 60 + totalBreakTime) / day.tomatoes) / (totalWorkTime * 60 + totalBreakTime) * 100) : 0 }))
