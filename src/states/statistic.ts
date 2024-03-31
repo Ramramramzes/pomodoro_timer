@@ -21,7 +21,7 @@ interface IForStatistic{
 
 const initialWeek = [
   {
-    "name": "Воскресенье",
+    "name": "Вс",
     "tomatoes": 0,
     "focus": 0,
     "pauseTime": [],
@@ -31,7 +31,7 @@ const initialWeek = [
     "readyTask": 0,
   },
   {
-    "name": "Понедельник",
+    "name": "Пн",
     "tomatoes": 0,
     "focus": 0,
     "pauseTime": [],
@@ -41,7 +41,7 @@ const initialWeek = [
     "readyTask": 0,
   },
   {
-    "name": "Вторник",
+    "name": "Вт",
     "tomatoes": 0,
     "focus": 0,
     "pauseTime": [],
@@ -51,7 +51,7 @@ const initialWeek = [
     "readyTask": 0,
   },
   {
-    "name": "Среда",
+    "name": "Ср",
     "tomatoes": 0,
     "focus": 0,
     "pauseTime": [],
@@ -61,7 +61,7 @@ const initialWeek = [
     "readyTask": 0,
   },
   {
-    "name": "Четверг",
+    "name": "Чт",
     "tomatoes": 0,
     "focus": 0,
     "pauseTime": [],
@@ -71,7 +71,7 @@ const initialWeek = [
     "readyTask": 0,
   },
   {
-    "name": "Пятница",
+    "name": "Пт",
     "tomatoes": 0,
     "focus": 0,
     "pauseTime": [],
@@ -81,7 +81,7 @@ const initialWeek = [
     "readyTask": 0,
   },
   {
-    "name": "Суббота",
+    "name": "Сб",
     "tomatoes": 0,
     "focus": 0,
     "pauseTime": [],
