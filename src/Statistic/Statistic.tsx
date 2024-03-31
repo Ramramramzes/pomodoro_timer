@@ -5,15 +5,8 @@ import { AppDispatch, RootState } from "../states/store";
 import { useEffect } from 'react';
 import { setFocus } from '../states/statistic';
 import { ChartEvent, ActiveElement, ChartOptions, } from 'chart.js';
-
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Tooltip,
-} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS,CategoryScale,LinearScale,BarElement,Tooltip,} from 'chart.js';
 
 ChartJS.register(
   CategoryScale,
@@ -39,6 +32,18 @@ const options: ChartOptions<'bar'> = {
     },
   },
   scales: {
+    x: {
+      ticks: {
+        color: (context) => {
+          //! Заменить 0 на активный элемент  ---------------------------------------------
+          if (context.index === 0) {
+            return '#DC3E22'; 
+          } else {
+            return '#999';
+          }
+        },
+      }
+    },
     y: {
       type: 'linear',
       position: 'right',
@@ -74,7 +79,16 @@ export function Statistic() {
           }
           return 0.01
         }),
-        backgroundColor: labels.map((label, index) => index === 0 ? '#C4C4C4' : '#EA8A79'),
+        backgroundColor: labels.map((label, index) => {
+          if(index === 0){
+            return '#C4C4C4'
+          }else{
+            if(index ===  1){
+              return '#DC3E22'
+            } //! Добавить активный элемент ---------------------------------------------
+            return '#EA8A79'
+          }
+        }),
         hoverBackgroundColor: '#EE735D',
       },
     ],
