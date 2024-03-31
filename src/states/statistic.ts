@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 interface day{
   name: string, //Понедельник
   workTime: number[], // Рабочее время
+  breakTime: number[], // Время отдыха
   tomatoes: number, // Кол-во помидоров
   focus: number, // % Фокус = рабочее время / выполненные задачи
   pauseTime: number[], // Время общих пауз
@@ -26,6 +27,7 @@ const initialWeek = [
     "pauseTime": [],
     "stops": 0,
     "workTime": [],
+    "breakTime": [],
     "readyTask": 0,
   },
   {
@@ -35,6 +37,7 @@ const initialWeek = [
     "pauseTime": [],
     "stops": 0,
     "workTime": [],
+    "breakTime": [],
     "readyTask": 0,
   },
   {
@@ -44,6 +47,7 @@ const initialWeek = [
     "pauseTime": [],
     "stops": 0,
     "workTime": [],
+    "breakTime": [],
     "readyTask": 0,
   },
   {
@@ -53,6 +57,7 @@ const initialWeek = [
     "pauseTime": [],
     "stops": 0,
     "workTime": [],
+    "breakTime": [],
     "readyTask": 0,
   },
   {
@@ -62,6 +67,7 @@ const initialWeek = [
     "pauseTime": [],
     "stops": 0,
     "workTime": [],
+    "breakTime": [],
     "readyTask": 0,
   },
   {
@@ -71,6 +77,7 @@ const initialWeek = [
     "pauseTime": [],
     "stops": 0,
     "workTime": [],
+    "breakTime": [],
     "readyTask": 0,
   },
   {
@@ -80,6 +87,7 @@ const initialWeek = [
     "pauseTime": [],
     "stops": 0,
     "workTime": [],
+    "breakTime": [],
     "readyTask": 0,
   },
 ]
@@ -120,11 +128,14 @@ const statisticSlice = createSlice({
     setStopCount: (state,action) => {
       state.curWeek[action.payload].stops += 1;
     },
-    
+    setBreakTime: (state,action) => {
+      state.curWeek[action.payload.dayNum].breakTime.push(action.payload.number)
+    },
+
   }
 
 })
 
 
-export const { pauseState , setPauseStart, setPausesResult, readyTasks, setTomatosForStat, setWorkTime, setFocus, setStopCount} = statisticSlice.actions
+export const { pauseState , setPauseStart, setPausesResult, readyTasks, setTomatosForStat, setWorkTime, setFocus, setStopCount, setBreakTime, } = statisticSlice.actions
 export default statisticSlice.reducer

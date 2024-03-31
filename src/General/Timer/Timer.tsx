@@ -7,7 +7,7 @@ import { addBigBreakeMinute, addBreakeMinute, addRound, addTomato, addWorkMinute
 import { removeFirst } from '../../states/taskSlice';
 import { Minus, Plus } from '../../img/images';
 import { bigBreakSound, breakSound, endSound, startSound } from '../../sound/sounds'
-import { pauseState, readyTasks, setPauseStart, setPausesResult, setStopCount, setWorkTime,  } from '../../states/statistic';
+import { pauseState, readyTasks, setBreakTime, setPauseStart, setPausesResult, setStopCount, setWorkTime,  } from '../../states/statistic';
 
 function Timer() {
   const dayNum = new Date().getDay()
@@ -22,10 +22,10 @@ function Timer() {
     return new Date(new Date().getTime() + userTime * 60000);
   };
 
-  const skipFn = (minutes: number, seconds: number) => {
+  const skipFn = (minutes: number, seconds: number, flag?:number) => {
     if(minutes == 0 && seconds == 0 && timer.tomatoCount != 4){
       if(timer.workActive){
-        dispatch(setWorkTime({dayNum:dayNum,number: timer.userTime}))
+        dispatch(setWorkTime({dayNum:dayNum,number: timer.userTime * 60}))
         if(timer.tomatoCount != 3){
           dispatch(changeBreak(true))
           dispatch(changeWork(false))
@@ -47,7 +47,7 @@ function Timer() {
     }
     if(minutes == 0 && seconds == 0 && timer.tomatoCount === 4){
       if(timer.workActive){
-        dispatch(setWorkTime({dayNum:dayNum,number: timer.userTime}))
+        dispatch(setWorkTime({dayNum:dayNum,number: timer.userTime * 60}))
       }
       dispatch(changeBigBreak(true))
       dispatch(changeWork(false))
@@ -56,6 +56,17 @@ function Timer() {
       dispatch(startTomato())
     }
     dispatch(pauseState(false))
+    if(minutes == 0 && seconds == 0 && flag != 1){
+      if(timer.breakActive){
+        dispatch(setBreakTime({dayNum:dayNum,number:timer.breakTime * 60}))
+      }
+      if(timer.bigBreakActive){
+        dispatch(setBreakTime({dayNum:dayNum,number:timer.bigBrakeTime * 60}))
+      }
+    }
+    if(flag === 2){
+      dispatch(setBreakTime({dayNum:dayNum,number: timer.breakActive ? timer.breakTime * 60 - ((timer.minutes * 60)+timer.seconds) : timer.bigBrakeTime * 60 - ((timer.minutes * 60)+timer.seconds)}))
+    }
   }
 
   const {
@@ -208,7 +219,8 @@ function Timer() {
                                                       dispatch(readyTasks(dayNum))
                                                     }}>Сделано</button>: ''}
       {timer.breakActive || timer.bigBreakActive ? <button className={styles.skip_btn + ' btn-animation'} onClick={()=> {
-                                                                                                                        skipFn(0,0)
+                                                                                                                        skipFn(minutes,seconds,2)
+                                                                                                                        skipFn(0,0,1)
                                                                                                                         endSound()}}>Пропустить</button> : ''}
       </div>
     </div>
