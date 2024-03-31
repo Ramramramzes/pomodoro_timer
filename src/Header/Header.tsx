@@ -35,13 +35,13 @@ export function Header({page}:{page:boolean}) {
                         }
                         dispatch(setTomatosForStat({dayNum:dayNum,result: ((timer.rounds * 4) + timer.tomatoCount)}))
                       }}
-                      className={styles.stat_btn}><Statistic size={screenWidth > 500 ? 24 : 20} color={!hoverStates.statistic}/> Статистика</button>
+                      className={styles.stat_btn}><Statistic size={screenWidth > 500 ? 24 : 20} color={hoverStates.statistic}/> Статистика</button>
                   </Link>
                   :
                   <button
                   onMouseEnter={() => dispatch(setStatisticHover())}
                   onMouseLeave={() => dispatch(setStatisticHover())}
-                  className={styles.stat_btn}><Statistic size={screenWidth > 500 ? 24 : 20} color={!hoverStates.statistic}/> Статистика</button>
+                  className={styles.stat_btn}><Statistic size={screenWidth > 500 ? 24 : 20} color={hoverStates.statistic}/> Статистика</button>
         }  
       </div>
     </div>
