@@ -14,7 +14,7 @@ interface day{
 interface IForStatistic{
   pauseStart: number,
   pauseState: boolean,
-  activeDay: (number | null),
+  activeDay: number,
   curWeek: day[],
   lastWeek: day[],
   pastWeek: day[],
@@ -96,7 +96,7 @@ const initialWeek = [
 const initialState:IForStatistic = {
   pauseStart: 0,
   pauseState: false,
-  activeDay: null,
+  activeDay: 7,
   curWeek: initialWeek,
   lastWeek: initialWeek,
   pastWeek: initialWeek,
@@ -135,6 +135,9 @@ const statisticSlice = createSlice({
     },
     setActiveDay: (state,action) =>{
       state.activeDay = action.payload
+    },
+    setDefActive: (state) => {
+      state.activeDay = 7
     }
 
   }
@@ -142,5 +145,5 @@ const statisticSlice = createSlice({
 })
 
 
-export const { pauseState , setPauseStart, setPausesResult, readyTasks, setTomatosForStat, setWorkTime, setFocus, setStopCount, setBreakTime, setActiveDay } = statisticSlice.actions
+export const { pauseState , setPauseStart, setPausesResult, readyTasks, setTomatosForStat, setWorkTime, setFocus, setStopCount, setBreakTime, setActiveDay,setDefActive } = statisticSlice.actions
 export default statisticSlice.reducer
