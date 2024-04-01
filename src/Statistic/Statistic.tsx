@@ -7,6 +7,7 @@ import { setFocus } from '../states/statistic';
 import { ChartEvent, ActiveElement, ChartOptions, } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS,CategoryScale,LinearScale,BarElement,Tooltip,} from 'chart.js';
+import { setActiveDay } from '../states/statistic';
 
 ChartJS.register(
   CategoryScale,
@@ -14,50 +15,6 @@ ChartJS.register(
   BarElement,
   Tooltip,
 );
-
-const options: ChartOptions<'bar'> = {
-  onClick: function(_event: ChartEvent, elements: ActiveElement[]) {
-    if (elements.length > 0) {
-      const clickedElement = elements[0];
-      console.log('Clicked element:', clickedElement);
-    }
-  },
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false
-    },
-    tooltip: {
-      enabled: false,
-    },
-  },
-  scales: {
-    x: {
-      ticks: {
-        color: (context) => {
-          //! Заменить 0 на активный элемент  ---------------------------------------------
-          if (context.index === 0) {
-            return '#DC3E22'; 
-          } else {
-            return '#999';
-          }
-        },
-      }
-    },
-    y: {
-      type: 'linear',
-      position: 'right',
-      ticks: {
-        callback: function(value: string | number) {
-          const tickValue = typeof value === 'string' ? parseFloat(value) : value;
-          const hours = Math.floor(tickValue / 60);
-          const minutes = tickValue % 60;
-          return `${hours} ч ${minutes} мин`;
-        }
-      }
-    }
-  }
-};
 
 export function Statistic() {
   const statistic = useSelector((state: RootState) => state.statistic)
@@ -68,39 +25,91 @@ export function Statistic() {
   const totalBreakTime = day.breakTime.reduce((acc, cur) => acc + cur, 0);
   const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
-// массив для графика
-const chartData = labels.map((el) => {
-  if (el === day.name) {
-    return totalWorkTime / 60;
-  }
-  return 0.01;
-});
-
-
-const backgroundColor = chartData.map((value, index) => {
-  if (value === 0.01) {
-    return '#C4C4C4';
-  }
-  return index === 2 ? '#DC3E22' : '#EA8A79';
-  //! 1 заменить на activ  ---------------------------------------------
-});
-
-
-const data = {
-  labels,
-  datasets: [
-    {
-      data: chartData,
-      backgroundColor,
-      hoverBackgroundColor: '#EE735D',
+  const options: ChartOptions<'bar'> = {
+    onClick: function(_event: ChartEvent, elements: ActiveElement[]) {
+      if (elements.length > 0) {
+        const clickedElement = elements[0];
+        console.log('Clicked element:', clickedElement);
+        dispatch(setActiveDay(clickedElement.index))
+      }
     },
-  ],
-};
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        enabled: false,
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: (context) => {
+            if (context.index === statistic.activeDay) {
+              return '#DC3E22'; 
+            } else {
+              return '#999';
+            }
+          },
+        }
+      },
+      y: {
+        type: 'linear',
+        position: 'right',
+        ticks: {
+          callback: function(value: string | number) {
+            const tickValue = typeof value === 'string' ? parseFloat(value) : value;
+            const hours = Math.floor(tickValue / 60);
+            const minutes = tickValue % 60;
+            return `${hours} ч ${minutes} мин`;
+          }
+        }
+      }
+    }
+  };
+  // массив для графика
+  const chartData = labels.map((el) => {
+    if (el === day.name) {
+      return totalWorkTime / 60;
+    }
+    return 0.01;
+  });
+
+
+  const backgroundColor = chartData.map((value, index) => {
+    if(index === statistic.activeDay){
+      return '#DC3E22'
+    }
+    if (value === 0.01) {
+      return '#C4C4C4';
+    }else{
+      return '#EA8A79'
+    }
+    
+
+  });
+
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        data: chartData,
+        backgroundColor,
+        hoverBackgroundColor: '#EE735D',
+      },
+    ],
+  };
 
 
   useEffect(() => {
     dispatch(setFocus({dayNum:dayNum, focus: day.readyTask !== 0 ? Math.round(((totalWorkTime * 60 + totalBreakTime) / day.tomatoes) / (totalWorkTime * 60 + totalBreakTime) * 100) : 0 }))
   },[])
+
+  useEffect(() => {
+    console.log(statistic.activeDay);
+  },[statistic.activeDay])
 
   return (
     <div className={styles.statistic}>
@@ -111,7 +120,7 @@ const data = {
       <div>Фокусирование {day.focus}%</div>
       <div>Стопов {day.stops}</div>
 
-      <Bar options={options} data={data} />
+      <Bar className={styles.bar} options={options} data={data} />
     </div>
   );
 }
