@@ -16,7 +16,7 @@ ChartJS.register(
 );
 
 const options: ChartOptions<'bar'> = {
-  onClick: function(event: ChartEvent, elements: ActiveElement[]) {
+  onClick: function(_event: ChartEvent, elements: ActiveElement[]) {
     if (elements.length > 0) {
       const clickedElement = elements[0];
       console.log('Clicked element:', clickedElement);
