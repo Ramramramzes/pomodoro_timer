@@ -4,4 +4,61 @@
 
 .bar{
   cursor: pointer;
+  padding: 5%;
+}
+
+.title{
+  font-family: 'SFUI_semi';
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 33px;
+}
+.day_data_title{
+  display: block;
+  margin-top: 10%;
+  font-family: 'SFUI_semi';
+  font-size: 24px;
+}
+.day_data{
+  margin-top: 10%;
+  display: block;
+}
+
+.left{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.right{
+  width: 65%;
+  background-color: #F4F4F4;
+}
+
+.top_block{
+  display: flex;
+  justify-content: space-between;
+}
+
+.day_worktime{
+  padding-left: 10%;
+  background-color: #F4F4F4;
+  height: 50%;
+}
+
+.tomato{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45%;
+  background-color: #F4F4F4;
+}
+
+.tomato_num{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: 'SFUI_semi';
+  font-size: 24px;
+  color: #999;
 }

@@ -115,17 +115,22 @@ export function Statistic() {
     
   },[statistic.activeDay])
 
-
   return (
     <div className={styles.statistic}>
-      <span>Ваша активность</span>
-      <div>
-        <div>
-          <span>{daysList[statistic.activeDay != 7 ? statistic.activeDay : 10]}</span>
-          {statistic.activeDay != 7 ? <span>Вы работали над задачами в течение {Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span> : false}
+      <span className={styles.title}>Ваша активность</span>
+      <div className={styles.top_block}>
+        <div className={styles.left}>
+          <div className={styles.day_worktime}>
+            <span className={styles.day_data_title}>{daysList[statistic.activeDay != 7 ? statistic.activeDay : dayNum != 0 ? dayNum-1 : 6  ]}</span>
+            <span className={styles.day_data}>{statistic.activeDay != 7 ? '' : 'Нет данных'}</span>
+            {statistic.activeDay != 7 ? <span>Вы работали над задачами <br></br>в течение <span style={{color:'var(--back-red)',fontFamily:'SFUI_semi'}}>{Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span></span> : false}
+          </div>
+          <div className={styles.tomato}>
+            {statistic.activeDay === 7 || statistic.activeDay === 10 ? <TomatoSmile width={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{statistic.curWeek[activDay].readyTask}</div>}
+          </div>
         </div>
-        <div>
-          {statistic.activeDay === 7 || statistic.activeDay === 10 ? <TomatoSmile width={115}/> : <div> <Tomato width={81} /> x {statistic.curWeek[activDay].readyTask}</div>}
+        <div className={styles.right}>
+          <Bar className={styles.bar} options={options} data={data}/>
         </div>
       </div>
 
@@ -139,7 +144,6 @@ export function Statistic() {
       <div>Фокусирование {day.focus}%</div>
       <div>Стопов {day.stops}</div>
 
-      <Bar className={styles.bar} options={options} data={data} />
     </div>
   );
 }
