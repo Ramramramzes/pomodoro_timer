@@ -96,7 +96,7 @@ const initialWeek = [
 const initialState:IForStatistic = {
   pauseStart: 0,
   pauseState: false,
-  activeDay: 7,
+  activeDay: 0,
   curWeek: initialWeek,
   lastWeek: initialWeek,
   pastWeek: initialWeek,

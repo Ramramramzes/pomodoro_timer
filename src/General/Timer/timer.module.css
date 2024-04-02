@@ -95,7 +95,6 @@
   border: 2px solid var(--back-red);
   transition: linear .2s;
 }
-
 .skip_btn:hover{
   color: #fff;
   background-color: var(--back-red);

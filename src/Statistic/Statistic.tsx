@@ -21,6 +21,7 @@ ChartJS.register(
 export function Statistic() {
   const statistic = useSelector((state: RootState) => state.statistic)
   const dispatch = useDispatch<AppDispatch>();
+  
   const dayNum = new Date().getDay();
   const day = statistic.curWeek[dayNum];
   const totalWorkTime = day.workTime.reduce((acc, cur) => acc + cur, 0);
@@ -28,7 +29,7 @@ export function Statistic() {
   const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
   const daysList = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье']
   const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
-  
+
   const options: ChartOptions<'bar'> = {
     onClick: function(_event: ChartEvent, elements: ActiveElement[]) {
       if (elements.length > 0) {
@@ -106,20 +107,14 @@ export function Statistic() {
   };
 
   const activDay = statistic.activeDay === 6 ? statistic.activeDay : statistic.activeDay === 7 ? 10 : statistic.activeDay + 1
-  const workTimeForTextMsg = statistic.activeDay != 7 ? statistic.curWeek[activDay].workTime.reduce((acc, cur) => acc + cur, 0) : 10
+  const workTime = statistic.curWeek[activDay].workTime;
+  const workTimeForTextMsg = statistic.activeDay != 7 ? workTime.reduce((acc, cur) => acc + cur, 0) : 10
   useEffect(() => {
     dispatch(setActiveDay(new Date().getDate() === 0 ? 6 : new Date().getDate() - 1))
     dispatch(setFocus({dayNum:dayNum, focus: day.readyTask !== 0 ? Math.round(((totalWorkTime * 60 + totalBreakTime) / day.tomatoes) / (totalWorkTime * 60 + totalBreakTime) * 100) : 0 }))
   },[])
 
-  
-  useEffect(() => {
-    // console.log(statistic.activeDay);
-    // console.log(workTimeForTextMsg);
-    console.log() ;
-    
-    
-  },[statistic.activeDay])
+
 
   return (
     <div className={styles.statistic}>
@@ -129,7 +124,7 @@ export function Statistic() {
           <div className={styles.day_worktime} style={!darkmode ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {} }>
             <span className={styles.day_data_title}>{daysList[statistic.activeDay != 7 ? statistic.activeDay : dayNum != 0 ? dayNum-1 : 6  ]}</span>
             <span className={styles.day_data}>{statistic.activeDay != 7 ? '' : 'Нет данных'}</span>
-            {statistic.curWeek[activDay].workTime.reduce((cur,ac) => cur + ac,0) == 0 ? 'Нет данных' : <span>Вы работали над задачами <br></br>в течение <span style={{color:'var(--back-red)',fontFamily:'SFUI_semi'}}>{Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span></span>}
+            {workTime.reduce((cur,ac) => cur + ac,0) == 0 ? 'Нет данных' : <span>Вы работали над задачами <br></br>в течение <span style={{color:'var(--back-red)',fontFamily:'SFUI_semi'}}>{Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span></span>}
           </div>
           <div className={styles.tomato} style={!darkmode ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {} }>
             {statistic.curWeek[activDay].readyTask === 0 ? <TomatoSmile width={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{statistic.curWeek[activDay].readyTask}</div>}
