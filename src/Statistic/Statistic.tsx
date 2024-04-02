@@ -8,7 +8,7 @@ import { ChartEvent, ActiveElement, ChartOptions, } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS,CategoryScale,LinearScale,BarElement,Tooltip,} from 'chart.js';
 import { setActiveDay } from '../states/statistic';
-import { Tomato, TomatoSmile } from '../img/images';
+import { Clock, Focus, Stop, Tomato, TomatoSmile } from '../img/images';
 
 ChartJS.register(
   CategoryScale,
@@ -129,7 +129,6 @@ export function Statistic() {
             {statistic.curWeek[activDay].workTime.reduce((cur,ac) => cur + ac,0) == 0 ? 'Нет данных' : <span>Вы работали над задачами <br></br>в течение <span style={{color:'var(--back-red)',fontFamily:'SFUI_semi'}}>{Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span></span>}
           </div>
           <div className={styles.tomato}>
-            {/* {statistic.activeDay === 7 || statistic.activeDay === 10 ? <TomatoSmile width={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{statistic.curWeek[activDay].readyTask}</div>} */}
             {statistic.curWeek[activDay].readyTask === 0 ? <TomatoSmile width={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{statistic.curWeek[activDay].readyTask}</div>}
           </div>
         </div>
@@ -137,17 +136,38 @@ export function Statistic() {
           <Bar className={styles.bar} options={options} data={data}/>
         </div>
       </div>
-
-
-
-
-      <div>Законченных заданий {day.readyTask}</div>
+      <div className={styles.bottom_block}>
+        <div className={styles.focus} style={statistic.curWeek[activDay].focus === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#FFDDA9'}}>
+          <div className={styles.text_content}>
+            <span className={styles.text_content_title}>Фокус</span>
+            <span>{statistic.curWeek[activDay].focus}%</span>
+          </div>
+          {statistic.curWeek[activDay].focus === 0 ? <Focus color={'#C4C4C4'}/> : <Focus color={'#FFAE35'}/>}
+        </div>
+        <div className={styles.pause} style={statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#DFDCFE'}}>
+          <div className={styles.text_content}>
+            <span className={styles.text_content_title}>Время на паузе</span>
+            <span>{Math.round(statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) > 0 ? Math.round(statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) : 0}ч {Math.round(statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) > 0 ? Math.round(statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) : 0}м</span>
+          </div>
+          {statistic.curWeek[activDay].focus === 0 ? <Clock color={'#C4C4C4'}/> : <Clock color={'#9C97D7'}/>}
+        </div>
+        <div className={styles.stop} style={statistic.curWeek[activDay].stops === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#C5F1FF'}}>
+          <div className={styles.text_content}>
+            <span className={styles.text_content_title}>Остановки</span>
+            <span>{statistic.curWeek[activDay].stops}</span>
+          </div>
+          {statistic.curWeek[activDay].stops === 0 ? <Stop color={'#C4C4C4'}/> : <Stop color={'#7FC2D7'}/>}
+        </div>
+      </div>
+      {/* <div>Законченных заданий {day.readyTask}</div>
       <div>Время на паузе - {day.pauseTime && day.pauseTime.reduce((acc,cur) => acc + cur,0)} сек</div>
       <div>Помидоров за сегодня {day.tomatoes}</div>
       <div>Время работы за сегодня {Math.round(day.workTime.reduce((acc,cur) => acc  + cur,0))} сек </div>
       <div>Фокус {day.focus}%</div>
-      <div>Стопов {day.stops}</div>
-
+      <div>Стопов {day.stops}</div> */}
     </div>
   );
 }
+
+
+

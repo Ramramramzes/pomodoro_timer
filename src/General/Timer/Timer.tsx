@@ -197,7 +197,7 @@ function Timer() {
                                                           pause()
                                                       }}>Стоп</button> : ''}
       {timer.workActive && statistic.pauseState ? <button className={styles.skip_btn + ' btn-animation'}
-                                                      style={taskList.value.length === 0 ? {filter: 'grayscale(100%)',color: 'white', borderColor: 'gray'} : {}}
+                                                      style={taskList.value.length === 0 && darkmode ? {filter: 'grayscale(100%)',color: 'gray', borderColor: 'gray'} : {filter: 'grayscale(100%)',color: 'gray', borderColor: 'gray'}}
                                                       disabled={taskList.value.length === 0}
                                                       onClick={() => {
                                                       if(timer.workActive){

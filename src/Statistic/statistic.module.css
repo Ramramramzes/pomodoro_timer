@@ -38,12 +38,14 @@
 .top_block{
   display: flex;
   justify-content: space-between;
+  margin-bottom: 3%;
 }
 
 .day_worktime{
   padding-left: 10%;
   background-color: #F4F4F4;
   height: 50%;
+  margin-bottom: 10%;
 }
 
 .tomato{
@@ -60,5 +62,33 @@
   justify-content: space-around;
   font-family: 'SFUI_semi';
   font-size: 24px;
-  color: #999;
+}
+
+.bottom_block{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.focus,
+.pause,
+.stop{
+  width: 26%;
+  display: flex;
+  align-items: center;
+  padding: 2%;
+  justify-content:space-between;
+}
+
+.text_content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  font-size: 64px;
+}
+
+.text_content_title{
+  font-family: 'SFUI_semi';
+  font-size: 24px;
 }
