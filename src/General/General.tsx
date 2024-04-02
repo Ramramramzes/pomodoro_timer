@@ -1,18 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './general.module.css'
 import { Guide } from './Guide';
 import { TaskInput } from './TaskInput';
 import { TaskListItem } from './TaskListItem';
 import Timer from './Timer/Timer';
-import { AppDispatch, RootState } from '../states/store';
-import { setDefActive } from '../states/statistic';
+import { RootState } from '../states/store';
 
 export function General() {
   const list = useSelector((state: RootState) => state.taskList)
   const timer = useSelector((state: RootState) => state.timer)
   const tomatoCount = useSelector((state: RootState) => state.timer.tomatoCount)
-  const dispatch = useDispatch<AppDispatch>();
-  dispatch(setDefActive())
 
   return (
     <div className={styles.general}>

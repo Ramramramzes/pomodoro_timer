@@ -105,13 +105,16 @@ export function Statistic() {
   const activDay = statistic.activeDay === 6 ? statistic.activeDay : statistic.activeDay === 7 ? 10 : statistic.activeDay + 1
   const workTimeForTextMsg = statistic.activeDay != 7 ? statistic.curWeek[activDay].workTime.reduce((acc, cur) => acc + cur, 0) : 10
   useEffect(() => {
+    dispatch(setActiveDay(new Date().getDate() === 0 ? 6 : new Date().getDate() - 1))
     dispatch(setFocus({dayNum:dayNum, focus: day.readyTask !== 0 ? Math.round(((totalWorkTime * 60 + totalBreakTime) / day.tomatoes) / (totalWorkTime * 60 + totalBreakTime) * 100) : 0 }))
   },[])
 
   
   useEffect(() => {
-    console.log(statistic.activeDay);
-    console.log(workTimeForTextMsg);
+    // console.log(statistic.activeDay);
+    // console.log(workTimeForTextMsg);
+    console.log() ;
+    
     
   },[statistic.activeDay])
 
@@ -123,10 +126,11 @@ export function Statistic() {
           <div className={styles.day_worktime}>
             <span className={styles.day_data_title}>{daysList[statistic.activeDay != 7 ? statistic.activeDay : dayNum != 0 ? dayNum-1 : 6  ]}</span>
             <span className={styles.day_data}>{statistic.activeDay != 7 ? '' : 'Нет данных'}</span>
-            {statistic.activeDay != 7 ? <span>Вы работали над задачами <br></br>в течение <span style={{color:'var(--back-red)',fontFamily:'SFUI_semi'}}>{Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span></span> : false}
+            {statistic.curWeek[activDay].workTime.reduce((cur,ac) => cur + ac,0) == 0 ? 'Нет данных' : <span>Вы работали над задачами <br></br>в течение <span style={{color:'var(--back-red)',fontFamily:'SFUI_semi'}}>{Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span></span>}
           </div>
           <div className={styles.tomato}>
-            {statistic.activeDay === 7 || statistic.activeDay === 10 ? <TomatoSmile width={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{statistic.curWeek[activDay].readyTask}</div>}
+            {/* {statistic.activeDay === 7 || statistic.activeDay === 10 ? <TomatoSmile width={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{statistic.curWeek[activDay].readyTask}</div>} */}
+            {statistic.curWeek[activDay].readyTask === 0 ? <TomatoSmile width={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{statistic.curWeek[activDay].readyTask}</div>}
           </div>
         </div>
         <div className={styles.right}>
@@ -141,7 +145,7 @@ export function Statistic() {
       <div>Время на паузе - {day.pauseTime && day.pauseTime.reduce((acc,cur) => acc + cur,0)} сек</div>
       <div>Помидоров за сегодня {day.tomatoes}</div>
       <div>Время работы за сегодня {Math.round(day.workTime.reduce((acc,cur) => acc  + cur,0))} сек </div>
-      <div>Фокусирование {day.focus}%</div>
+      <div>Фокус {day.focus}%</div>
       <div>Стопов {day.stops}</div>
 
     </div>
