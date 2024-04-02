@@ -8,10 +8,12 @@
 }
 
 .title{
+  display: block;
   font-family: 'SFUI_semi';
   font-size: 24px;
   font-weight: 700;
   line-height: 33px;
+  margin-bottom: 1%;
 }
 .day_data_title{
   display: block;
@@ -92,3 +94,5 @@
   font-family: 'SFUI_semi';
   font-size: 24px;
 }
+
+/* rgba(100, 100, 100, .5) */

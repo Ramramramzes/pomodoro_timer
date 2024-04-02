@@ -10,6 +10,7 @@ import { Chart as ChartJS,CategoryScale,LinearScale,BarElement,Tooltip,} from 'c
 import { setActiveDay } from '../states/statistic';
 import { Clock, Focus, Stop, Tomato, TomatoSmile } from '../img/images';
 
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -26,7 +27,8 @@ export function Statistic() {
   const totalBreakTime = day.breakTime.reduce((acc, cur) => acc + cur, 0);
   const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
   const daysList = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье']
-
+  const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
+  
   const options: ChartOptions<'bar'> = {
     onClick: function(_event: ChartEvent, elements: ActiveElement[]) {
       if (elements.length > 0) {
@@ -65,8 +67,9 @@ export function Statistic() {
             const hours = Math.floor(tickValue / 60);
             const minutes = tickValue % 60;
             return `${hours} ч ${minutes} мин`;
-          }
-        }
+          },
+          color: !darkmode ? 'white' : 'gray'
+        },
       }
     }
   };
@@ -123,35 +126,35 @@ export function Statistic() {
       <span className={styles.title}>Ваша активность</span>
       <div className={styles.top_block}>
         <div className={styles.left}>
-          <div className={styles.day_worktime}>
+          <div className={styles.day_worktime} style={!darkmode ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {} }>
             <span className={styles.day_data_title}>{daysList[statistic.activeDay != 7 ? statistic.activeDay : dayNum != 0 ? dayNum-1 : 6  ]}</span>
             <span className={styles.day_data}>{statistic.activeDay != 7 ? '' : 'Нет данных'}</span>
             {statistic.curWeek[activDay].workTime.reduce((cur,ac) => cur + ac,0) == 0 ? 'Нет данных' : <span>Вы работали над задачами <br></br>в течение <span style={{color:'var(--back-red)',fontFamily:'SFUI_semi'}}>{Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span></span>}
           </div>
-          <div className={styles.tomato}>
+          <div className={styles.tomato} style={!darkmode ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {} }>
             {statistic.curWeek[activDay].readyTask === 0 ? <TomatoSmile width={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{statistic.curWeek[activDay].readyTask}</div>}
           </div>
         </div>
-        <div className={styles.right}>
+        <div className={styles.right} style={!darkmode ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {} }>
           <Bar className={styles.bar} options={options} data={data}/>
         </div>
       </div>
       <div className={styles.bottom_block}>
-        <div className={styles.focus} style={statistic.curWeek[activDay].focus === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#FFDDA9'}}>
+      <div className={styles.focus} style={darkmode ? (statistic.curWeek[activDay].focus === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#FFDDA9'} ) : (statistic.curWeek[activDay].focus === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#FFDDA9', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
             <span className={styles.text_content_title}>Фокус</span>
             <span>{statistic.curWeek[activDay].focus}%</span>
           </div>
           {statistic.curWeek[activDay].focus === 0 ? <Focus color={'#C4C4C4'}/> : <Focus color={'#FFAE35'}/>}
         </div>
-        <div className={styles.pause} style={statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#DFDCFE'}}>
+        <div className={styles.pause} style={darkmode ? (statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#DFDCFE'}) : (statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#DFDCFE', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
             <span className={styles.text_content_title}>Время на паузе</span>
             <span>{Math.round(statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) > 0 ? Math.round(statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) : 0}ч {Math.round(statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) > 0 ? Math.round(statistic.curWeek[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) : 0}м</span>
           </div>
           {statistic.curWeek[activDay].focus === 0 ? <Clock color={'#C4C4C4'}/> : <Clock color={'#9C97D7'}/>}
         </div>
-        <div className={styles.stop} style={statistic.curWeek[activDay].stops === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#C5F1FF'}}>
+        <div className={styles.stop} style={darkmode ? (statistic.curWeek[activDay].stops === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#C5F1FF'}) : (statistic.curWeek[activDay].stops === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#C5F1FF', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
             <span className={styles.text_content_title}>Остановки</span>
             <span>{statistic.curWeek[activDay].stops}</span>
