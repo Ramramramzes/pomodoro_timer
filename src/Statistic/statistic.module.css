@@ -95,4 +95,9 @@
   font-size: 24px;
 }
 
-/* rgba(100, 100, 100, .5) */
+.title_select{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1%;
+  align-items: center;
+}

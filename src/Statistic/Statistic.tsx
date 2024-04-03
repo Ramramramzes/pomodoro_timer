@@ -2,13 +2,14 @@ import styles from './statistic.module.css';
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../states/store";
-import { ChangeEvent, useEffect, useMemo,  } from 'react';
-import { changeWeek, changeWeekState, newWeek, setFocus } from '../states/statistic';
+import { useEffect, useMemo,  } from 'react';
+import { changeWeekState, newWeek, setFocus } from '../states/statistic';
 import { ChartEvent, ActiveElement, ChartOptions, } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS,CategoryScale,LinearScale,BarElement,Tooltip,} from 'chart.js';
 import { setActiveDay } from '../states/statistic';
 import { Clock, Focus, Stop, Tomato, TomatoSmile } from '../img/images';
+import { Select } from './Select';
 
 
 ChartJS.register(
@@ -21,7 +22,6 @@ ChartJS.register(
 export function Statistic() {
   const statistic = useSelector((state: RootState) => state.statistic)
   const dispatch = useDispatch<AppDispatch>();
-  // const selectedValue = 'this_week'
   let weekControl = statistic.curWeek;
 
   useMemo(() => {
@@ -146,19 +146,11 @@ export function Statistic() {
     dispatch(setFocus({dayNum:dayNum, focus: day.readyTask !== 0 ? Math.round(((totalWorkTime * 60 + totalBreakTime) / day.tomatoes) / (totalWorkTime * 60 + totalBreakTime) * 100) : 0 }))
   },[])
 
-  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(changeWeek(event.target.value));
-  };
-
   return (
     <div className={styles.statistic}>
-      <div>
+      <div className={styles.title_select}>
         <span className={styles.title}>Ваша активность</span>
-        <select value={statistic.activeWeek} onChange={handleChange}>
-          <option value="cur">Эта неделя</option>
-          <option value="last">Прошлая неделя</option>
-          <option value="past">2 недели назад</option>
-        </select>
+        <Select />
       </div>
       <div className={styles.top_block}>
         <div className={styles.left}>
@@ -198,12 +190,6 @@ export function Statistic() {
           {weekControl[activDay].stops === 0 ? <Stop color={'#C4C4C4'}/> : <Stop color={'#7FC2D7'}/>}
         </div>
       </div>
-      {/* <div>Законченных заданий {day.readyTask}</div>
-      <div>Время на паузе - {day.pauseTime && day.pauseTime.reduce((acc,cur) => acc + cur,0)} сек</div>
-      <div>Помидоров за сегодня {day.tomatoes}</div>
-      <div>Время работы за сегодня {Math.round(day.workTime.reduce((acc,cur) => acc  + cur,0))} сек </div>
-      <div>Фокус {day.focus}%</div>
-      <div>Стопов {day.stops}</div> */}
     </div>
   );
 }
