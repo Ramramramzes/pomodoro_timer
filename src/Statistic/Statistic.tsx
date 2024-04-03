@@ -2,8 +2,8 @@ import styles from './statistic.module.css';
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../states/store";
-import { ChangeEvent, useEffect } from 'react';
-import { changeWeek, setFocus } from '../states/statistic';
+import { ChangeEvent, useEffect, useMemo,  } from 'react';
+import { changeWeek, changeWeekState, newWeek, setFocus } from '../states/statistic';
 import { ChartEvent, ActiveElement, ChartOptions, } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS,CategoryScale,LinearScale,BarElement,Tooltip,} from 'chart.js';
@@ -24,6 +24,19 @@ export function Statistic() {
   // const selectedValue = 'this_week'
   let weekControl = statistic.curWeek;
 
+  useMemo(() => {
+    if(!statistic.weekChangeState){
+      if(new Date().getDate() === 1){
+        console.log(statistic.weekChangeState);
+        dispatch(changeWeekState())
+        dispatch(newWeek())
+      }
+      if(new Date().getDate() === 2){
+        dispatch(changeWeekState())
+      }
+    }
+  },[statistic.weekChangeState])
+
   switch (statistic.activeWeek) {
     case "cur":
       weekControl = statistic.curWeek;
@@ -38,9 +51,6 @@ export function Statistic() {
       weekControl = statistic.curWeek;
       break;
   }
-  useEffect(() => {
-        console.log(statistic.activeWeek);
-  }, [dispatch, statistic.activeWeek,statistic.activeDay,weekControl,statistic]);
   
   const dayNum = statistic.activeDay === 6 ? statistic.activeDay : statistic.activeDay === 7 ? 10 : statistic.activeDay + 1
   const day = weekControl[dayNum];
@@ -101,7 +111,6 @@ export function Statistic() {
       
       if (el === weekControl[i].name) {
         const totalWorkTime = weekControl[i].workTime.reduce((acc, cur) => acc + cur, 0);
-        console.log(weekControl);
         return totalWorkTime === 0 ? .1 : totalWorkTime / 60;
       }
     }
