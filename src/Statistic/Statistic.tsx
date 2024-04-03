@@ -90,7 +90,6 @@ export function Statistic() {
             const minutes = Math.round(tickValue % 60);
             return `${hours} ч ${minutes} мин`;
           },
-          stepSize: 25,
           color: !darkmode ? 'white' : 'gray'
         },
       }
@@ -98,12 +97,14 @@ export function Statistic() {
   };
 
   const chartData = labels.map((el) => {
-    if (el === day.name) {
-      console.log(totalWorkTime);
-      return totalWorkTime === 0 ? .1 : totalWorkTime / 60;
+    for (let i = 0; i < weekControl.length+1; i++) {
       
+      if (el === weekControl[i].name) {
+        const totalWorkTime = weekControl[i].workTime.reduce((acc, cur) => acc + cur, 0);
+        console.log(weekControl);
+        return totalWorkTime === 0 ? .1 : totalWorkTime / 60;
+      }
     }
-    return .1;
   });
 
   const backgroundColor = chartData.map((value, index) => {
@@ -128,7 +129,7 @@ export function Statistic() {
     ],
   };
 
-  const activDay = statistic.activeDay === 6 ? statistic.activeDay : statistic.activeDay === 7 ? 10 : statistic.activeDay + 1
+  const activDay = statistic.activeDay === 6 ? 0 : statistic.activeDay + 1;
   const workTime = weekControl[activDay].workTime;
   const workTimeForTextMsg = statistic.activeDay != 7 ? workTime.reduce((acc, cur) => acc + cur, 0) : 10
   useEffect(() => {
