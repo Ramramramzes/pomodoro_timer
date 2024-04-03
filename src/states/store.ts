@@ -6,6 +6,7 @@ import timerReducer from "./timer"
 import darkmodeReducer from "./settings"
 import hoverReducer from "./hoverStates"
 import staticReducer from "./statistic"
+import selectReduser from "./customSelect"
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   darkmode: darkmodeReducer,
   hoverState: hoverReducer,
   statistic: staticReducer,
+  select: selectReduser,
 })
 
 const persistConfig = {
