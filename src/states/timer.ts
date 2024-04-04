@@ -16,9 +16,9 @@ interface ITimerState{
 }
 
 const initialState:ITimerState = {
-  userTime: 25,
-  breakTime: 3,
-  bigBrakeTime: 30,
+  userTime: .1,
+  breakTime: .1,
+  bigBrakeTime: .1,
   workActive: true,
   bigBreakActive: false,
   breakActive: false,

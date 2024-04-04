@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit"
 
 interface ISettingsState{
   darkmode: boolean,
+  alerts: boolean,
 }
 
 const initialState:ISettingsState = {
-  darkmode: false,
+  darkmode: true,
+  alerts: true,
 }
 
 const settings = createSlice({
@@ -14,9 +16,12 @@ const settings = createSlice({
   reducers: {
     darkmodeState: (state) => {
       state.darkmode = !state.darkmode
+    },
+    alertsToogle: (state) => {
+      state.alerts = !state.alerts
     }
   }
 })
 
-export const { darkmodeState } = settings.actions
+export const { darkmodeState, alertsToogle } = settings.actions
 export default settings.reducer

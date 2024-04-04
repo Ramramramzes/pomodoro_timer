@@ -10,6 +10,7 @@ import { endSound } from '../sound/sounds';
 export function Message() {
   const timer = useSelector((state: RootState) => state.timer)
   const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
+  const alerts = useSelector((state: RootState) => state.darkmode.alerts)
 
   const msgFn = () => {
     const msgBlock = document.getElementById('msg_block');
@@ -27,15 +28,15 @@ export function Message() {
 
     useEffect(() => {
       if(timer.minutes === 0 && timer.seconds === 4){
-        msgFn()
-        endSound()
+        alerts ? msgFn() : false 
+        alerts ? endSound() : false
       }
     }, [timer.seconds]);
 
 
   return (
     <div>
-      <div id='msg_block' className={ (darkmode ? `${styles.msg_block} `: `${styles.msg_block_dark} ` )+ `${timer.workActive ? styles.green : styles.red}`}>
+      <div id='msg_block' className={ (darkmode ? `${styles.msg_block} `: `${styles.msg_block_dark} ` ) + `${timer.workActive ? styles.green : styles.red}` + `${!alerts ? styles.dn : ''}`}>
         {timer.workActive ? '⏳ Рабочее время подходит к концу' : '⏳ Перерыв подходит к концу'}
       </div>
     </div>

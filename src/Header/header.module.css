@@ -49,6 +49,10 @@
   justify-content: space-around;
 }
 
+.alert_btn{
+  background-color: transparent;
+  cursor: pointer;
+}
 @media (max-width: 500px) {
   .header{
     display: flex;

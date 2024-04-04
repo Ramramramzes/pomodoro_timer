@@ -32,6 +32,10 @@
   box-shadow: 5px 5px 6px var(--back-red);
 }
 
+.dn{
+  display: none;
+}
+
 @media (max-width:500px) {
   .msg_block{
     width: 90%;

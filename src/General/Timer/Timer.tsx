@@ -13,6 +13,7 @@ function Timer() {
   const dayNum = new Date().getDay()
   const timer = useSelector((state: RootState) => state.timer)
   const statistic = useSelector((state: RootState) => state.statistic)
+  const alerts = useSelector((state: RootState) => state.darkmode.alerts)
   const taskList = useSelector((state: RootState) => state.taskList)
   const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
   const dispatch = useDispatch<AppDispatch>();
@@ -182,7 +183,7 @@ function Timer() {
                                             if(document.getElementById('start_btn')?.textContent === 'Продолжить'){
                                               dispatch(setPausesResult({number:(Math.round((new Date().getTime() - statistic.pauseStart)/1000)),dayNum:dayNum}))
                                             }
-                                            document.getElementById('start_btn')?.textContent === 'Старт' && timer.workActive ? startSound() : false
+                                            document.getElementById('start_btn')?.textContent === 'Старт' && timer.workActive ? (alerts ? startSound() : false) : false
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.breakActive ? breakSound() : false
                                             document.getElementById('start_btn')?.textContent === 'Старт' && timer.bigBreakActive ? bigBreakSound() : false
                                             }}>{!statistic.pauseState ? 'Старт' : 'Продолжить'}</button> : ''}
@@ -230,7 +231,7 @@ function Timer() {
       {timer.breakActive || timer.bigBreakActive ? <button className={styles.skip_btn + ' btn-animation'} onClick={()=> {
                                                                                                                         skipFn(minutes,seconds,2)
                                                                                                                         skipFn(0,0,1)
-                                                                                                                        endSound()}}>Пропустить</button> : ''}
+                                                                                                                        alerts ? endSound() : false}}>Пропустить</button> : ''}
       </div>
     </div>
   );
