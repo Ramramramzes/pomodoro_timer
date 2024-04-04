@@ -18,13 +18,13 @@ export function Select() {
   const data = ['Эта неделя','Прошедшая неделя','2 недели назад']
   const customStyleClosed = {
     paddingLeft: '20px',
-    backgroundImage: `url('/src/img/arr_down.svg')`,
+    backgroundImage: `url('../../img/arr_down.svg')`,
     backgroundRepeat: 'no-repeat',
     backgroundPositionX: '95%',
     backgroundPositionY: '50%'
   };
   const customStyleOpen = {
-    backgroundImage: `url('/src/img/arr_up.svg')`,
+    backgroundImage: `url('../../img/arr_up.svg')`,
     backgroundRepeat: 'no-repeat',
     backgroundPositionX: '95%',
     backgroundPositionY: '50%'
