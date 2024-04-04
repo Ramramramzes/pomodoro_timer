@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+const formattedDate = `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}.${new Date().getFullYear()}`;
 
 interface day{
   name: string, //Понедельник
@@ -16,6 +17,7 @@ interface IForStatistic{
   pauseState: boolean,
   activeDay: number,
   activeWeek: string,
+  dayForCheck: string,
   weekChangeState: boolean,
   curWeek: day[],
   lastWeek: day[],
@@ -101,6 +103,7 @@ const initialState:IForStatistic = {
   activeDay: 0,
   activeWeek: 'cur',
   weekChangeState: false,
+  dayForCheck: formattedDate,
   curWeek: initialWeek,
   lastWeek: initialWeek,
   pastWeek: initialWeek,
@@ -154,12 +157,13 @@ const statisticSlice = createSlice({
       state.lastWeek = state.curWeek
       state.curWeek = initialWeek
     },
-
-
+    dayCheck: (state,action) => {
+      state.dayForCheck = action.payload
+    }
   }
 
 })
 
 
-export const { pauseState , setPauseStart, setPausesResult, readyTasks, setTomatosForStat, setWorkTime, setFocus, setStopCount, setBreakTime, setActiveDay,setDefActive,changeWeek,newWeek,changeWeekState } = statisticSlice.actions
+export const { pauseState , setPauseStart, setPausesResult, readyTasks, setTomatosForStat, setWorkTime, setFocus, setStopCount, setBreakTime, setActiveDay,setDefActive, changeWeek, newWeek, changeWeekState,dayCheck } = statisticSlice.actions
 export default statisticSlice.reducer

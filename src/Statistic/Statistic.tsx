@@ -3,13 +3,15 @@ import styles from './statistic.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../states/store";
 import { useEffect, useMemo,  } from 'react';
-import { changeWeekState, newWeek, setFocus } from '../states/statistic';
+import { changeWeekState, dayCheck, newWeek, setFocus } from '../states/statistic';
 import { ChartEvent, ActiveElement, ChartOptions, } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS,CategoryScale,LinearScale,BarElement,Tooltip,} from 'chart.js';
 import { setActiveDay } from '../states/statistic';
 import { Clock, Focus, Stop, Tomato, TomatoSmile } from '../img/images';
 import { Select } from './Select';
+
+
 
 
 ChartJS.register(
@@ -20,6 +22,7 @@ ChartJS.register(
 );
 
 export function Statistic() {
+  const formattedDate = `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}.${new Date().getFullYear()}`;
   const statistic = useSelector((state: RootState) => state.statistic)
   const dispatch = useDispatch<AppDispatch>();
   let weekControl = statistic.curWeek;
@@ -27,11 +30,13 @@ export function Statistic() {
   useMemo(() => {
     if(!statistic.weekChangeState){
       if(new Date().getDate() === 1){
-        console.log(statistic.weekChangeState);
-        dispatch(changeWeekState())
-        dispatch(newWeek())
+        if(statistic.dayForCheck != formattedDate){
+          dispatch(changeWeekState())
+          dispatch(newWeek())
+          dispatch(dayCheck(formattedDate))
+        }
       }
-      if(new Date().getDate() === 2){
+      if(new Date().getDate() != 1){
         dispatch(changeWeekState())
       }
     }
