@@ -31,15 +31,12 @@
 .btn_plus,
 .btn_minus{
   background-color: rgba(220, 62, 34, 1);
-  color: white;
-  font-size: 18px;
+  color: var(--back-red);
+  font-size: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center; 
-  border-radius: 100%;
-  width: 30px;
-  height: 30px;
 }
 .rounds{
   display: flex;
