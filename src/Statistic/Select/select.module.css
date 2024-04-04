@@ -42,4 +42,11 @@
   .container{
     width: 65%;
   }
+  .item {
+    width: calc(100% - 20px);
+    cursor: pointer;
+    background-color: rgba(100, 100, 100, 1);
+    padding: 20px 0px 20px 20px;
+  }
+  
 }
