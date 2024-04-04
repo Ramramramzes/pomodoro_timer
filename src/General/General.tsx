@@ -10,6 +10,7 @@ export function General() {
   const list = useSelector((state: RootState) => state.taskList)
   const timer = useSelector((state: RootState) => state.timer)
   const tomatoCount = useSelector((state: RootState) => state.timer.tomatoCount)
+  const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
 
   return (
     <div className={styles.general}>
@@ -19,12 +20,12 @@ export function General() {
         <TaskListItem />
       </div>
       <div className={styles.rightside_main}>
-        <div style={{backgroundColor: 'rgba(220, 220, 220, 0.3)'}} className={timer.isRuning && timer.workActive ? styles.rightside_red :
+        <div style={{backgroundColor: 'rgba(220, 220, 220, 0.1)'}} className={timer.isRuning && timer.workActive ? styles.rightside_red :
                             (timer.isRuning && (timer.breakActive || timer.bigBreakActive)) ? styles.rightside_green :
                             styles.rightside_def}>
           <div className={timer.isRuning && timer.workActive ? styles.title_red :
                             (timer.isRuning && (timer.breakActive || timer.bigBreakActive)) ? styles.title_green :
-                            styles.title_def}>
+                            styles.title_def} style={darkmode ? {backgroundColor: '#C4C4C4'} : {backgroundColor: 'rgba(220, 220, 220, 0.2)'}}>
                             
             <span title={list.value.length != 0 ? list.value[0].content : 'Задач нет'} className={styles.title}>{list.value.length != 0 ? list.value[0].content : 'Задач нет'}</span>
             <span className={styles.count}>{timer.workActive ? 'Помидор' : timer.breakActive ? 'Перерыв' : ''} {tomatoCount != 4 && !timer.breakActive? tomatoCount + 1 : ''}{tomatoCount != 4 && !timer.workActive ? tomatoCount : ''}{timer.bigBreakActive ? 'Большой перерыв' : ''}</span>
