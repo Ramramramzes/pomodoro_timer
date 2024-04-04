@@ -87,7 +87,7 @@
   transition: linear .3s;
 }
 .title_def{
-  background-color: #333;
+  /* background-color: #333; */
   color: #fff;
   width: 100%;
   display: flex;

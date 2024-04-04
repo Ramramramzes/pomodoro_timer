@@ -225,4 +225,10 @@ h1,h2,h3,p{
   color: #fff;
   background-color: #333;
 }
+.bcg_title{
+  background-color: #C4C4C4;
+}
 
+.bcg_title_dark{
+  background-color: rgba(220, 220, 220, 0.2);
+}
