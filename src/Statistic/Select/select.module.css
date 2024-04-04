@@ -37,3 +37,9 @@
 .item_dark:not(:last-child){
   border-bottom: 1px solid #DEDEDE;
 }
+
+@media (max-width:500px) {
+  .container{
+    width: 65%;
+  }
+}
