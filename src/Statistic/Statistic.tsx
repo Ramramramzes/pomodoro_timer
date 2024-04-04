@@ -26,7 +26,7 @@ export function Statistic() {
   const statistic = useSelector((state: RootState) => state.statistic)
   const dispatch = useDispatch<AppDispatch>();
   let weekControl = statistic.curWeek;
-
+  
   useMemo(() => {
     if(!statistic.weekChangeState){
       if(new Date().getDate() === 1){
@@ -185,7 +185,7 @@ export function Statistic() {
             <span className={styles.text_content_title}>Время на паузе</span>
             <span>{Math.round(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) > 0 ? Math.round(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) : 0}ч {Math.round(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) > 0 ? Math.round(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) : 0}м</span>
           </div>
-          {Math.round(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) === 0  ? <Clock color={'#C4C4C4'}/> : <Clock color={'#9C97D7'}/>}
+          {Math.ceil(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) > 0  ? <Clock color={'#9C97D7'}/> : <Clock color={'#C4C4C4'}/>}
         </div>
         <div className={styles.stop} style={darkmode ? (weekControl[activDay].stops === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#C5F1FF'}) : (weekControl[activDay].stops === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#C5F1FF', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
