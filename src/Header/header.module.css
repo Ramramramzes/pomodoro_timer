@@ -31,8 +31,13 @@
 .btn_plus,
 .btn_minus{
   background-color: rgba(220, 62, 34, 1);
-  color: #fff;
-  border-radius: 100%;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
+  border-radius: 50%;
   width: 20px;
   height: 20px;
 }

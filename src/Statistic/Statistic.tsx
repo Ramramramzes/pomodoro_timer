@@ -165,7 +165,7 @@ export function Statistic() {
             {workTime.reduce((cur,ac) => cur + ac,0) == 0 ? 'Нет данных' : <span>Вы работали над задачами <br></br>в течение <span style={{color:'var(--back-red)',fontFamily:'SFUI_semi'}}>{Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span></span>}
           </div>
           <div className={styles.tomato} style={!darkmode ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {} }>
-            {weekControl[activDay].readyTask === 0 ? <TomatoSmile width={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{weekControl[activDay].readyTask}</div>}
+            {weekControl[activDay].readyTask === 0 ? <TomatoSmile width={115} height={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{weekControl[activDay].readyTask}</div>}
           </div>
         </div>
         <div className={styles.right} style={!darkmode ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {} }>
