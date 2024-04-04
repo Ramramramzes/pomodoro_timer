@@ -12,6 +12,7 @@ interface ITimerState{
   isRuning: boolean,
   minutes:number,
   seconds: number,
+  bigBrakePlace: number,
 }
 
 
@@ -29,6 +30,7 @@ const initialState:ITimerState = {
   isRuning: false,
   minutes: 0,
   seconds: 0,
+  bigBrakePlace: 4,
 }
 
 const timerSlice = createSlice({
@@ -71,7 +73,6 @@ const timerSlice = createSlice({
     addRound: (state) => {
       state.rounds += 1
     },
-
     setIsRuning: (state,action) => {
       state.isRuning = action.payload
     },
@@ -81,8 +82,17 @@ const timerSlice = createSlice({
     setSec: (state,action) => {
       state.seconds = action.payload
     },
+    bigBrakePlaceUp : (state) => {
+      state.bigBrakePlace += 1
+      state.bigBrakePlace >= 10 ? state.bigBrakePlace = 10 : false;
+    },
+    bigBrakePlaceDown : (state) => {
+      state.bigBrakePlace -= 1
+      state.bigBrakePlace <= 4 ? state.bigBrakePlace = 4 : false;
+    },
+    
   }
 })
 
-export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound, setIsRuning, remWorkMinute , remBreakeMinute, remBigBreakeMinute, setMin, setSec} = timerSlice.actions
+export const { addWorkMinute, changeWork, changeBreak, changeBigBreak, addBreakeMinute, addBigBreakeMinute, addTomato, startTomato, addRound, setIsRuning, remWorkMinute , remBreakeMinute, remBigBreakeMinute, setMin, setSec,bigBrakePlaceUp, bigBrakePlaceDown} = timerSlice.actions
 export default timerSlice.reducer

@@ -17,6 +17,8 @@
 .btns{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 30%;
 }
 
 .darkmode_btn{
@@ -26,6 +28,26 @@
 .darkmode_btn:focus{
   outline: none;
 }
+.btn_plus,
+.btn_minus{
+  background-color: rgba(220, 62, 34, 1);
+  color: #fff;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+}
+.rounds{
+  display: flex;
+  color: var(--app-green);
+  font-size: 20px;
+  font-weight: bold;
+  cursor:wait;
+}
+.rounds_control{
+  display: flex;
+  width: 25%;
+  justify-content: space-around;
+}
 
 @media (max-width: 500px) {
   .header{
@@ -33,6 +55,11 @@
     justify-content: space-around;
     padding: 10px 0px;
     align-items: center;
-
+  }
+  .btns{
+    width: 60%;
+  }
+  .rounds_control{
+    width: 100%;
   }
 }

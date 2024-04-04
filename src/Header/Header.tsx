@@ -6,6 +6,7 @@ import { setStatisticHover } from '../states/hoverStates';
 import { darkmodeState } from '../states/settings';
 import { Link } from 'react-router-dom';
 import { setPausesResult, setTomatosForStat } from '../states/statistic';
+import { bigBrakePlaceDown, bigBrakePlaceUp } from '../states/timer';
 
 
 
@@ -24,6 +25,11 @@ export function Header({page}:{page:boolean}) {
       </Link>
       <div className={styles.btns}>
         {darkmode ? <button className={styles.darkmode_btn} onClick={() => dispatch(darkmodeState())}><Moon size={screenWidth > 500 ? 25 : 20} color={true}/></button> : <button className={styles.darkmode_btn} onClick={() => dispatch(darkmodeState())}><Sun size={screenWidth > 500 ? 30 : 25} color={true}/></button>}
+        <div className={styles.rounds_control}>
+          <button className={styles.btn_minus} onClick={() => {dispatch(bigBrakePlaceDown())}}>-</button>
+          <span title='Колл-во помидоров до большого перерыва' className={styles.rounds}>{timer.bigBrakePlace && timer.bigBrakePlace}</span>
+          <button className={styles.btn_plus} onClick={() => {dispatch(bigBrakePlaceUp())}}>+</button>
+        </div>
         {!page ? <Link to="/statistic">
                     <button
                       onMouseEnter={() => dispatch(setStatisticHover())}

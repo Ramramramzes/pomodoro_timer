@@ -23,15 +23,15 @@ function Timer() {
   };
 
   const skipFn = (minutes: number, seconds: number, flag?:number) => {
-    if(minutes == 0 && seconds == 0 && timer.tomatoCount != 4){
+    if(minutes == 0 && seconds == 0 && timer.tomatoCount != timer.bigBrakePlace){
       if(timer.workActive){
         dispatch(setWorkTime({dayNum:dayNum,number: timer.userTime * 60}))
-        if(timer.tomatoCount != 3){
+        if(timer.tomatoCount != (timer.bigBrakePlace - 1)){
           dispatch(changeBreak(true))
           dispatch(changeWork(false))
           dispatch(changeBigBreak(false))
         }
-        if(timer.tomatoCount === 3){
+        if(timer.tomatoCount === (timer.bigBrakePlace - 1)){
           dispatch(changeBigBreak(true))
           dispatch(changeBreak(false))
           dispatch(changeWork(false))
@@ -45,7 +45,7 @@ function Timer() {
       }
       dispatch(pauseState(false))
     }
-    if(minutes == 0 && seconds == 0 && timer.tomatoCount === 4){
+    if(minutes == 0 && seconds == 0 && timer.tomatoCount === timer.bigBrakePlace){
       if(timer.workActive){
         dispatch(setWorkTime({dayNum:dayNum,number: timer.userTime * 60}))
       }

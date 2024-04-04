@@ -28,7 +28,7 @@ export function General() {
                             styles.title_def + (darkmode ? ' bcg_title' : ' bcg_title_dark')}>
                             
             <span title={list.value.length != 0 ? list.value[0].content : 'Задач нет'} className={styles.title}>{list.value.length != 0 ? list.value[0].content : 'Задач нет'}</span>
-            <span className={styles.count}>{timer.workActive ? 'Помидор' : timer.breakActive ? 'Перерыв' : ''} {tomatoCount != 4 && !timer.breakActive? tomatoCount + 1 : ''}{tomatoCount != 4 && !timer.workActive ? tomatoCount : ''}{timer.bigBreakActive ? 'Большой перерыв' : ''}</span>
+            <span className={styles.count}>{timer.workActive ? 'Помидор' : timer.breakActive ? 'Перерыв' : ''} {tomatoCount != timer.bigBrakePlace && !timer.breakActive? tomatoCount + 1 : ''}{tomatoCount != timer.bigBrakePlace && !timer.workActive ? tomatoCount : ''}{timer.bigBreakActive ? 'Большой перерыв' : ''}</span>
           </div>
           <Timer />
         </div>
