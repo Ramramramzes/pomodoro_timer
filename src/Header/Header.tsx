@@ -31,7 +31,7 @@ export function Header({page}:{page:boolean}) {
         <div className={styles.rounds_control}>
           <button className={styles.btn_minus} onClick={() => {dispatch(bigBrakePlaceDown())}}>-</button>
           <span title='Колл-во помидоров до большого перерыва' className={styles.rounds}>{timer.bigBrakePlace && timer.bigBrakePlace}</span>
-          <button className={styles.btn_plus} onClick={() => {dispatch(bigBrakePlaceUp())}}>-</button>
+          <button className={styles.btn_plus} onClick={() => {dispatch(bigBrakePlaceUp())}}>+</button>
         </div>
         {!page ? <Link to="/statistic">
                     <button
