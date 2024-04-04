@@ -49,4 +49,10 @@
     padding: 20px 0px 20px 20px;
   }
   
+  .item_dark {
+    width: calc(100% - 20px);
+    cursor: pointer;
+    background-color: #f4f4f4;
+    padding: 20px 0px 20px 20px;
+  }
 }
