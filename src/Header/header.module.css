@@ -30,7 +30,7 @@
 }
 .btn_plus,
 .btn_minus{
-  background-color: rgba(220, 62, 34, 1);
+  background-color: transparent;
   color: var(--back-red);
   font-size: 22px;
   display: flex;
