@@ -15,9 +15,6 @@ interface ITimerState{
   bigBrakePlace: number,
 }
 
-
-
-
 const initialState:ITimerState = {
   userTime: 25,
   breakTime: 3,
@@ -38,22 +35,22 @@ const timerSlice = createSlice({
   initialState,
   reducers:{
     addWorkMinute: (state) => {
-      state.userTime += 1
+      state.userTime = state.userTime >= 59 ? 59 : state.userTime += 1
     },
     addBreakeMinute: (state) => {
-      state.breakTime += 1
+      state.breakTime = state.breakTime >= 59 ? 59 : state.breakTime += 1
     },
     addBigBreakeMinute: (state) => {
-      state.bigBrakeTime += 1
+      state.bigBrakeTime = state.bigBrakeTime >= 59 ? 59 : state.bigBrakeTime += 1
     },
     remWorkMinute: (state) => {
-      state.userTime = state.userTime <= 0 ? 0 : state.userTime -= 1
+      state.userTime = state.userTime <= 3 ? 3 : state.userTime -= 1
     },
     remBreakeMinute: (state) => {
-      state.breakTime = state.breakTime <= 0 ? 0 : state.breakTime -= 1
+      state.breakTime = state.breakTime <= 3 ? 3 : state.breakTime -= 1
     },
     remBigBreakeMinute: (state) => {
-      state.bigBrakeTime = state.bigBrakeTime <= 0 ? 0 : state.bigBrakeTime -= 1
+      state.bigBrakeTime = state.bigBrakeTime <= 3 ? 3 : state.bigBrakeTime -= 1
     },
     changeWork: (state,action) => {
       state.workActive = action.payload

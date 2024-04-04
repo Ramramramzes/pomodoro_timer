@@ -148,7 +148,7 @@ export function Statistic() {
   const workTimeForTextMsg = statistic.activeDay != 7 ? workTime.reduce((acc, cur) => acc + cur, 0) : 10
   useEffect(() => {
     dispatch(setActiveDay(new Date().getDate() === 0 ? 6 : new Date().getDate() - 1))
-    dispatch(setFocus({dayNum:dayNum, focus: day.readyTask !== 0 ? Math.round(((totalWorkTime * 60 + totalBreakTime) / day.tomatoes) / (totalWorkTime * 60 + totalBreakTime) * 100) : 0 }))
+    dispatch(totalWorkTime != 0 ? setFocus({dayNum:dayNum, focus: day.readyTask !== 0 ? Math.round(((totalWorkTime * 60 + totalBreakTime) / day.tomatoes) / (totalWorkTime * 60 + totalBreakTime) * 100) : 0 }) : setFocus({dayNum:dayNum, focus:0}))
   },[])
 
   return (
