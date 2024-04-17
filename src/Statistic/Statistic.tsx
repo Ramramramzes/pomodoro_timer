@@ -173,12 +173,12 @@ export function Statistic() {
         </div>
       </div>
       <div className={styles.bottom_block}>
-      <div className={styles.focus} style={darkmode ? ((weekControl[activDay] ? weekControl[activDay].focus : 0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#FFDDA9'} ) : (weekControl[activDay].focus === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#FFDDA9', color: 'rgba(100, 100, 100, 1)'})}>
+      <div className={styles.focus} style={darkmode ? ((weekControl[activDay] ? weekControl[activDay].focus : 0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#FFDDA9'} ) : (weekControl[activDay] && weekControl[activDay].focus === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#FFDDA9', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
             <span className={styles.text_content_title}>Фокус</span>
             <span>{weekControl[activDay] && weekControl[activDay].focus}%</span>
           </div>
-          {weekControl[activDay]&& weekControl[activDay].focus === 0 ? <Focus color={'#C4C4C4'}/> : <Focus color={'#FFAE35'}/>}
+          {weekControl[activDay] && weekControl[activDay].focus === 0 ? <Focus color={'#C4C4C4'}/> : <Focus color={'#FFAE35'}/>}
         </div>
         <div className={styles.pause} style={darkmode ? (weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#DFDCFE'}) : (weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#DFDCFE', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
