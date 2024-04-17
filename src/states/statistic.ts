@@ -131,9 +131,12 @@ const statisticSlice = createSlice({
     setWorkTime: (state,action) => {
       state.curWeek[action.payload.dayNum].workTime.push(action.payload.number)
     },
-    setFocus: (state,action) => {
-      state.curWeek[action.payload.dayNum].focus = action.payload.focus;
+    setFocus: (state, action) => {
+      if (state.curWeek[action.payload.dayNum]) {
+        state.curWeek[action.payload.dayNum].focus = action.payload.focus;
+      }
     },
+    
     setStopCount: (state,action) => {
       state.curWeek[action.payload].stops += 1;
     },

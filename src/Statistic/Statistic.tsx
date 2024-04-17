@@ -59,8 +59,8 @@ export function Statistic() {
   
   const dayNum = statistic.activeDay === 6 ? statistic.activeDay : statistic.activeDay === 7 ? 10 : statistic.activeDay + 1
   const day = weekControl[dayNum];
-  const totalWorkTime = day.workTime.reduce((acc, cur) => acc + cur, 0);
-  const totalBreakTime = day.breakTime.reduce((acc, cur) => acc + cur, 0);
+  const totalWorkTime = day ? day.workTime.reduce((acc, cur) => acc + cur, 0) : 0;
+  const totalBreakTime = day ? day.breakTime.reduce((acc, cur) => acc + cur, 0) : 0
   const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
   const daysList = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье']
   const darkmode = useSelector((state: RootState) => state.darkmode.darkmode)
@@ -144,7 +144,7 @@ export function Statistic() {
   };
 
   const activDay = statistic.activeDay === 6 ? 0 : statistic.activeDay + 1;
-  const workTime = weekControl[activDay].workTime;
+  const workTime = weekControl[activDay] ? weekControl[activDay].workTime : [];
   const workTimeForTextMsg = statistic.activeDay != 7 ? workTime.reduce((acc, cur) => acc + cur, 0) : 10
   useEffect(() => {
     dispatch(setActiveDay(new Date().getDate() === 0 ? 6 : new Date().getDate() - 1))
@@ -165,7 +165,7 @@ export function Statistic() {
             {workTime.reduce((cur,ac) => cur + ac,0) == 0 ? 'Нет данных' : <span>Вы работали над задачами <br></br>в течение <span style={{color:'var(--back-red)',fontFamily:'SFUI_semi'}}>{Math.round(workTimeForTextMsg/60/60) > 0 ? Math.round(workTimeForTextMsg/60/60) : 0}ч {Math.round(workTimeForTextMsg/60) > 0 ? Math.round(workTimeForTextMsg/60) : 0}м</span></span>}
           </div>
           <div className={styles.tomato} style={!darkmode ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {} }>
-            {weekControl[activDay].readyTask === 0 ? <TomatoSmile width={115} height={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{weekControl[activDay].readyTask}</div>}
+            {(weekControl[activDay] ? weekControl[activDay].readyTask : 0) === 0 ? <TomatoSmile width={115} height={115}/> : <div className={styles.tomato_num}> <Tomato width={81} /><span style={{display:'flex',marginRight:'5px',marginLeft:'5px'}}>x</span>{weekControl[activDay].readyTask}</div>}
           </div>
         </div>
         <div className={styles.right} style={!darkmode ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {} }>
@@ -173,26 +173,26 @@ export function Statistic() {
         </div>
       </div>
       <div className={styles.bottom_block}>
-      <div className={styles.focus} style={darkmode ? (weekControl[activDay].focus === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#FFDDA9'} ) : (weekControl[activDay].focus === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#FFDDA9', color: 'rgba(100, 100, 100, 1)'})}>
+      <div className={styles.focus} style={darkmode ? ((weekControl[activDay] ? weekControl[activDay].focus : 0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#FFDDA9'} ) : (weekControl[activDay].focus === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#FFDDA9', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
             <span className={styles.text_content_title}>Фокус</span>
-            <span>{weekControl[activDay].focus}%</span>
+            <span>{weekControl[activDay] && weekControl[activDay].focus}%</span>
           </div>
-          {weekControl[activDay].focus === 0 ? <Focus color={'#C4C4C4'}/> : <Focus color={'#FFAE35'}/>}
+          {weekControl[activDay]&& weekControl[activDay].focus === 0 ? <Focus color={'#C4C4C4'}/> : <Focus color={'#FFAE35'}/>}
         </div>
-        <div className={styles.pause} style={darkmode ? (weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#DFDCFE'}) : (weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#DFDCFE', color: 'rgba(100, 100, 100, 1)'})}>
+        <div className={styles.pause} style={darkmode ? (weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#DFDCFE'}) : (weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#DFDCFE', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
             <span className={styles.text_content_title}>Время на паузе</span>
-            <span>{Math.round(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) > 0 ? Math.round(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) : 0}ч {Math.round(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) > 0 ? Math.round(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) : 0}м</span>
+            <span>{Math.round(weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) > 0 ? Math.round(weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) : 0}ч {Math.round(weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) > 0 ? Math.round(weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60) : 0}м</span>
           </div>
-          {Math.ceil(weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) > 0  ? <Clock color={'#9C97D7'}/> : <Clock color={'#C4C4C4'}/>}
+          {Math.ceil(weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0)/60/60) > 0  ? <Clock color={'#9C97D7'}/> : <Clock color={'#C4C4C4'}/>}
         </div>
-        <div className={styles.stop} style={darkmode ? (weekControl[activDay].stops === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#C5F1FF'}) : (weekControl[activDay].stops === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#C5F1FF', color: 'rgba(100, 100, 100, 1)'})}>
+        <div className={styles.stop} style={darkmode ? (weekControl[activDay] && weekControl[activDay].stops === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#C5F1FF'}) : (weekControl[activDay] && weekControl[activDay].stops === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#C5F1FF', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
             <span className={styles.text_content_title}>Остановки</span>
-            <span>{weekControl[activDay].stops}</span>
+            <span>{weekControl[activDay] && weekControl[activDay].stops}</span>
           </div>
-          {weekControl[activDay].stops === 0 ? <Stop color={'#C4C4C4'}/> : <Stop color={'#7FC2D7'}/>}
+          {weekControl[activDay] && weekControl[activDay].stops === 0 ? <Stop color={'#C4C4C4'}/> : <Stop color={'#7FC2D7'}/>}
         </div>
       </div>
     </div>
