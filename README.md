@@ -42,5 +42,5 @@ node server/server.js
 
 ---
 Спасибо за ценные советы и тестирование 
-@bukomp
-@SawGoD
+- [@bukomp](https://github.com/bukomp)
+- [@SawGoD](https://github.com/SawGoD)
