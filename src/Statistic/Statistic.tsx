@@ -147,8 +147,9 @@ export function Statistic() {
   const workTime = weekControl[activDay] ? weekControl[activDay].workTime : [];
   const workTimeForTextMsg = statistic.activeDay != 7 ? workTime.reduce((acc, cur) => acc + cur, 0) : 10
   useEffect(() => {
-    dispatch(setActiveDay(new Date().getDate() === 0 ? 6 : new Date().getDate() - 1))
+    dispatch(setActiveDay(new Date().getDay() === 0 ? 6 : new Date().getDay() - 1))
     dispatch(totalWorkTime != 0 ? setFocus({dayNum:dayNum, focus: day.readyTask !== 0 ? Math.round(((totalWorkTime * 60 + totalBreakTime) / day.tomatoes) / (totalWorkTime * 60 + totalBreakTime) * 100) : 0 }) : setFocus({dayNum:dayNum, focus:0}))
+    
   },[])
 
   return (
@@ -178,7 +179,7 @@ export function Statistic() {
             <span className={styles.text_content_title}>Фокус</span>
             <span>{weekControl[activDay] && weekControl[activDay].focus}%</span>
           </div>
-          {weekControl[activDay] && weekControl[activDay].focus === 0 ? <Focus color={'#C4C4C4'}/> : <Focus color={'#FFAE35'}/>}
+          {weekControl[activDay] && weekControl[activDay].focus === 0  ? <Focus color={'#C4C4C4'}/> : <Focus color={'#FFAE35'}/>}
         </div>
         <div className={styles.pause} style={darkmode ? (weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: '#F4F4F4'} : {backgroundColor: '#DFDCFE'}) : (weekControl[activDay] && weekControl[activDay].pauseTime.reduce((cur,ac) => cur + ac,0) === 0 ? {backgroundColor: 'rgba(100, 100, 100, .5)'} : {backgroundColor: '#DFDCFE', color: 'rgba(100, 100, 100, 1)'})}>
           <div className={styles.text_content}>
